@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
-    <link href="knjiznice/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
 
   <style>
@@ -29,8 +29,8 @@
 
     }
     #levi-meni{
-        padding-top:5px;
-        padding-bottom:5px;
+        padding-top:15px;
+        padding-bottom:20px;
     }
 
     .mojEHR, .pripomocki{
@@ -81,14 +81,23 @@
         padding:0px;
         margin-left: 20px;
     }
+
+    #vnosEHR{
+        padding:0px;
+        margin-left: 20px;
+    }
     #glavno-desno{
 
     }
 
+    .obstojeci-uporabniki li{
+        cursor:pointer;
+    }
+
   </style>
-  <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
-  <script src="knjiznice/js/bootstrap.min.js"></script>
-  <script src="knjiznice/js/koda.js"></script>
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/koda.js"></script>
 </head>
 <body>
 
@@ -101,7 +110,7 @@
           <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html"><span style="color:white; font-size:24px;"><b>Portal e-Zdravlje</b></span></a>
+        <a class="navbar-brand" href="index.html"><span style="color:white; font-size:24px;"><b>Portal e-Zdravje</b></span></a>
         <!-- KONEC: Ime vaše aplikacije -->
       </div>
       <div class="collapse navbar-collapse" id="menujska-vrstica">
@@ -155,7 +164,28 @@
                     <div id="izbira-uporabnika" class="panel panel-primary col-md-5" >
 
                         <div class="panel-heading">
-                        <span><b>Izbira uporabnika</b></span>
+                            <div class="row">
+                                
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <span><b>Izbira uporabnika</b></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    
+                                    <div class="dropdown obstojeci-uporabniki">
+                                        <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"> Obstoječi uporabniki
+                                      <span class="caret"></span>
+
+                                      </button>
+
+                                      <ul class="dropdown-menu obstojeci-uporabniki">
+                                        <li><a>Jože Gorišek</a></li>
+                                        <li><a>Ana Novak</a></li>
+                                        <li><a>Janez Rovtar</a></li>
+                                      </ul>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
 
                         <div class="panel-body">
@@ -165,7 +195,7 @@
                                     <!--<div class="col-sm-4"> -->
                                         
                                         <input type="ehrID" class="form-control">
-                                        <button type="submit" class="btn btn-default" style="margin-top:10px;">Potrdi</button> 
+                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
                                     <!--</div> -->                   
                                 </div>
                             </form>
@@ -179,11 +209,11 @@
                 <div class="row">   
                     <div id="registracija-uporabnika" class="panel panel-primary col-md-5" >
 
-                        <div class="panel-heading">
-                        <span><b>Registracija novega uporabnika</b></span>
+                        <div class="panel-heading" data-toggle="collapse" data-target="#registracija-polja">
+                            <span ><b>Registracija novega uporabnika</b></span> </span>
                         </div>
 
-                        <div class="panel-body">
+                        <div id="registracija-polja" class="panel-body panel-collapse collapse">
                             <form role="form">
                                 <div class="form-group col-sm-10">
                                     <label for="ime" class="control-label">Ime:</label>
@@ -192,10 +222,10 @@
                                     <label for="priimek" class="control-label">Priimek:</label>
                                     <input type="priimek" class="form-control">
 
-                                    <label for="Datum rojstva" class="control-label">Datum rojstva:</label>
-                                    <input type="priimek" class="form-control">
+                                    <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
+                                    <input type="Datumrojstva" class="form-control">
 
-                                    <button type="submit" class="btn btn-default" style="margin-top:10px;">Potrdi</button>    
+                                    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
 
                                 </div>
                             </form>
@@ -204,6 +234,38 @@
                     </div>
                 </div>
             <!-- KONEC REGISTRACIJA UPORABNIKA -->
+            <!-- VNOS PODATKOV V EHR -->    
+                <div class="row">   
+                    <div id="vnosEHR" class="panel panel-primary col-md-5" >
+
+                        <div class="panel-heading">
+                            <span ><b>Vnos podatkov v EHR</b></span> </span>
+                        </div>
+
+                        <div id="registracija-polja" class="panel-body">
+                            <form role="form">
+                                <div class="form-group col-sm-10">
+                                    <label for="ehrID" class="control-label">EhrID:</label>
+                                    <input type="ehrID" class="form-control">
+
+                                    <label for="datum" class="control-label">Datum:</label>
+                                    <input type="datum" class="form-control">
+
+                                    <label for="visina" class="control-label">Telesna visina:</label>
+                                    <input type="visina" class="form-control">
+
+                                    <label for="teza" class="control-label">Telesna teža:</label>
+                                    <input type="teza" class="form-control">
+
+                                    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Dodaj podatke meritve</button>    
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- KONEC VNOSA PODATKOV V EHR -->
 
             </div> <!-- konec desnega dela spletne strani -->
             
