@@ -3,18 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
 
   <style>
+    .container
+    {
+    min-width: 468px !important;
+    }
+
     body {
         padding-top: 80px;
         background: -webkit-linear-gradient(left, #259CEC, #259CEC, #259CEC);
         background: -o-linear-gradient(right, #259CEC, #259CEC, #259CEC); 
         background: -moz-linear-gradient(right,#259CEC, #259CEC, #259CEC); 
         background: linear-gradient(to right,#259CEC, #259CEC, #259CEC); 
+        min-width:1000px; /* suppose you want minimun width of 1000px */
+        width: auto !important;  /* Firefox will set width as auto */
 
     }
 
@@ -75,14 +81,30 @@
     #izbira-uporabnika{
         margin-top:20px;
         padding:0px;
+        margin-right: 0px;
         margin-left: 20px;
+        width: -moz-calc(100% - 20px);
+        width: -webkit-calc(100% - 20px);
+        width:calc(100% - 20px);
     }
     #registracija-uporabnika{
+        cursor:pointer;
         padding:0px;
+        margin-top:20px;
         margin-left: 20px;
     }
 
     #vnosEHR{
+        padding:0px;
+        margin-left: 20px;
+    }
+
+    #izpisEHR{
+        padding:0px;
+        margin-left: 20px;
+    }
+
+    #ITM-kalkulator{
         padding:0px;
         margin-left: 20px;
     }
@@ -94,10 +116,223 @@
         cursor:pointer;
     }
 
+    * {
+      @include box-sizing(border-box);
+    }
+
+    $pad: 0px;
+
+    .grid {
+      background: white;
+      margin: 0 0 $pad 0;
+      
+      &:after {
+        /* Or @extend clearfix */
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    [class*='col-'] {
+      float: left;
+      padding-right: $pad;
+      .grid &:last-of-type {
+        padding-right: 0;
+      }
+    }
+    .col-1-3 {
+      width: 33.33%;
+    }
+    .col-1-1 {
+      width: 100%;
+    }
+    .col-1-2 {
+      width: 50%;
+    }
+    .col-1-4 {
+      width: 25%;
+    }
+
+
+    /* Opt-in outside padding */
+    .grid-pad {
+      padding: $pad 0 $pad $pad;
+      [class*='col-']:last-of-type {
+        padding-right: $pad;
+      }
+    }
+    .chart {
+      width: 100%; 
+      height: 600px;
+    }
+
+    #tabelaEHRpodatkov{
+        margin-left:55px; 
+        width: -moz-calc(100% - 55px);
+        width: -webkit-calc(100% - 55px);
+        width:calc(100% - 55px);
+    }
+
+    #tabelaITM{
+        -webkit-border-top-left-radius: 7px;
+        -webkit-border-top-right-radius: 7px;
+        -moz-border-radius-topleft: 7px;
+        -moz-border-radius-topright: 7px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+
   </style>
   <script src="js/jquery-2.2.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/koda.js"></script>
+  <script src="js/d3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/loader.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      
+      <script type="text/javascript">
+      google.load("visualization", "1", {
+        packages: ["corechart"]
+      });
+google.setOnLoadCallback(drawChart1);
+
+function drawChart1() {
+  var data = google.visualization.arrayToDataTable([
+    ['Year', 'Telesna višina'],
+    ['2004', 1000],
+    ['2005', 1170],
+    ['2006', 660],
+    ['2007', 1030]
+  ]);
+
+  var options = {
+    title: 'Graf telesne višine',
+    hAxis: {
+      title: 'Datum',
+      titleTextStyle: {
+        color: '#333'
+      }
+    },
+    vAxis: {
+      minValue: 0
+    },
+    chartArea:{left:100,top:100, bottom:50}
+  };
+
+  var chart = new google.visualization.AreaChart(document.getElementById('graf1'));
+  chart.draw(data, options);
+}
+
+google.load("visualization", "1", {
+  packages: ["corechart"]
+});
+google.setOnLoadCallback(drawChart2);
+
+function drawChart2() {
+  var data = google.visualization.arrayToDataTable([
+    ['Datum', 'Telesna masa'],
+    ['2013', 1000],
+    ['2014', 1170],
+    ['2015', 660],
+    ['2016', 11030]
+  ]);
+
+  var options = {
+    title: 'Graf telesne mase',
+    hAxis: {
+      title: 'Datum',
+      titleTextStyle: {
+        color: '#333'
+      }
+    },
+    vAxis: {
+      minValue: 0
+    },
+    chartArea:{left:100,top:100, bottom:50}
+  }
+
+  var chart = new google.visualization.AreaChart(document.getElementById('graf2'));
+  chart.draw(data, options);
+}
+
+google.load("visualization", "1", {
+  packages: ["corechart"]
+});
+google.setOnLoadCallback(drawChart2);
+
+function drawChart3() {
+  var data = google.visualization.arrayToDataTable([
+    ['Datum', 'Telesna temperatura'],
+    ['2013', 1000],
+    ['2014', 1170],
+    ['2015', 660],
+    ['2016', 11030]
+  ]);
+
+  var options = {
+    title: 'Graf telesne temperature',
+    hAxis: {
+      title: 'Datum',
+      titleTextStyle: {
+        color: '#333'
+      }
+    },
+    vAxis: {
+      minValue: 0
+    },
+    chartArea:{left:100,top:100, bottom:50}
+  }
+
+  var chart = new google.visualization.AreaChart(document.getElementById('graf3'));
+  chart.draw(data, options);
+}
+
+google.load("visualization", "1", {
+  packages: ["corechart"]
+});
+google.setOnLoadCallback(drawChart3);
+
+function drawChart4() {
+  var data = google.visualization.arrayToDataTable([
+    ['Datum', 'ITM'],
+    ['2013', 1000],
+    ['2014', 1170],
+    ['2015', 660],
+    ['2016', 11030]
+  ]);
+
+  var options = {
+    title: 'Graf ITM',
+    hAxis: {
+      title: 'Datum',
+      titleTextStyle: {
+        color: '#333'
+      }
+    },
+    vAxis: {
+      minValue: 0
+    },
+    chartArea:{left:100,top:100, bottom:50}
+  }
+
+  var chart = new google.visualization.AreaChart(document.getElementById('graf4'));
+  chart.draw(data, options);
+}
+
+google.load("visualization", "1", {
+  packages: ["corechart"]
+});
+google.setOnLoadCallback(drawChart4);
+
+$(window).resize(function() {
+  drawChart1();
+  drawChart2();
+  drawChart3();
+  drawChart4();
+});
+    </script>
+
 </head>
 <body>
 
@@ -130,7 +365,7 @@
     <div class="container-fluid" style="width=100%"> 
         
         <div class="row">
-            <div class="col-md-2 col-lg-2"> 
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"> 
                 <div id="levi-meni" class="row">
                       
                         <div id="mojEHR" data-toggle="dropdown" data-target=".mojEHR">
@@ -142,7 +377,7 @@
                         </div>
 
                         <div class="dropdown mojEHR">
-                            <p>Izpis EHR </p>
+                            <p>Izpis podatkov EHR</p>
                         </div>
                       
                         <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">
@@ -158,130 +393,331 @@
 
                 </div>
             </div>
+
+
             <!-- PRIJAVA UPORABNIKA -->
-            <div id="glavno-desno" class="col-md-10 col-lg-10"> <!-- desni del spletne strani -->
-                <div class="row">   
-                    <div id="izbira-uporabnika" class="panel panel-primary col-md-5" >
+            <div id="glavno-desno" class="col-xs-10 col-sm-10 col-md-10 col-lg-10 "> <!-- desni del spletne strani -->
+                
+                <div id="glavno-desno-zgoraj-levo"class="row"> <!-- Vrhnja vrstica, ki vsebuje PRIJAVO in REGISTRACIJO -->
+                    
 
-                        <div class="panel-heading">
-                            <div class="row">
-                                
-                                <div class="col-lg-8 col-md-8 col-sm-8">
-                                    <span><b>Izbira uporabnika</b></span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4">
-                                    
-                                    <div class="dropdown obstojeci-uporabniki">
-                                        <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"> Obstoječi uporabniki
-                                      <span class="caret"></span>
+                    <div class="col-md-6 col-lg-6"> <!-- PRIJAVA UPORABNIKA -->
+                        <div class="row">   
+                            <div id="izbira-uporabnika" class="panel panel-primary col-md-12" >
 
-                                      </button>
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-8 col-md-7 col-sm-5">
+                                            <span><b>Izbira uporabnika</b></span>
+                                        </div>
+                                        <div class="col-lg-4 col-md-5 col-sm-7">
+                                            
+                                            <div class="dropdown obstojeci-uporabniki">
+                                                <button  class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"> Obstoječi uporabniki
+                                              <span class="caret"></span>
 
-                                      <ul class="dropdown-menu obstojeci-uporabniki">
-                                        <li><a>Jože Gorišek</a></li>
-                                        <li><a>Ana Novak</a></li>
-                                        <li><a>Janez Rovtar</a></li>
-                                      </ul>
+                                              </button>
+
+                                              <ul class="dropdown-menu obstojeci-uporabniki">
+                                                <li><a>Jože Gorišek</a></li>
+                                                <li><a>Ana Novak</a></li>
+                                                <li><a>Janez Rovtar</a></li>
+                                              </ul>
+                                            </div>
+
+                                        </div>
                                     </div>
-
                                 </div>
+
+                                <div class="panel-body">
+                                    <form role="form">
+                                        <div class="form-group col-sm-10">
+                                            <label for="ehrID" class="control-label">EhrID:</label>
+                                            <!--<div class="col-sm-4"> -->
+                                                
+                                                <input type="ehrID" class="form-control">
+                                                <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
+                                            <!--</div> -->                   
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="panel-body">
-                            <form role="form">
-                                <div class="form-group col-sm-10">
-                                    <label for="ehrID" class="control-label">EhrID:</label>
-                                    <!--<div class="col-sm-4"> -->
-                                        
-                                        <input type="ehrID" class="form-control">
-                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
-                                    <!--</div> -->                   
-                                </div>
-                            </form>
-                        </div>
-
                     </div>
-                </div>
-            <!-- KONEC PRIJAVA UPORABNIKA -->    
+                    <!-- KONEC PRIJAVA UPORABNIKA -->    
 
-            <!-- REGISTRACIJA UPORABNIKA -->
-                <div class="row">   
-                    <div id="registracija-uporabnika" class="panel panel-primary col-md-5" >
+                    <!-- REGISTRACIJA UPORABNIKA -->
+                    <div class="col-md-6 col-lg-6">    
+                        <div class="row">   
+                            <div id="registracija-uporabnika" class="panel panel-primary col-lg-11 col-md-11 col-lg-11 col-md-11" >
 
-                        <div class="panel-heading" data-toggle="collapse" data-target="#registracija-polja">
-                            <span ><b>Registracija novega uporabnika</b></span> </span>
-                        </div>
-
-                        <div id="registracija-polja" class="panel-body panel-collapse collapse">
-                            <form role="form">
-                                <div class="form-group col-sm-10">
-                                    <label for="ime" class="control-label">Ime:</label>
-                                    <input type="ime" class="form-control">
-
-                                    <label for="priimek" class="control-label">Priimek:</label>
-                                    <input type="priimek" class="form-control">
-
-                                    <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
-                                    <input type="Datumrojstva" class="form-control">
-
-                                    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
-
+                                <div class="panel-heading" data-toggle="collapse" data-target="#registracija-polja">
+                                    <span ><b>Registracija novega uporabnika</b></span> </span>
                                 </div>
-                            </form>
-                        </div>
 
-                    </div>
-                </div>
-            <!-- KONEC REGISTRACIJA UPORABNIKA -->
-            <!-- VNOS PODATKOV V EHR -->    
-                <div class="row">   
-                    <div id="vnosEHR" class="panel panel-primary col-md-5" >
+                                <div id="registracija-polja" class="panel-body panel-collapse collapse">
+                                    <form role="form">
+                                        <div class="form-group col-lg-10 col-md-10 col-lg-10 col-md-10">
+                                            <label for="ime" class="control-label">Ime:</label>
+                                            <input type="ime" class="form-control">
 
-                        <div class="panel-heading">
-                            <span ><b>Vnos podatkov v EHR</b></span> </span>
-                        </div>
+                                            <label for="priimek" class="control-label">Priimek:</label>
+                                            <input type="priimek" class="form-control">
 
-                        <div id="registracija-polja" class="panel-body">
-                            <form role="form">
-                                <div class="form-group col-sm-10">
-                                    <label for="ehrID" class="control-label">EhrID:</label>
-                                    <input type="ehrID" class="form-control">
+                                            <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
+                                            <input type="Datumrojstva" class="form-control">
 
-                                    <label for="datum" class="control-label">Datum:</label>
-                                    <input type="datum" class="form-control">
+                                            <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
 
-                                    <label for="visina" class="control-label">Telesna visina:</label>
-                                    <input type="visina" class="form-control">
-
-                                    <label for="teza" class="control-label">Telesna teža:</label>
-                                    <input type="teza" class="form-control">
-
-                                    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Dodaj podatke meritve</button>    
-
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
+                    </div>  <!-- KONEC REGISTRACIJE UPORABNIKA -->
+                </div>     <!-- KONEC vrhnje vrstice, ki vsebuje PRIJAVO in REGISTRACIJO -->  
+                    
+                       
+                        <div class="row">   <!-- ##################### OKVIR ZA POSAMAZNE PUNKCIONALNOSTI ##################### -->
+                            <div class="col-md-12">
 
-                    </div>
+                                <div class="row">   <!-- FUNKCIONALNOST 1 -> VNOS PODATKOV V EHR --> 
+                                    <div id="vnosEHR" class="panel panel-primary col-md-11" >
+
+                                        <div class="panel-heading">
+                                            <span ><b>Vnos podatkov v EHR</b></span> </span>
+                                        </div>
+
+                                        <div id="registracija-polja" class="panel-body">
+                                            <form role="form">
+                                                <div class="form-group col-sm-7">
+                                                        <label for="ehrID" class="control-label">EhrID:</label>
+                                                        <input type="ehrID" class="form-control">
+
+                                                        <label for="datum" class="control-label">Datum:</label>
+                                                        <input type="datum" class="form-control">
+                                                    
+                                                        <label for="visina" class="control-label">Telesna višina:</label>
+                                                    <div class="input-group">
+                                                        <input type="visina" class="form-control input-mini">
+                                                        <span class="input-group-addon">cm</span>
+                                                    </div>
+                                                        <label for="teza" class="control-label">Telesna teža:</label>
+                                                    <div class="input-group">
+                                                        <input type="teza" class="form-control">
+                                                        <span class="input-group-addon">kg</span>
+                                                    </div>
+                                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Dodaj podatke meritve</button>    
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>        
+                                </div>  <!-- KONEC FUNKCIONALNOSTI 1 -> VNOS PODATKOV V EHR --> 
+
+                                <div class="row">   <!-- FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR --> 
+                                        <div id="izpisEHR" class="panel panel-primary col-md-11" >
+
+
+                                                    <div class="panel-heading">
+                                                        <span ><b>Izpis podatkov EHR</b></span> </span>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="margin-top:10px;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Datum in ura</th>
+                                                                        <th>Telesna višina</th>
+                                                                        <th>Telesna masa</th>
+                                                                        <th>Telesna temperatura</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>12.1.2016 14:00</td>
+                                                                        <td>1.80 m</td>
+                                                                        <td>57 kg</td>
+                                                                        <td>36.5 &#x2103</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>13.1.2016 15:00</td>
+                                                                        <td>1.80 m</td>
+                                                                        <td>57 kg</td>
+                                                                        <td>36.5 &#x2103</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>14.1.2016 14:00</td>
+                                                                        <td>1.80 m</td>
+                                                                        <td>57 kg</td>
+                                                                        <td>36.5 &#x2103</td>
+                                                                    </tr>
+                                                                </tbody>                    
+                                                            </table>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="grid">
+                                                                            
+                                                                        <div class="col-1-2">
+                                                                            <div id="graf1" class="chart">
+                                                                                
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-1-2">
+                                                                            <div id="graf2" class="chart">
+                                                                                    
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>  
+                                                                </div>
+                                                            </div> 
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="grid">
+                                                                            
+                                                                        <div class="col-1-2">
+                                                                            <div id="graf3" class="chart">
+                                                                                
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-1-2">
+                                                                            <div id="graf4" class="chart">
+                                                                                    
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>  
+                                                                </div>
+                                                            </div>
+
+                                                    </div>
+                                        </div>        
+                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR ##################### -->   
+
+                                    <div class="row">   <!-- ##################### FUNKCIONALNOST 3 -> RAČUNANJE ITM #####################--> 
+                                        <div id="ITM-kalkulator" class="panel panel-primary col-md-11" >
+
+
+                                                    <div class="panel-heading">
+                                                        <span ><b>ITM kalkulator</b></span> </span>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                        <div class=row>
+                                                            <div class="col-md-6">
+
+                                                                <form role="form">
+                                                                    <div class="form-group col-sm-12">
+                                                                        
+                                                                        <label for="spol" class="control-label">Spol:</label>
+                                                                            <div id="spol" sytle="">  
+                                                                                <label class="radio-inline "><input type="radio" name="optradio"  checked>Moški</label>
+                                                                                <label class="radio-inline "><input type="radio" name="optradio">Ženski</label>   
+                                                                            </div>
+                                                                        <label for="teza" class="control-label" style="margin-top:10px;">Telesna teža:</label>
+                                                                        <div class="input-group">
+                                                                            <input type="teza" class="form-control">
+                                                                            <span class="input-group-addon">kg</span>
+                                                                        </div>
+                                                                        
+                                                                        <label for="visina" class="control-label">Telesna višina:</label>
+                                                                        <div class="input-group">
+                                                                            <input type="visina" class="form-control input-mini">
+                                                                            <span class="input-group-addon">cm</span>
+                                                                        </div>
+                                                                        
+                                                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Izračunaj ITM</button>    
+
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+
+                                                            <div class="col-md-6" border="1">
+
+                                                                <table id="tabelaITM" class="table" style="background-color: rgba(157, 157, 157,0.175); padding:5px;"> 
+                                                                    <thead>
+                                                                      <tr>
+                                                                        <th></th>
+                                                                        <th>Kategorija</th>
+                                                                        <th>ITM (kg/m²)</th>
+                                                                        <th>Telesna masa</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr style="border-top: 3px solid #aaa;">
+                                                                            <td bgcolor="#2A50FF"></td>
+                                                                            <td>Huda podhranjenost</td>
+                                                                            <td>≤ 16,0</td>
+                                                                            <td rowspan="3">suhost(zmanjšana telesna masa)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td bgcolor="#3A60BB"></td>
+                                                                            <td>Zmerna nedohranjenost</td>
+                                                                            <td>16,0–17,0</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td bgcolor="#4A708B"></td>
+                                                                            <td>Blaga nedohranjenost</td>
+                                                                            <td >17,0–18,5</td>
+                                                                        </tr>
+                                                                        <tr style="border-top: 3px solid #aaa;">
+                                                                            <td bgcolor="#006400"></td>
+                                                                            <td>Normalna telesna masa</td>
+                                                                            <td>18,5–25,0</td>
+                                                                            <td>normalna telesna masa</a></td>
+                                                                        </tr>
+                                                                        <tr style="border-top: 3px solid #aaa;">
+                                                                            <td bgcolor="#FFFF00"></td>
+                                                                            <td>Zvečana telesna masa (preadipoznost)</td>
+                                                                            <td>25,0–30,0</td>
+                                                                            <td>zvečana telesna masa</td>
+                                                                        </tr>
+                                                                        <tr style="border-top: 3px solid #aaa;">
+                                                                            <td bgcolor="#FFA500"></td>
+                                                                            <td>Debelost stopnje I</td>
+                                                                            <td>30,0–35,0</td>
+                                                                            <td rowspan="3" ></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td bgcolor="#FF0000"></td>
+                                                                            <td>Debelost stopnje II</td>
+                                                                            <td>35,0–40,0</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td bgcolor="#8B0000"></td>
+                                                                            <td>Debelost stopnje III</td>
+                                                                            <td>≥ 40,0</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                        </div>        
+                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 3 -> RAČUNANJE ITM ##################### -->   
+
+
+
+                            </div>
+                        </div> <!-- KONEC OKVIRJA ZA POSAMAZNE PUNKCIONALNOSTI -->
+        
                 </div>
-                <!-- KONEC VNOSA PODATKOV V EHR -->
-
             </div> <!-- konec desnega dela spletne strani -->
-            
-
-            
-
-
-
 
         </div>
-
-        
-
     </div>
-
-  <!-- KONEC: Vsebina aplikacije -->
 
 </body>
 </html>
+
+
+
+
