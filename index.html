@@ -15,7 +15,7 @@
         background: -o-linear-gradient(right, #259CEC, #259CEC, #259CEC); 
         background: -moz-linear-gradient(right,#259CEC, #259CEC, #259CEC); 
         background: linear-gradient(to right,#259CEC, #259CEC, #259CEC); 
-        /*min-width:1000px;*/ /* suppose you want minimun width of 1000px */
+        min-width:600px;
         /*width: auto !important;*/  /* Firefox will set width as auto */
 
     }
@@ -368,7 +368,7 @@ $(window).resize(function() {
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style=""> 
                 <div  class="row" >
-                    <div id="levi-meni" class="col-xs-3 col-sm-3 col-md-2 col-lg-2" >
+                    <div id="levi-meni" class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="min-width:150px;">
                         <div id="mojEHR" data-toggle="dropdown" data-target=".mojEHR">
                             <p style="color:white;"><b>MOJ EHR</b></p>
                         </div>
@@ -389,7 +389,7 @@ $(window).resize(function() {
                             <p>ITM kalkulator</p>
                         </div>
                         <div class="dropdown pripomocki">
-                            <p>Priprava jedilnega lista </p>
+                            <p>Priprava obroka</p>
                         </div>
                     </div>
 
@@ -722,7 +722,93 @@ $(window).resize(function() {
                                         </div>        
                                     </div>  <!-- ##################### KONEC FUNKCIONALNOST 3 -> RAČUNANJE ITM ##################### -->   
 
+                                    <div class="row">   <!-- FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK --> 
+                                        <div id="izpisEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
 
+
+                                                    <div class="panel-heading">
+                                                        <span ><b>Priprava jedilnega lista</b></span> </span>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                            <div class="row" >
+                                                            	<div id="iskalnik" class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                                            		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+															            <tbody>
+															            <tr class="success">
+															              <th colspan="2" style="text-align:center; ">Iskalnik živil</th>
+															            </tr>
+															            <tr>
+															              <td>Skupina:</td>
+															              <td><select name="skupina">
+															                  					<option value="" selected="">Katerakoli skupina</option>
+															                                    <option value="0100">Mlečni in jajčni izdelki</option>
+															                                    <option value="0200">Začimbe in zelišča</option>
+															                                    <option value="0400">Maščobe in olja</option>
+															                                    <option value="0500">Perutnina in izdelki iz perutnine</option>
+															                                    <option value="0600">Juhe, omake</option>
+															                                    <option value="0700">Klobase in suhomesni izdelki</option>
+															                                    <option value="0900">Sadje in sadni sokovi</option>
+															                                    <option value="1000">Svinjina in izdelki iz svinjine</option>
+															                                    <option value="1100">Zelenjava in zelenjavni izdelki</option>
+															                                    <option value="1200">Oreščki in semena</option>
+															                                    <option value="1300">Govedina in izdelki iz govedine</option>
+															                                    <option value="1400">Pijače, napitki</option>
+															                                    <option value="1500">Ribe, školjke, raki</option>
+															                                    <option value="1600">Stročnice in izdelki iz stročnic</option>
+															                                    <option value="1700">Jagnjetina, teletina, divjačina</option>
+															                                    <option value="1800">Pecivo, kruh</option>
+															                                    <option value="1900" >Sladkarije</option>
+															                                    <option value="2000">Žita in testenine</option>
+															                                    <option value="2100">Hitra hrana - Fast Food</option>
+															                                </select>
+															              </td>
+															            </tr>
+															            <tr>
+															              <td>Živilo:</td>
+															              <td><input name="zivilo" value="" type="text"></td>
+															            </tr>
+															            <tr>
+															              <td>Beljakovine:</td>
+															              <td>od
+															                <input class="input-small " name="beljak_min" value="" type="text">
+															                do
+															                <input class="input-small" name="beljak_max" value="" type="text">
+															                g/100 g</td>
+															            </tr>
+															            <tr>
+															              <td>Maščobe skupaj:</td>
+															              <td>od
+															                <input class="input-small" name="masc_min" value="" type="text">
+															                do
+															                <input class="input-small" name="masc_max" value="" type="text">
+															                g/100 g</td>
+															            </tr>
+															            <tr>
+															              <td>OH skupaj:</td>
+															              <td>od
+															                <input class="input-small" name="oh_min" value="" type="text">
+															                do
+															                <input class="input-small" name="oh_max" value="" type="text">
+															                g/100 g</td>
+															            </tr>
+															            <tr>
+															              <th colspan="2" >
+															              <button type="submit" class="btn btn-primary btn-md" style="margin-top:10px; margin:auto; display:block;" align="center">Poišči živila</button> 
+															              
+															            </tr>
+															          </tbody>
+																	</table>
+                                                            	</div>
+                                                            	<div id="hranilneVrednostiObroka" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+
+                                                            	</div>
+
+                                                            </div>
+
+                                                    </div>
+                                        </div>        
+                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK ##################### -->   
 
                             </div>
                         </div> <!-- KONEC OKVIRJA ZA POSAMAZNE PUNKCIONALNOSTI -->
