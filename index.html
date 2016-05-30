@@ -442,9 +442,9 @@ $(window).resize(function() {
                                             
                                             <select  id="preberiPredlogoBolnika" value="Obstoječi uporabniki" style="position:absolute; right:5px;top:-4px;">
                                                 <option value="Obstoječi uporabniki"></option>
-                                                <option value="Jože Gorišek">Calvin Harris</option>
-                                                <option value="Ana Novak">Ana Krašnja</option>
-                                                <option value="Ana Novak">Paul Walker</option>
+                                                <option value="Calvin Harris">Calvin Harris</option>
+                                                <option value="Ana Krašnja">Ana Krašnja</option>
+                                                <option value="Paul Walker">Paul Walker</option>
                                             </select>
                                               
                                         </div>
@@ -479,21 +479,32 @@ $(window).resize(function() {
                                 </div>
 
                                 <div id="registracija-polja" class="panel-body" style="display:none;">
-                                    <form role="form">
-                                        <div class="form-group col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <label for="ime" class="control-label">Ime:</label>
-                                            <input type="ime" class="form-control">
+                         
+                                        <div class="form-group col-sm-10">
 
-                                            <label for="priimek" class="control-label">Priimek:</label>
-                                            <input type="priimek" class="form-control">
+                                        	<label for="ime" class="control-label" >Ime:</label>
+	                                        <div class="input-group col-sm-10">
+	                                            <input id="registracija-ime" type="ime" class="form-control" placeholder="Janez">
+	                                        </div>
 
-                                            <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
-                                            <input type="Datumrojstva" class="form-control">
+	                                        <label for="priimek" class="control-label" >Priimek:</label>
+	                                        <div class="input-group col-sm-10">
+	                                            <input id="registracija-priimek" type="priimek" class="form-control" placeholder="Novak">
+	                                        </div>
 
-                                            <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
+	                                        <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
+	                                        <div class="input-group col-sm-10">
+	                                            <input id="registracija-datum" type="Datumrojstva" class="form-control" placeholder="02-09-1996">
+	                                        </div>
+
+	                                        <label for="Urarojstva" class="control-label" >Ura rojstva:</label>
+	                                        <div class="input-group col-sm-10">
+	                                            <input id="registracija-ura" type="Urarojstva" class="form-control" placeholder="09:46">
+	                                        </div>
+	                                            <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
 
                                         </div>
-                                    </form>
+                                   
                                 </div>
 
                             </div>
@@ -592,7 +603,7 @@ $(window).resize(function() {
                                                     			
 
                                                     		</div>
-                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:30px;">
+                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:0px;">
                                                                 <thead>
                                                                     <tr style="background-color: rgba(37, 156, 236,0.5);">
                                                                         <th>Datum in ura</th>
