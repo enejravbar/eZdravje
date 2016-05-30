@@ -474,11 +474,11 @@ $(window).resize(function() {
                         <div class="row">   
                             <div id="registracija-uporabnika" class="panel panel-primary col-xs-12 col-sm-12 col-md-10 col-lg-10" >
 
-                                <div class="panel-heading" data-toggle="collapse" data-target="#registracija-polja" >
+                                <div class="panel-heading">
                                     <span ><b>Registracija novega uporabnika</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-down"> </span>
                                 </div>
 
-                                <div id="registracija-polja" class="panel-body panel-collapse collapse">
+                                <div id="registracija-polja" class="panel-body" style="display:none;">
                                     <form role="form">
                                         <div class="form-group col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <label for="ime" class="control-label">Ime:</label>
@@ -691,7 +691,6 @@ $(window).resize(function() {
                                                         <div class=row>
                                                             <div class="col-md-6">
 
-                                                                <form role="form">
                                                                     <div class="form-group col-sm-12">
                                                                         
                                                                         <label for="spol" class="control-label">Spol:</label>
@@ -701,25 +700,24 @@ $(window).resize(function() {
                                                                             </div>
                                                                         <label for="teza" class="control-label" style="margin-top:10px;">Telesna teža:</label>
                                                                         <div class="input-group">
-                                                                            <input type="teza" class="form-control">
+                                                                            <input id="teza" type="teza" class="form-control">
                                                                             <span class="input-group-addon">kg</span>
                                                                         </div>
                                                                         
                                                                         <label for="visina" class="control-label">Telesna višina:</label>
                                                                         <div class="input-group">
-                                                                            <input type="visina" class="form-control input-mini">
+                                                                            <input id="visina" type="visina" class="form-control input-mini">
                                                                             <span class="input-group-addon">cm</span>
                                                                         </div>
-                                                                        
-                                                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Izračunaj ITM</button>    
-
+                                                                         <button id="gumbITM"  class="btn btn-primary" style="margin-top:10px;">Izračunaj ITM</button>
                                                                     </div>
-                                                                </form>
+
+                                                               
                                                             <div class="row">
                                                                 <div class="col-md-12" style="margin-top:20px; margin-left:13px;">
-                                                                    <div class="alert alert-success">
-                                                                        <p >Vaš indeks telesne mase (ITM) je <span style="font-size:17px;"><b>19</b></span>.<br>
-                                                                        Uvrščate se v kategorijo: <b>NORMALNA TELESNA MASA</b>. </p>   
+                                                                    <div id="ITM-okvir" class="alert alert-success" style="display:none;">
+                                                                        <p >Vaš indeks telesne mase (ITM) je <span id="ITM-podatek" style="font-size:17px;"><b></b></span>.<br>
+                                                                        Uvrščate se v kategorijo: <b><span id="ITM-kategorija"></span></b>. </p>   
                                                                     </div>
                                                                 </div>
                                                             </div>
