@@ -19,6 +19,13 @@
         /*width: auto !important;*/  /* Firefox will set width as auto */
 
     }
+
+    .vertical_line{
+    	height:150px; 
+    	width:1px;
+    	background:#000;
+    }
+
     .panel-heading{
     	position:relative;
     }
@@ -541,7 +548,46 @@ $(window).resize(function() {
                                                     </div>
 
                                                     <div class="panel-body">
-                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:10px;">
+                                                    		<div class="row">
+                                                    			<div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
+	                                                    			
+	                                                    			<img src="Slike/Ana-Novak.jpg" style="width:90%;" class="img-rounded"> 
+                                                    			</div>
+                                                    			<div class="col-xs-7 col-sm-7 col-md-9 col-lg-9" style="border-left:2px;">
+                                                    				<div class="panel">
+                                                    					<div class="panel-heading" style="background-color: rgba(37, 156, 236,0.5);">
+		                                                    				<b>Osebna izkaznica</b>
+	                                                    				</div>
+	                                                    				<div class="panel-body" style="background-color: rgba(157, 157, 157,0.05);">
+	                                                    					<table class="table table-hover" border="0" style="width:40%; border-top:0px;">
+																			    <tbody>
+																				    <tr>
+																				       	<th>Ime:</td>
+																				        <td>Ana</td>
+																				    </tr>
+																				    <tr>
+																				        <th>Priimek:</td>
+																				        <td>Novak</td>
+																			      	</tr>
+																			      	<tr>
+																				        <th>Datum rojstva:</td>
+																				        <td>23.4.1975</td>
+																			      	</tr>
+																			      	<tr>
+																				        <th>Starost:</td>
+																				        <td>Spol:</td>
+																			      	</tr>
+																			     	
+																			    </tbody>
+																			  </table>
+	                                                    				</div>
+
+                                                    				</div>
+                                                    			</div>
+                                                    			
+
+                                                    		</div>
+                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:30px;">
                                                                 <thead>
                                                                     <tr style="background-color: rgba(37, 156, 236,0.5);">
                                                                         <th>Datum in ura</th>
