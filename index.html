@@ -1,363 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <title>Portal e-Zdravje</title>
-    
 
-
-  <style>
-    
-    body {
-        padding-top: 80px;
-        background: -webkit-linear-gradient(left, #259CEC, #259CEC, #259CEC);
-        background: -o-linear-gradient(right, #259CEC, #259CEC, #259CEC); 
-        background: -moz-linear-gradient(right,#259CEC, #259CEC, #259CEC); 
-        background: linear-gradient(to right,#259CEC, #259CEC, #259CEC); 
-        min-width:630px;
-        /*width: auto !important;*/  /* Firefox will set width as auto */
-
-    }
-
-    .vertical_line{
-    	height:150px; 
-    	width:1px;
-    	background:#000;
-    }
-
-    .panel-heading{
-    	position:relative;
-    }
-    .glyphicon{
-    	cursor:pointer;
-    	font-size: 17px;
-    }
-
-    #levi-meni {
-        position:fixed;
-        top:80px;
-        left:-20px;
-        -webkit-border-top-right-radius: 7px;
-        -webkit-border-bottom-right-radius: 7px;
-        -moz-border-radius-topright: 7px;
-        -moz-border-radius-bottomright: 7px;
-        border-top-right-radius: 7px;
-        border-bottom-right-radius: 7px;
-        background-color: #222;
-        padding-top:15px;
-        padding-bottom:20px;
-        
-
-    }
-
-    .mojEHR, .pripomocki{
-        cursor:none;
-        color:#9d9d9d;
-        padding-left:25px;
-        font-size:15px;
-    }
-
-    .mojEHR:hover, .pripomocki:hover{
-        cursor:pointer;
-        color:white;
-        padding-left:27px;
-    }
-
-    #mojEHR{
-        height:auto;
-        margin-top:5px;
-        padding-top:2px;
-        padding-left:15px;
-        font-size:16px;
-        /*background-color:#9d9d9d;*/
-    }
-    #pripomocki{
-        /*background-color:#9d9d9d;*/
-        padding-top:2px;
-        padding-left:15px;
-        font-size:16px;
-
-    }
-    #zgornji-meni{
-        -webkit-border-bottom-right-radius: 7px;
-        -webkit-border-bottom-left-radius: 7px;
-        -moz-border-radius-bottomright: 7px;
-        -moz-border-radius-bottomleft: 7px;
-        border-bottom-right-radius: 7px;
-        border-bottom-left-radius: 7px;
-        padding-top:5px;
-        padding-bottom: 5px;
-    }
-
-    #izbira-uporabnika{
-        margin-top:20px;
-        padding:0px;
-        margin-left: 0px;
-        width: -moz-calc(100% - 20px);
-        width: -webkit-calc(100% - 20px);
-        width:calc(100% - 20px);
-    }
-
-    #preberiPredlogoBolnika{
-    	color:rgb(51,51,51);
-    	margin-right:5px;
-    }
-    #registracija-uporabnika{
-        cursor:pointer;
-        padding:0px;
-        margin-top:20px;
-        margin-left: 0px;
-        /*width: -moz-calc(100% - 40px);
-        width: -webkit-calc(100% - 40px);
-        width:calc(100% - 40px);*/
-    }
-
-    #vnosEHR{
-        padding:0px;
-        margin-left: 0px;
-    }
-
-    #izpisEHR{
-        padding:0px;
-        margin-left: 0px;
-    }
-
-    #ITM-kalkulator{
-        padding:0px;
-        margin-left: 0px;
-    }
-    #glavno-desno{
-
-    }
-
-	#pripravaObroka{
-		padding:0px;
-        margin-left: 0px;
-	}
-    .obstojeci-uporabniki li{
-        cursor:pointer;
-    }
-
-    * {
-      @include box-sizing(border-box);
-    }
-
-    $pad: 0px;
-
-    .grid {
-      background: white;
-      margin: 0 0 $pad 0;
-      
-      &:after {
-        /* Or @extend clearfix */
-        content: "";
-        display: table;
-        clear: both;
-      }
-    }
-
-    [class*='col-'] {
-      float: left;
-      padding-right: $pad;
-      .grid &:last-of-type {
-        padding-right: 0;
-      }
-    }
-    .col-1-3 {
-      width: 33.33%;
-    }
-    .col-1-1 {
-      width: 100%;
-    }
-    .col-1-2 {
-      width: 50%;
-    }
-    .col-1-4 {
-      width: 25%;
-    }
-
-
-    /* Opt-in outside padding */
-    .grid-pad {
-      padding: $pad 0 $pad $pad;
-      [class*='col-']:last-of-type {
-        padding-right: $pad;
-      }
-    }
-    .chart {
-      width: 100%; 
-      height: 600px;
-    }
-
-    #tabelaEHRpodatkov{
-       /*margin-left:55px; 
-        width: -moz-calc(100% - 55px);
-        width: -webkit-calc(100% - 55px);
-        width:calc(100% - 55px);*/
-    }
-
-    #tabelaITM{
-        -webkit-border-top-left-radius: 7px;
-        -webkit-border-top-right-radius: 7px;
-        -moz-border-radius-topleft: 7px;
-        -moz-border-radius-topright: 7px;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-    }
-
-  </style>
+  <meta charset="utf-8">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <title>Portal e-Zdravje</title>
+  <link rel="stylesheet" href="css/oblikovanje.css"> 
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
   <script src="js/jquery-2.2.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/d3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="js/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <script src="js/koda.js"></script>
+  <script src="js/izrisGrafov.js"> </script>
       
-      <script type="text/javascript">
-      google.load("visualization", "1", {
-        packages: ["corechart"]
-      });
-google.setOnLoadCallback(drawChart1);
-
-function drawChart1() {
-  var data = google.visualization.arrayToDataTable([
-    ['Year', 'Telesna višina'],
-    ['2004', 1000],
-    ['2005', 1170],
-    ['2006', 660],
-    ['2007', 1030]
-  ]);
-
-  var options = {
-    title: 'Graf telesne višine',
-    hAxis: {
-      title: 'Datum',
-      titleTextStyle: {
-        color: '#333'
-      }
-    },
-    vAxis: {
-      minValue: 0
-    },
-    /*chartArea:{left:100,top:100, bottom:50}*/
-    chartArea:{top:100, bottom:50}
-  };
-
-  var chart = new google.visualization.AreaChart(document.getElementById('graf1'));
-  chart.draw(data, options);
-}
-
-google.load("visualization", "1", {
-  packages: ["corechart"]
-});
-google.setOnLoadCallback(drawChart2);
-
-function drawChart2() {
-  var data = google.visualization.arrayToDataTable([
-    ['Datum', 'Telesna masa'],
-    ['2013', 1000],
-    ['2014', 1170],
-    ['2015', 660],
-    ['2016', 11030]
-  ]);
-
-  var options = {
-    title: 'Graf telesne mase',
-    hAxis: {
-      title: 'Datum',
-      titleTextStyle: {
-        color: '#333'
-      }
-    },
-    vAxis: {
-      minValue: 0
-    },
-    chartArea:{top:100, bottom:50}
-  }
-
-  var chart = new google.visualization.AreaChart(document.getElementById('graf2'));
-  chart.draw(data, options);
-}
-
-google.load("visualization", "1", {
-  packages: ["corechart"]
-});
-google.setOnLoadCallback(drawChart2);
-
-function drawChart3() {
-  var data = google.visualization.arrayToDataTable([
-    ['Datum', 'Telesna temperatura'],
-    ['2013', 1000],
-    ['2014', 1170],
-    ['2015', 660],
-    ['2016', 11030]
-  ]);
-
-  var options = {
-    title: 'Graf telesne temperature',
-    hAxis: {
-      title: 'Datum',
-      titleTextStyle: {
-        color: '#333'
-      }
-    },
-    vAxis: {
-      minValue: 0
-    },
-    chartArea:{top:100, bottom:50}
-  }
-
-  var chart = new google.visualization.AreaChart(document.getElementById('graf3'));
-  chart.draw(data, options);
-}
-
-google.load("visualization", "1", {
-  packages: ["corechart"]
-});
-google.setOnLoadCallback(drawChart3);
-
-function drawChart4() {
-  var data = google.visualization.arrayToDataTable([
-    ['Datum', 'ITM'],
-    ['2013', 1000],
-    ['2014', 1170],
-    ['2015', 660],
-    ['2016', 11030]
-  ]);
-
-  var options = {
-    title: 'Graf ITM',
-    hAxis: {
-      title: 'Datum',
-      titleTextStyle: {
-        color: '#333'
-      }
-    },
-    vAxis: {
-      minValue: 0
-    },
-    chartArea:{top:100, bottom:50}
-  }
-
-  var chart = new google.visualization.AreaChart(document.getElementById('graf4'));
-  chart.draw(data, options);
-}
-
-google.load("visualization", "1", {
-  packages: ["corechart"]
-});
-google.setOnLoadCallback(drawChart4);
-
-$(window).resize(function() {
-  drawChart1();
-  drawChart2();
-  drawChart3();
-  drawChart4();
-});
-    </script>
 
 </head>
 <body>
@@ -457,7 +115,7 @@ $(window).resize(function() {
                                             <!--<div class="col-sm-4"> -->
                                                 
                                                 <input id="prijava-vpisEHR" type="ehrID" class="form-control">
-                                                <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
+                                                <button id="gumb-prijava" type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
                                             <!--</div> -->                   
                                         </div>
                                 </div>
@@ -590,7 +248,7 @@ $(window).resize(function() {
                                                     		<div class="row">
                                                     			<div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
 	                                                    			
-	                                                    			<img src="Slike/Ana-Klasnja.jpg" style="width:90%;" class="img-rounded"> 
+	                                                    			<img id="osebna-slika" src="Slike/No-Image.jpg" style="width:90%;" class="img-rounded"> 
                                                     			</div>
                                                     			<div class="col-xs-7 col-sm-7 col-md-9 col-lg-9" style="border-left:2px;">
                                                     				<div class="panel">
@@ -602,26 +260,20 @@ $(window).resize(function() {
 																			    <tbody>
 																				    <tr>
 																				       	<th>Ime:</td>
-																				        <td>Ana</td>
+																				        <td id="izpis-ime">-</td>
 																				    </tr>
 																				    <tr>
 																				        <th>Priimek:</td>
-																				        <td>Novak</td>
+																				        <td id="izpis-priimek">-</td>
 																			      	</tr>
 																			      	<tr>
 																				        <th>Datum rojstva:</td>
-																				        <td>23.4.1975</td>
+																				        <td id="izpis-datum">-</td>
 																			      	</tr>
 																			      	<tr>
 																				        <th>Starost:</td>
-																				        <td>41</td>
+																				        <td id="izpis-starost">-</td>
 																			      	</tr>
-																			      	<tr>
-																				        <th>Spol:</td>
-																				        <td>Ženski</td>
-																			      	</tr>
-																			      	
-																			     	
 																			    </tbody>
 																			  </table>
 	                                                    				</div>
@@ -640,25 +292,11 @@ $(window).resize(function() {
                                                                         <th>Telesna temperatura</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>12.1.2016 14:00</td>
-                                                                        <td>1.80 m</td>
-                                                                        <td>57 kg</td>
-                                                                        <td>36.5 &#x2103</td>
+                                                                <tbody id="nosilec-zapisov">
+                                                                    <tr id="niZapisov">
+                                                                        <td colspan="4" style="text-align:center;">V EHR trenutno ni nobenih zapisov.</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>13.1.2016 15:00</td>
-                                                                        <td>1.80 m</td>
-                                                                        <td>57 kg</td>
-                                                                        <td>36.5 &#x2103</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>14.1.2016 14:00</td>
-                                                                        <td>1.80 m</td>
-                                                                        <td>57 kg</td>
-                                                                        <td>36.5 &#x2103</td>
-                                                                    </tr>
+                                                                    
                                                                 </tbody>                    
                                                             </table>
 

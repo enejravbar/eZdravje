@@ -19,14 +19,27 @@ $(document).ready(function(){
   /*var uporabnik = preberiEHR("58aff611-17bb-4b44-9cae-7502035cdd76");
 
   console.log("Ime je " + uporabnik.ime+ "Priimek je " + uporabnik.priimek +" datum rojstva " + uporabnik.datumRojstva);*/
+    /*var uporabnik={
+            ime: "",
+            priimek: "",
+            datumRojstva: "",
+            telesnaTeza: [],
+            telesnaTemperatura: [],
+            telesnaVisina:[]
+          }*/
   
-  var uporabnik = preberiMeritve("58aff611-17bb-4b44-9cae-7502035cdd76");
-  //console.log(uporabnik);
+  //var uporabnik = preberiMeritve("58aff611-17bb-4b44-9cae-7502035cdd76");
+  //console.log("Ime: "+ uporabnik.ime+ " Priimek: "+uporabnik.priimek+ " Datum rojstva: "+uporabnik.datumRojstva + " \nTelesna masa: " + uporabnik.telesnaTeza[0] +" Telesna temperatura: " + uporabnik.telesnaTemperatura[0]);
+
+
   razsirjanjeInKrcenjeOken();
 
   gumbGenerirajPodatke();
   registracijaUporabnika();
   vnosPodatkovVEHR();
+
+  //console.log("Star si: " +izracunajStarost("1996-09-22"));
+  izberiUporabnika();
   ITMKalkulator();
 
 });
@@ -119,6 +132,73 @@ function generirajPodatke(stPacienta) {
   return ehrIdUstvarjeni;
 }
 
+function izberiUporabnika(){
+  $("#gumb-prijava").click(function() {
+
+      izpisPodatkovEHR( "684b6f23-3d92-4eb2-bcaf-2ed09239d9d6" );
+  });
+}
+
+function izpisPodatkovEHR(ehrId){
+
+  /*var uporabnik={
+            ime: "",
+            priimek: "",
+            datumRojstva: "",
+            telesnaTeza: [],
+            telesnaTemperatura: [],
+            telesnaVisina:[]
+          }*/
+
+  var uporabnik = preberiMeritve(ehrId);
+  if(jeObstojeciUporabnik(ehrId)){
+    if(ehrId==tabelaObstojecihUporabnikov[0]){  // Calvin Harris
+      $("#osebna-slika").attr({
+        "src" : "Slike/Calvin-Harris.jpg"
+      });
+    }
+    if(ehrId==tabelaObstojecihUporabnikov[1]){  // Ana Klašnja
+      $("#osebna-slika").attr({
+        "src" : "Slike/Ana-Klasnja.jpg"
+      });
+    }
+    if(ehrId==tabelaObstojecihUporabnikov[2]){  // Julija Tavčar
+      $("#osebna-slika").attr({
+        "src" : "Slike/Julija-Tavcar.jpg"
+      });
+    }
+
+  }else{
+      $("#osebna-slika").attr({
+        "src" : "Slike/No-Image.jpg"
+      });
+  }
+  //-------------- OSEBNA IZKAZNICA --------------//
+  $("#izpis-ime").text(uporabnik.ime);
+  $("#izpis-priimek").text(uporabnik.priimek);
+  $("#izpis-datum").text(izpisDatumaVLepiObliki(uporabnik.datumRojstva));
+  $("#izpis-starost").text( izracunajStarost(uporabnik.datumRojstva) );
+    console.log("Dolzina tabele je: " +uporabnik.telesnaTeza.length);
+  if(uporabnik.telesnaTeza.length==0){
+    $("#niZapisov").css({"display" : "block"});
+  }else{
+    $("#niZapisov").css({"display" : "none"});
+    var element = document.getElementById("nosilec-zapisov");
+    var zac="<tr class=\"vrsticeEHR\">";
+    var kon = "</tr>";
+    var vrsticeHTML="";
+    
+    for(var i=(uporabnik.telesnaTeza.length-1); i>=0; i--){
+      vrsticeHTML+= zac+"<td>"+ izpisDatumaInUreVLepiObliki(uporabnik.telesnaTeza[i].time)+"</td>";
+      vrsticeHTML+= "<td>"+ uporabnik.telesnaVisina[i].height+"</td>";
+      vrsticeHTML+= "<td>"+ uporabnik.telesnaTeza[i].weight+"</td>";
+      vrsticeHTML+= "<td>"+ uporabnik.telesnaTemperatura[i].temperature+"</td>" + kon;
+    }
+    element.innerHTML=vrsticeHTML;
+  }
+
+}
+
 function preberiEHR(ehrId) {
   sessionId = getSessionId();
   var uporabnik;
@@ -142,6 +222,56 @@ function preberiEHR(ehrId) {
 
     return uporabnik;
     
+}
+
+
+
+function jeObstojeciUporabnik(ehrId){
+  if(ehrId==tabelaObstojecihUporabnikov[0] || ehrId==tabelaObstojecihUporabnikov[1] || ehrId==tabelaObstojecihUporabnikov[2]){
+    return true;
+  }
+  return false;
+}
+
+function izpisDatumaVLepiObliki(datumRojstva){
+  console.log("DAtum rojstva" + datumRojstva);
+  var datum= datumRojstva.split("-");
+  return datum[2].substring(0,2)+"."+datum[1]+"."+datum[0];
+}
+
+function izpisDatumaInUreVLepiObliki(datumRojstva){
+  console.log("Datum rojstva" + datumRojstva);
+  var datum= datumRojstva.split("-");
+  return datum[2].substring(0,2)+"."+datum[1]+"."+datum[0]+ "  " + datum[2].substring(3,8);
+}
+
+function izracunajStarost(datumRojstva){
+  var datum= datumRojstva.split("-");
+  var starost=0;
+  var leto,mesec,dan;
+  leto=datum[0];
+  mesec=datum[1];
+  dan=datum[2].substring(0,2);
+  var d = new Date();
+  var trenutnoLeto = d.getFullYear();
+  var trenutniDan = d.getDate();
+  var trenutniMesec = d.getMonth()+1;
+
+  if(mesec==trenutniMesec){
+    if(dan<=trenutniDan){
+      starost=trenutnoLeto-leto;
+    }else{
+      starost=trenutnoLeto-leto-1;
+    }
+  }
+  if(mesec<trenutniMesec){
+    starost=trenutnoLeto-leto;
+  }
+  if(mesec>trenutniMesec){
+    starost=trenutnoLeto-leto-1;
+  }
+  return starost;
+
 }
 
 function vnosPodatkovVEHR(){
@@ -557,6 +687,7 @@ function preberiMeritve(ehrId) {
             ime: "",
             priimek: "",
             datumRojstva: "",
+            cas: "",
             telesnaTeza: [],
             telesnaTemperatura: [],
             telesnaVisina:[]
