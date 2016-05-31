@@ -5,12 +5,32 @@ var queryUrl = baseUrl + '/query';
 var username = "ois.seminar";
 var password = "ois4fri";
 
-
+var tabelaObstojecihUporabnikov=new Array();
 /**
  * Prijava v sistem z privzetim uporabnikom za predmet OIS in pridobitev
  * enolične ID številke za dostop do funkcionalnosti
  * @return enolični identifikator seje za dostop do funkcionalnosti
  */
+
+$(document).ready(function(){
+
+  //kreirajEhrId("Test","PriimekTesta","1970-12-18T16:00");
+  //dodajMeritve("58aff611-17bb-4b44-9cae-7502035cdd76","1984-01-17T16:34","150","56","36.6" );
+  /*var uporabnik = preberiEHR("58aff611-17bb-4b44-9cae-7502035cdd76");
+
+  console.log("Ime je " + uporabnik.ime+ "Priimek je " + uporabnik.priimek +" datum rojstva " + uporabnik.datumRojstva);*/
+  
+  var uporabnik = preberiMeritve("58aff611-17bb-4b44-9cae-7502035cdd76");
+  //console.log(uporabnik);
+  razsirjanjeInKrcenjeOken();
+
+  gumbGenerirajPodatke();
+  registracijaUporabnika();
+  vnosPodatkovVEHR();
+  ITMKalkulator();
+
+});
+
 function getSessionId() {
     var response = $.ajax({
         type: "POST",
@@ -30,44 +50,221 @@ function getSessionId() {
  * @param stPacienta zaporedna številka pacienta (1, 2 ali 3)
  * @return ehrId generiranega pacienta
  */
-function generirajPodatke(stPacienta) {
-  ehrId = "";
+function gumbGenerirajPodatke(){
 
-  // TODO: Potrebno implementirati
-
-  return ehrId;
+  $("#gumbGenerirajPodatke").click(function(){
+     console.log("Kliknjeno!");
+    for(var i=1; i<=3; i++){
+      tabelaObstojecihUporabnikov.push(generirajPodatke(i));
+      console.log("Uporabnik "+i+ " EhrID = " + tabelaObstojecihUporabnikov[i-1]);
+    }
+  });
 }
 
-function kreirajUporabnika(){
+function generirajPodatke(stPacienta) {
+  var ehrIdUstvarjeni;
+
+  var podatkiCalvin = [ // slabi vitalni znaki - povečana telesna masa
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 180, telesnaTeza: 90, telesnaTemperatura: 36.6},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 181, telesnaTeza: 95, telesnaTemperatura: 37.3},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 184, telesnaTeza: 87, telesnaTemperatura: 36.6},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 186, telesnaTeza: 90, telesnaTemperatura: 36.5},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 188, telesnaTeza: 95, telesnaTemperatura: 38.6},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 190, telesnaTeza: 98, telesnaTemperatura: 36.6}
+  ];
+  var podatkiAna = [ // srednje dobri vitalni znaki
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 160, telesnaTeza: 72, telesnaTemperatura: 36.6},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 162, telesnaTeza: 71, telesnaTemperatura: 37.3},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 165, telesnaTeza: 70, telesnaTemperatura: 36.6},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 166, telesnaTeza: 77, telesnaTemperatura: 36.5},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 169, telesnaTeza: 80, telesnaTemperatura: 38.6},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 172, telesnaTeza: 73, telesnaTemperatura: 36.6}
+  ];
+  var podatkiJulija = [ // dobri vitalni znaki
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 170, telesnaTeza: 62, telesnaTemperatura: 36.6},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 172, telesnaTeza: 61, telesnaTemperatura: 37.3},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 175, telesnaTeza: 60, telesnaTemperatura: 36.6},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 176, telesnaTeza: 67, telesnaTemperatura: 36.5},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 180, telesnaTeza: 70, telesnaTemperatura: 38.6},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 182, telesnaTeza: 63, telesnaTemperatura: 36.6}
+  ];
+
+  switch(stPacienta){
+
+    case 1: // Calvin Harris
+      var ehrIdCalvin = kreirajEhrId("Calvin", "Harris", "1984-01-17T16:34");
+      ehrIdUstvarjeni = ehrIdCalvin;
+          for(var i=0; i<6; i++){
+            dodajMeritve(ehrIdCalvin,podatkiCalvin[i].datumInUra,podatkiCalvin[i].telesnaVisina,podatkiCalvin[i].telesnaTeza,podatkiCalvin[i].telesnaTemperatura );
+          }
+      break;
+      
+    case 2: // Ana Klašnja
+      var ehrIdAna = kreirajEhrId("Ana", "Klašnja", "1978-12-18T16:00");
+      ehrIdUstvarjeni = ehrIdAna;
+          for(var i=0; i<6; i++){
+            dodajMeritve(ehrIdAna,podatkiAna[i].datumInUra,podatkiAna[i].telesnaVisina,podatkiAna[i].telesnaTeza,podatkiAna[i].telesnaTemperatura );
+          }
+      break;
+
+    case 3: // Julija Tavčar
+      var ehrIdJulija = kreirajEhrId("Julija", "Tavčar", "1996-09-12T12:00");
+      ehrIdUstvarjeni = ehrIdJulija;
+          for(var i=0; i<6; i++){
+            dodajMeritve(ehrIdJulija,podatkiJulija[i].datumInUra,podatkiJulija[i].telesnaVisina,podatkiJulija[i].telesnaTeza,podatkiJulija[i].telesnaTemperatura );
+          }
+      break;
+  }
+
+  return ehrIdUstvarjeni;
+}
+
+function preberiEHR(ehrId) {
+  sessionId = getSessionId();
+  var uporabnik;
+    $.ajax({
+      url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+      type: 'GET',
+      async: false,
+      headers: {"Ehr-Session": sessionId},
+        success: function (data) {
+        var party = data.party;
+          uporabnik={
+            ime: party.firstNames,
+            priimek: party.lastNames,
+            datumRojstva: party.dateOfBirth
+          }
+      },
+      error: function(err) {
+        uporabnik={};
+      } 
+    });
+
+    return uporabnik;
+    
+}
+
+function vnosPodatkovVEHR(){
+    
+    $("#gumb-vnosVEHR").click(function(){
+      var ehrId = $("#vnosVEHR-ehrId").val();
+      var datum = $("#vnosVEHR-datum").val();
+      var ura = $("#vnosVEHR-ura").val();
+      var telesnaVisina = $("#vnosVEHR-telesnaVisina").val();
+      var telesnaMasa = $("#vnosVEHR-masa").val();
+      var telesnaTemperatura = $("#vnosVEHR-temperatura").val();
+
+
+      var napaka=false;
+      var napaka1=false;
+      var napaka2=false;
+      var napaka3=false;
+
+      if(!preveriVeljavnostDatuma(datum)){ 
+        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        napaka=true;
+      }else{
+        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-sm-12 "});
+      }
+
+      if(!preveriVeljavnostUre(ura)){
+        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-sm-10 has-error"});
+        napaka1=true;
+      }else{
+        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-sm-10"});
+        
+      }
+
+      if(!(telesnaTemperatura >0)){ 
+        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        napaka2=true;
+      }else{
+        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-sm-12"});
+      }
+
+      if(!(telesnaMasa >0)){ 
+        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        napaka3=true;
+      }else{
+        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-sm-12"});
+      }
+
+      if(!(telesnaVisina >0)){
+        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
+        $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+        $("#vnosVEHR-obvestilo").html("<b>NAPAKA!</b> Prosim izpolnite polja pravilno.");
+        return;
+      }else{
+        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-sm-12"});
+        if(napaka||napaka1 || napaka2){
+          $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
+          $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+          $("#vnosVEHR-obvestilo").html("<b>NAPAKA</b> Prosim izpolnite polja pravilno.");
+          return;
+        }
+      }
+            var datumInUra = zapisiDatumRojstvaVFormatu(datum, ura)
+            var statusProcesaDodajMeritve = dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaMasa,telesnaTemperatura);
+            console.log("statusProcesaDodajMeritve "+statusProcesaDodajMeritve);
+            if(statusProcesaDodajMeritve==1){
+              $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
+              $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
+              $("#vnosVEHR-obvestilo").html("Podatki so bili uspešno vnešeni v EHR.");
+            }else{
+              $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
+              $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+              $("#vnosVEHR-obvestilo").html("<b>NAPAKA!</b> Preverite pravilnost EhrID.");
+            }
+            
+      
+    });
+}
+
+function registracijaUporabnika(){
 
    $("#gumb-registriraj").click(function(){
+
+      var sessionId=getSessionId();
       var ime=$("#registracija-ime").val();
       var priimek=$("#registracija-priimek").val();
       var datum=$("#registracija-datum").val();
       var ura=$("#registracija-ura").val();
       //console.log("preveriVeljavnostDatuma: " +datum+ " preveriVeljavnostUre: " + ura);
+      var napaka=false;
       if(!preveriVeljavnostDatuma(datum)){ 
         $("#registracija-datum").parent().attr({"class" : "input-group col-sm-10 has-error"});
-        return;
+        napaka=true;
       }else{
         $("#registracija-datum").parent().attr({"class" : "input-group col-sm-10"});
       }
       if(!preveriVeljavnostUre(ura)){
         $("#registracija-ura").parent().attr({"class" : "input-group col-sm-10 has-error"});
+        $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+        $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+        $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Prosim izpolnite polja pravilno.");
         return;
       }else{
         $("#registracija-ura").parent().attr({"class" : "input-group col-sm-10"});
+        if(napaka){
+          $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+          $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+          $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Prosim izpolnite polja pravilno.");
+          return;
+        }
       }
 
       var datumRojstva= zapisiDatumRojstvaVFormatu(datum, ura);
       console.log("datum rojstva: " + datumRojstva);
-    
-     /*$.ajaxSetup({
+      
+
+     $.ajaxSetup({
             headers: {"Ehr-Session": sessionId}
         });
         $.ajax({
             url: baseUrl + "/ehr",
             type: 'POST',
+            async: false,
             success: function (data) {
                 var ehrId = data.ehrId;
                 var partyData = {
@@ -84,16 +281,122 @@ function kreirajUporabnika(){
                     success: function (party) {
                         if (party.action == 'CREATE') {
                             console.log("Uspešno kreiran zapis " +ehrId);
+
+                            $("#prijava-vpisEHR").val(ehrId);
+                            $("#vnosVEHR-ehrId").val(ehrId);
+                            $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                            $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
+                            $("#registracija-obvestilo").html("Uporabnik je bil uspešno registriran!" + " <br><strong>EhrID = "+ehrId+"</strong>");
+                            return ehrId;
                         }
                     },
                     error: function(err) {
-                      
+                        $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                        $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+                        $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Uporabnik ni bil uspešno registriran.");
+
+                        return -1;
                     }
                 });
             }
-        });*/
+        });
 
     });  
+}
+
+
+function dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaTeza,telesnaTemperatura ) {
+  var sessionId = getSessionId();
+  var kontrola = 1;
+
+    $.ajaxSetup({
+        headers: {"Ehr-Session": sessionId}
+    });
+    var podatki = {
+      // Struktura predloge je na voljo na naslednjem spletnem naslovu:
+      // https://rest.ehrscape.com/rest/v1/template/Vital%20Signs/example
+        "ctx/language": "en",
+        "ctx/territory": "SI",
+        "ctx/time": datumInUra,
+        "vital_signs/height_length/any_event/body_height_length": telesnaVisina,
+        "vital_signs/body_weight/any_event/body_weight": telesnaTeza,
+        "vital_signs/body_temperature/any_event/temperature|magnitude": telesnaTemperatura,
+        "vital_signs/body_temperature/any_event/temperature|unit": "°C",
+    };
+    var parametriZahteve = {
+        ehrId: ehrId,
+        templateId: 'Vital Signs',
+        format: 'FLAT',
+    };
+    $.ajax({
+        url: baseUrl + "/composition?" + $.param(parametriZahteve),
+        type: 'POST',
+        contentType: 'application/json',
+        async: false,
+        data: JSON.stringify(podatki),
+        success: function (res) {
+          //console.log("Podatki uspešno vnešeni! "+ "datumInUra " + datumInUra + " telesnaVisina " + telesnaVisina +" telesnaTeza " +telesnaTeza + " telesnaTemperatura "+telesnaTemperatura);
+          //console.log("Podatki uspešno vnešeni! ");
+          kontrola=1;
+        },
+        error: function(err) {
+          kontrola = -1;
+        }
+    });
+    return kontrola;
+
+}
+
+function prijavaUporabnika(){
+
+  var uporabnik;
+  var tabela
+  $("#preberiPredlogoBolnika").change(function(){
+    //console.log("Izbran je bil: " + $("#preberiPredlogoBolnika option:selected" ).text());
+    uporabnik = $("#preberiPredlogoBolnika option:selected" ).text();
+  });
+
+  
+}
+
+
+function kreirajEhrId(ime,priimek,datumRojstva){
+  var sessionId=getSessionId();
+  var ehrId;
+  $.ajaxSetup({
+            headers: {"Ehr-Session": sessionId}
+        });
+        $.ajax({
+            url: baseUrl + "/ehr",
+            type: 'POST',
+            async: false,
+            success: function (data) {
+                ehrId = data.ehrId;
+                var partyData = {
+                    firstNames: ime,
+                    lastNames: priimek,
+                    dateOfBirth: datumRojstva,
+                    partyAdditionalInfo: [{key: "ehrId", value: ehrId}]
+                };
+                $.ajax({
+                    url: baseUrl + "/demographics/party",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(partyData),
+                    success: function (party) {
+                        if (party.action == 'CREATE') {
+                            //console.log("Uporabnik "+ ime+" "+ priimek+" je bil uspešno kreiran. ErhID = " +ehrId);
+                          
+                        }
+                    },
+                    error: function(err) {
+                    
+                        ehrId=-1; // napaka
+                    }
+                });
+            }
+        }); 
+        return ehrId; 
 }
 
 function preveriVeljavnostDatuma(datum){
@@ -118,7 +421,7 @@ function preveriVeljavnostDatuma(datum){
     }
   }
 
-  if(tabela.length=3 && tabela[0]>=1 && tabela[0]<=31 && tabela[1]>=1 && tabela[1]<=12 && tabela[2]>1950){  // format 12.4.2016
+  if(tabela.length=3 && tabela[0]>=1 && tabela[0]<=31 && tabela[1]>=1 && tabela[1]<=12 && tabela[2]>1000 && tabela[0].length==2 && tabela[1].length==2){  // format 12.04.2016
 
     return true;
   }
@@ -144,7 +447,7 @@ function preveriVeljavnostUre(ura){
   }
   
 
-  if(tabela.length==2 && tabela[0]>=0 && tabela[0]<=23 && tabela[1]>=0 && tabela[1]<=59){  // format 12.4.2016
+  if(tabela.length==2 && tabela[0]>=0 && tabela[0]<=23 && tabela[1]>=0 && tabela[1]<=59 && tabela[0].length==2 && tabela[1].length==2){ 
 
     return true;
   }
@@ -157,15 +460,7 @@ function zapisiDatumRojstvaVFormatu(datum, ura){
   return format;
 }
 
-$(document).ready(function(){
-
-  kreirajUporabnika();
-
-  $("#preberiPredlogoBolnika").change(function(){
-    console.log("Izbran je bil: " + $("#preberiPredlogoBolnika option:selected" ).text());
-  });
-  
-
+function razsirjanjeInKrcenjeOken(){
   $(".glyphicon").click(function(){
 
         if($(this).attr("class").indexOf("glyphicon-menu-down")>-1){
@@ -180,6 +475,9 @@ $(document).ready(function(){
           });
         }
   });
+}
+
+function ITMKalkulator(){
 
   $("#gumbITM").click(function(){
 
@@ -205,7 +503,7 @@ $(document).ready(function(){
        $("#visina").parent().attr({"class" : "input-group has-error"});
     }
     if(!napaka1 && !napaka2){
-      console.log("Test1");
+      //console.log("Test1");
       ITM=teza/(visina*visina);
       switch(true){
         case (ITM<=16): 
@@ -249,4 +547,102 @@ $(document).ready(function(){
     }
   });
 
-});
+}
+
+function preberiMeritve(ehrId) {
+  
+  var sessionId = getSessionId();
+
+  var uporabnik={
+            ime: "",
+            priimek: "",
+            datumRojstva: "",
+            telesnaTeza: [],
+            telesnaTemperatura: [],
+            telesnaVisina:[]
+          }
+
+    $.ajax({
+      url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+      type: 'GET',
+      async: false,
+      headers: {"Ehr-Session": sessionId},
+        success: function (data) {
+        var party = data.party;
+
+          uporabnik.ime=party.firstNames;
+          uporabnik.priimek=party.lastNames;
+          uporabnik.datumRojstva=party.dateOfBirth;
+          //console.log("Ime je " + uporabnik.ime+ "Priimek je " + uporabnik.priimek +" datum rojstva " + uporabnik.datumRojstva);
+      },
+      error: function(err) {
+        uporabnik={};
+      } 
+    });
+
+ // TELESNA TEŽA ----------------------------------         
+          $.ajax({
+              url: baseUrl + "/view/" + ehrId + "/" + "weight",
+              type: 'GET',
+              async: false,
+              headers: {"Ehr-Session": sessionId},
+              success: function (res) {
+                if (res.length > 0) {
+                    // res[i].time  res[i].weight res[i].unit
+                    // console.log(res[0].time + " " + res[0].weight +" "+res[0].unit +"\n" +res[1].time + " " + res[1].weight +" "+res[1].unit);
+                    uporabnik.telesnaTeza=res;
+                }else{ 
+                  uporabnik.telesnaTeza=[];
+                }
+              },
+              error: function() {
+                
+              }
+          });
+
+
+// TELESNA TEMPERATURA ----------------------------------
+          
+          $.ajax({
+              url: baseUrl + "/view/" + ehrId + "/" + "body_temperature",
+              type: 'GET',
+              async: false,
+              headers: {"Ehr-Session": sessionId},
+              success: function (res) {
+                if (res.length > 0) {
+                    // res[i].time  res[i].weight res[i].unit
+                    uporabnik.telesnaTemperatura=res;
+                    //console.log(res);
+                    //console.log(res[0].time + " " + res[0].temperature +" "+res[0].unit +"\n" +res[1].time + " " + res[1].temperature +" "+res[1].unit); 
+                }else{ 
+                  uporabnik.telesnaTemperatura=[];
+                }
+              },
+              error: function() {
+                
+              }
+          });
+
+// TELESNA VIŠINA ----------------------------------------
+          $.ajax({
+              url: baseUrl + "/view/" + ehrId + "/" + "height",
+              type: 'GET',
+              async: false,
+              headers: {"Ehr-Session": sessionId},
+              success: function (res) {
+                if (res.length > 0) {
+                    // res[i].time  res[i].weight res[i].unit
+                    uporabnik.telesnaVisina=res;
+                    //console.log(res);
+                    //console.log(res[0].time + " " + res[0].temperature +" "+res[0].unit +"\n" +res[1].time + " " + res[1].temperature +" "+res[1].unit); 
+                }else{ 
+                  uporabnik.telesnaTemperatura=[];
+                }
+              },
+              error: function() {
+                
+              }
+          });
+
+          return uporabnik;
+}

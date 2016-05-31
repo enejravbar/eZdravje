@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
+    <title>Portal e-Zdravje</title>
     
 
 
@@ -207,14 +207,14 @@
     }
 
   </style>
-  <script src="js/jquery-2.2.3.min.js"></script>
 
+  <script src="js/jquery-2.2.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/koda.js"></script>
   <script src="js/d3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="js/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="js/koda.js"></script>
       
       <script type="text/javascript">
       google.load("visualization", "1", {
@@ -378,7 +378,7 @@ $(window).resize(function() {
         <ul  class="nav navbar-nav" >
             <li><a href="opis.html"><span style="font-size:15px;">Opis ideje</span> </a></li>
             <li><a href="nacrt.html"><span style="font-size:15px;">Načrt informacijske rešitve </span></a></li>
-            <li><a href="#"><span style="font-size:15px;">Generiranje podatkov</span></a></li>
+            <li ><a href="#"><span id="gumbGenerirajPodatke" style="font-size:15px;">Generiranje podatkov</span></a></li>
         </ul>
       </div>
     </div>
@@ -443,8 +443,8 @@ $(window).resize(function() {
                                             <select  id="preberiPredlogoBolnika" value="Obstoječi uporabniki" style="position:absolute; right:5px;top:-4px;">
                                                 <option value="Obstoječi uporabniki"></option>
                                                 <option value="Calvin Harris">Calvin Harris</option>
-                                                <option value="Ana Krašnja">Ana Krašnja</option>
-                                                <option value="Paul Walker">Paul Walker</option>
+                                                <option value="Ana Krašnja">Ana Klašnja</option>
+                                                <option value="Julija Tavčar">Julija Tavčar</option>
                                             </select>
                                               
                                         </div>
@@ -452,16 +452,14 @@ $(window).resize(function() {
                                 </div>
 
                                 <div class="panel-body">
-                                    <form role="form">
                                         <div class="form-group col-sm-10">
                                             <label for="ehrID" class="control-label">EhrID:</label>
                                             <!--<div class="col-sm-4"> -->
                                                 
-                                                <input type="ehrID" class="form-control">
+                                                <input id="prijava-vpisEHR" type="ehrID" class="form-control">
                                                 <button type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
                                             <!--</div> -->                   
                                         </div>
-                                    </form>
                                 </div>
 
                             </div>
@@ -501,7 +499,13 @@ $(window).resize(function() {
 	                                        <div class="input-group col-sm-10">
 	                                            <input id="registracija-ura" type="Urarojstva" class="form-control" placeholder="09:46">
 	                                        </div>
-	                                            <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button>    
+	                                            <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px; float:left; position:relative;">Registriraj</button> 
+	                                            
+
+	                                            <div class="" id="registracija-obvestilo-okvir" class="bg-danger fade-in" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+	                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+												  <span id="registracija-obvestilo"> <span>
+												</div>
 
                                         </div>
                                    
@@ -524,28 +528,52 @@ $(window).resize(function() {
                                         </div>
 
                                         <div id="registracija-polja" class="panel-body">
-                                            <form role="form">
+                                            
                                                 <div class="form-group col-sm-7">
-                                                        <label for="ehrID" class="control-label">EhrID:</label>
-                                                        <input type="ehrID" class="form-control">
 
-                                                        <label for="datum" class="control-label">Datum:</label>
-                                                        <input type="datum" class="form-control">
-                                                    
+                                                		<label for="ehrID" class="control-label">EhrID:</label>
+                                                    <div class="input-group col-sm-12">
+                                                        <input id="vnosVEHR-ehrId" type="ehrID" class="form-control">
+                                                    </div>
+
+                                                    	<label for="datum" class="control-label" >Datum:</label>
+                                                    <div class="input-group col-sm-12">
+                                                        <input id="vnosVEHR-datum"type="datum" class="form-control" placeholder="02-09-1996">
+                                                    </div>
+
+                                                    <label for="ura" class="control-label">Ura:</label>
+                                                    <div class="input-group col-sm-12">
+                                                        <input id="vnosVEHR-ura"type="ura" class="form-control" placeholder="09:46">
+                                                    </div>
+
                                                         <label for="visina" class="control-label">Telesna višina:</label>
                                                     <div class="input-group">
-                                                        <input type="visina" class="form-control input-mini">
+                                                        <input id="vnosVEHR-telesnaVisina" type="visina" class="form-control input-mini" placeholder="180">
                                                         <span class="input-group-addon">cm</span>
                                                     </div>
-                                                        <label for="teza" class="control-label">Telesna teža:</label>
+
+                                                        <label for="masa" class="control-label">Telesna masa:</label>
                                                     <div class="input-group">
-                                                        <input type="teza" class="form-control">
+                                                        <input id="vnosVEHR-masa" type="masa" class="form-control" placeholder="80">
                                                         <span class="input-group-addon">kg</span>
                                                     </div>
-                                                        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Dodaj podatke meritve</button>    
+
+                                                    <label for="temperatura" class="control-label" >Telesna temperatura:</label>
+                                                    <div class="input-group">
+                                                        <input id="vnosVEHR-temperatura" type="temperatura" class="form-control" placeholder="36.6">
+                                                        <span class="input-group-addon">&#8451</span>
+                                                    </div>
+
+                                                        <button id="gumb-vnosVEHR" type="submit" class="btn btn-primary" style="margin-top:10px; float:left;">Dodaj podatke meritve</button>  
+
+                                                        <div class="" id="vnosVEHR-obvestilo-okvir" class="bg-danger fade-in" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+			                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+														  	<span id="vnosVEHR-obvestilo"> <span>
+														</div>
+  
 
                                                 </div>
-                                            </form>
+                                        
                                         </div>
                                     </div>        
                                 </div>  <!-- KONEC FUNKCIONALNOSTI 1 -> VNOS PODATKOV V EHR --> 
@@ -562,7 +590,7 @@ $(window).resize(function() {
                                                     		<div class="row">
                                                     			<div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
 	                                                    			
-	                                                    			<img src="Slike/Ana-Krasnja.jpg" style="width:90%;" class="img-rounded"> 
+	                                                    			<img src="Slike/Ana-Klasnja.jpg" style="width:90%;" class="img-rounded"> 
                                                     			</div>
                                                     			<div class="col-xs-7 col-sm-7 col-md-9 col-lg-9" style="border-left:2px;">
                                                     				<div class="panel">
@@ -755,12 +783,12 @@ $(window).resize(function() {
                                                                         </tr>
                                                                         <tr>
                                                                             <td bgcolor="#3A60BB"></td>
-                                                                            <td>Zmerna nedohranjenost</td>
+                                                                            <td>Zmerna podhranjenost</td>
                                                                             <td>16,0–17,0</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td bgcolor="#4A708B"></td>
-                                                                            <td>Blaga nedohranjenost</td>
+                                                                            <td>Blaga podhranjenost</td>
                                                                             <td >17,0–18,5</td>
                                                                         </tr>
                                                                         <tr style="border-top: 3px solid #aaa;">
