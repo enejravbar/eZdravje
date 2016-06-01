@@ -8,7 +8,10 @@ var password = "ois4fri";
 var trenutniUporabnik="";
 var trenutniEhrUporabnika=-1;
 var prijavljen = false;
-
+var timer1; 
+var timer2;
+var timer3;
+var timer4;
 var tabelaObstojecihUporabnikov=[
     "c5df5629-94ab-443f-97ad-0fdc8d915aa8",
     "38825892-b31c-4045-a4ca-f357240773ef",
@@ -136,6 +139,12 @@ function generirajPodatke(stPacienta) {
   return ehrIdUstvarjeni;
 }
 
+
+ 
+function odstraniElement(elementZaIzginjanje){
+  $("#"+elementZaIzginjanje).hide();
+}
+
 function onemogociPrijavoZEhr(){
    $("#prijava-vpisEHR").attr("disabled","true");
 }
@@ -159,6 +168,7 @@ function gumbOsvezi(){
     
   });
 }
+
 
 function nadzorujDropdownObstojecihUporabnikovNaZačetku(){
     var kontrola=0;
@@ -221,6 +231,9 @@ function nadzorujDropdownObstojecihUporabnikovObSpremembi(){
 function izberiUporabnika(){
 
   $("#gumb-prijava").click(function() {
+
+      clearTimeout(timer1);
+      odstraniElement("prijava-obvestilo-okvir");
       
       if(trenutniUporabnik=="Calvin Harris"){
 
@@ -233,6 +246,8 @@ function izberiUporabnika(){
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
           $("#prijava-obvestilo").html("Uporabnik \""+trenutniUporabnik+"\" je bil uspešno prijavljen.");
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[0] );
         }else{
 
@@ -243,7 +258,10 @@ function izberiUporabnika(){
           $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
-          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
+          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik ne obstaja.");
+
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+          
           return;
         }
       }
@@ -260,6 +278,9 @@ function izberiUporabnika(){
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
           $("#prijava-obvestilo").html("Uporabnik \""+trenutniUporabnik+"\" je bil uspešno prijavljen.");
+
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[1] );
         }else{
 
@@ -270,7 +291,10 @@ function izberiUporabnika(){
           $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
-          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
+          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik ne obstaja.");
+
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           return;
         }
       }
@@ -287,6 +311,9 @@ function izberiUporabnika(){
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
           $("#prijava-obvestilo").html("Uporabnik \""+trenutniUporabnik+"\" je bil uspešno prijavljen.");
+          
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[2] );
         }else{
           
@@ -297,7 +324,10 @@ function izberiUporabnika(){
           $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
-          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
+          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik ne obstaja.");
+          
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           return;
         }
       }
@@ -315,8 +345,10 @@ function izberiUporabnika(){
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
           $("#prijava-obvestilo").html("Uporabnik je bil uspešno prijavljen.");
-          izpisPodatkovEHR( prebraniEhr );
 
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
+          izpisPodatkovEHR( prebraniEhr );
         }else{
           
           trenutniEhrUporabnika=-1;
@@ -326,7 +358,10 @@ function izberiUporabnika(){
           $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
-          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
+          $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik ne obstaja.");
+          
+          timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
+
           return;
         }
       }
@@ -592,6 +627,10 @@ function izracunajStarost(datumRojstva){
 function vnosPodatkovVEHR(){
     
     $("#gumb-vnosVEHR").click(function(){
+
+      clearTimeout(timer2);
+      odstraniElement("vnosVEHR-obvestilo-okvir");
+
       var ehrId = $("#vnosVEHR-ehrId").val();
       var datum = $("#vnosVEHR-datum").val();
       var ura = $("#vnosVEHR-ura").val();
@@ -639,6 +678,7 @@ function vnosPodatkovVEHR(){
         $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
         $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
         $("#vnosVEHR-obvestilo").html("<b>NAPAKA!</b> Prosim izpolnite polja pravilno.");
+        timer2 = setTimeout(function(){ $("#vnosVEHR-obvestilo-okvir").hide('slow');}, 3500);
         return;
       }else{
         $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
@@ -646,6 +686,7 @@ function vnosPodatkovVEHR(){
           $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
           $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#vnosVEHR-obvestilo").html("<b>NAPAKA</b> Prosim izpolnite polja pravilno.");
+          timer2 = setTimeout(function(){ $("#vnosVEHR-obvestilo-okvir").hide('slow');}, 3500);
           return;
         }
       }
@@ -656,10 +697,12 @@ function vnosPodatkovVEHR(){
               $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
               $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
               $("#vnosVEHR-obvestilo").html("Podatki so bili uspešno vnešeni v EHR.");
+              timer2 = setTimeout(function(){ $("#vnosVEHR-obvestilo-okvir").hide('slow');}, 3500);
             }else{
               $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
               $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
               $("#vnosVEHR-obvestilo").html("<b>NAPAKA!</b> Preverite pravilnost EhrID.");
+              timer2 = setTimeout(function(){ $("#vnosVEHR-obvestilo-okvir").hide('slow');}, 3500);
             }
             
       
@@ -669,6 +712,9 @@ function vnosPodatkovVEHR(){
 function registracijaUporabnika(){
 
    $("#gumb-registriraj").click(function(){
+
+      clearTimeout(timer3);
+      odstraniElement("registracija-obvestilo-okvir");
 
       var sessionId=getSessionId();
       var ime=$("#registracija-ime").val();
@@ -688,6 +734,7 @@ function registracijaUporabnika(){
         $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
         $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
         $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Prosim izpolnite polja pravilno.");
+        timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
         return;
       }else{
         $("#registracija-ura").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
@@ -695,6 +742,7 @@ function registracijaUporabnika(){
           $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
           $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Prosim izpolnite polja pravilno.");
+          timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
           return;
         }
       }
@@ -729,9 +777,12 @@ function registracijaUporabnika(){
 
                             $("#prijava-vpisEHR").val(ehrId);
                             $("#vnosVEHR-ehrId").val(ehrId);
+                            $("#preberiPredlogoBolnika").val("");
+
                             $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
                             $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
                             $("#registracija-obvestilo").html("Uporabnik je bil uspešno registriran!" + " <br><strong>EhrID = "+ehrId+"</strong>");
+                            timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
                             return ehrId;
                         }
                     },
@@ -739,6 +790,7 @@ function registracijaUporabnika(){
                         $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
                         $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
                         $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Uporabnik ni bil uspešno registriran.");
+                        timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
 
                         return -1;
                     }
@@ -916,6 +968,9 @@ function ITMKalkulator(){
 
   $("#gumbITM").click(function(){
 
+    clearTimeout(timer4);
+    odstraniElement("ITM-okvir");
+
     var teza = $("#teza").val();
     var visina = ($("#visina").val())/100;
     var ITM;
@@ -979,10 +1034,12 @@ function ITMKalkulator(){
       $("#ITM-okvir").attr({"class" : barva});
       $("#ITM-podatek").text(ITM.toFixed(1));
       $("#ITM-kategorija").text(kategorija);
+      timer4 = setTimeout(function(){ $("#ITM-okvir").hide('slow');}, 3500);
     }
   });
 
 }
+
 
 function preberiMeritve(ehrId) {
   
