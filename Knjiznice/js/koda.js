@@ -435,18 +435,22 @@ function izpisPodatkovEHR(ehrId){
   $("#izpis-priimek").text(uporabnik.priimek);
   $("#izpis-datum").text(izpisDatumaVLepiObliki(uporabnik.datumRojstva));
   $("#izpis-starost").text( izracunajStarost(uporabnik.datumRojstva) );
-    //console.log("Dolzina tabele je: " +uporabnik.telesnaTeza.length);
+  
+  //console.log("Dolzina tabele je: " +uporabnik.telesnaTeza.length);
+  var element = document.getElementById("nosilec-zapisov");
+
   if(uporabnik.telesnaTeza.length==0){
-    console.log("nisem dobil podatkov");
     $("#niZapisov").css({"display" : ""});
     $("#prostorZaGrafe").css({"display" : "none"});  // skrij prostor za grafe, če ni podatkov
+    element.innerHTML="";
   }else{
     $("#niZapisov").css({"display" : "none"});
-    var element = document.getElementById("nosilec-zapisov");
+    $("#prostorZaGrafe").css({"display" : ""});
+    
     var zac="<tr class=\"vrsticeEHR\">";
     var kon = "</tr>";
     var vrsticeHTML="";
-    
+      
     for(var i=(uporabnik.telesnaTeza.length-1); i>=0; i--){
       vrsticeHTML+= zac+"<td>"+ izpisDatumaInUreVLepiObliki(uporabnik.telesnaTeza[i].time)+"</td>";
       vrsticeHTML+= "<td>"+ uporabnik.telesnaVisina[i].height+"</td>";
@@ -454,6 +458,7 @@ function izpisPodatkovEHR(ehrId){
       vrsticeHTML+= "<td>"+ uporabnik.telesnaTemperatura[i].temperature+"</td>" + kon;
     }
     element.innerHTML=vrsticeHTML;
+
     console.log("sem pred izrisom grafov");
     console.log(posredujPodatkeZaGraf1(ehrId));
 
@@ -775,9 +780,11 @@ function registracijaUporabnika(){
                         if (party.action == 'CREATE') {
                             //console.log("Uspešno kreiran zapis " +ehrId);
 
-                            $("#prijava-vpisEHR").val(ehrId);
+                            
                             $("#vnosVEHR-ehrId").val(ehrId);
                             $("#preberiPredlogoBolnika").val("");
+                            nadzorujDropdownObstojecihUporabnikovNaZačetku();
+                            $("#prijava-vpisEHR").val(ehrId);
 
                             $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
                             $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
