@@ -225,9 +225,9 @@ function izberiUporabnika(){
       if(trenutniUporabnik=="Calvin Harris"){
 
         if(preveriVeljavnostEHR( tabelaObstojecihUporabnikov[0] )){
-          
           trenutniEhrUporabnika=tabelaObstojecihUporabnikov[0];
           prijavljen=true;
+          $("#vnosVEHR-ehrId").val(trenutniEhrUporabnika);
           odpriIzpisPodatkovEHR();
 
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
@@ -240,7 +240,7 @@ function izberiUporabnika(){
           prijavljen=false;
           zapriIzpisPodatkovEHR();
 
-          $("#prijava-vpisEHR").attr({"class" : "input-group col-sm-10 has-error"});
+          $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
@@ -254,6 +254,7 @@ function izberiUporabnika(){
 
           trenutniEhrUporabnika=tabelaObstojecihUporabnikov[1];
           prijavljen=true;
+          $("#vnosVEHR-ehrId").val(trenutniEhrUporabnika);
           odpriIzpisPodatkovEHR();
 
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
@@ -266,7 +267,7 @@ function izberiUporabnika(){
           prijavljen=false;
           zapriIzpisPodatkovEHR();
 
-          $("#prijava-vpisEHR").attr({"class" : "input-group col-sm-10 has-error"});
+          $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
@@ -280,6 +281,7 @@ function izberiUporabnika(){
           
           trenutniEhrUporabnika=tabelaObstojecihUporabnikov[2];
           prijavljen=true; 
+          $("#vnosVEHR-ehrId").val(trenutniEhrUporabnika);
           odpriIzpisPodatkovEHR();
 
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
@@ -292,7 +294,7 @@ function izberiUporabnika(){
           prijavljen=false;
           zapriIzpisPodatkovEHR();
 
-          $("#prijava-vpisEHR").attr({"class" : "input-group col-sm-10 has-error"});
+          $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
@@ -307,6 +309,7 @@ function izberiUporabnika(){
           
           trenutniEhrUporabnika=prebraniEhr;
           prijavljen=true;
+          $("#vnosVEHR-ehrId").val(trenutniEhrUporabnika);
           odpriIzpisPodatkovEHR();
 
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
@@ -320,7 +323,7 @@ function izberiUporabnika(){
           prijavljen=false;
           zapriIzpisPodatkovEHR();
 
-          $("#prijava-vpisEHR").attr({"class" : "input-group col-sm-10 has-error"});
+          $("#prijava-vpisEHR").attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
           $("#prijava-obvestilo-okvir").css({"display" : "inline-block"});
           $("#prijava-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#prijava-obvestilo").html("<b>NAPAKA!</b> Uporabnik z vnešenim EhrID-jem ne obstaja.");
@@ -603,42 +606,42 @@ function vnosPodatkovVEHR(){
       var napaka3=false;
 
       if(!preveriVeljavnostDatuma(datum)){ 
-        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         napaka=true;
       }else{
-        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-sm-12 "});
+        $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-xs-12 col-sm-12 "});
       }
 
       if(!preveriVeljavnostUre(ura)){
-        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-sm-10 has-error"});
+        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         napaka1=true;
       }else{
-        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-sm-10"});
+        $("#vnosVEHR-ura").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
         
       }
 
       if(!(telesnaTemperatura >0)){ 
-        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         napaka2=true;
       }else{
-        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-sm-12"});
+        $("#vnosVEHR-temperatura").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
       }
 
       if(!(telesnaMasa >0)){ 
-        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         napaka3=true;
       }else{
-        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-sm-12"});
+        $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
       }
 
       if(!(telesnaVisina >0)){
-        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-sm-12 has-error"});
+        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
         $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
         $("#vnosVEHR-obvestilo").html("<b>NAPAKA!</b> Prosim izpolnite polja pravilno.");
         return;
       }else{
-        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-sm-12"});
+        $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
         if(napaka||napaka1 || napaka2){
           $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
           $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
@@ -675,19 +678,19 @@ function registracijaUporabnika(){
       //console.log("preveriVeljavnostDatuma: " +datum+ " preveriVeljavnostUre: " + ura);
       var napaka=false;
       if(!preveriVeljavnostDatuma(datum)){ 
-        $("#registracija-datum").parent().attr({"class" : "input-group col-sm-10 has-error"});
+        $("#registracija-datum").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         napaka=true;
       }else{
-        $("#registracija-datum").parent().attr({"class" : "input-group col-sm-10"});
+        $("#registracija-datum").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
       }
       if(!preveriVeljavnostUre(ura)){
-        $("#registracija-ura").parent().attr({"class" : "input-group col-sm-10 has-error"});
+        $("#registracija-ura").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
         $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
         $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Prosim izpolnite polja pravilno.");
         return;
       }else{
-        $("#registracija-ura").parent().attr({"class" : "input-group col-sm-10"});
+        $("#registracija-ura").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
         if(napaka){
           $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
           $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
