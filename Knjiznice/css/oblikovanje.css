@@ -117,6 +117,12 @@
         padding:0px;
         margin-left: 0px;
     }
+
+    #container-tabelaIskanihZivil{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height:360px;
+    }
     #glavno-desno{
 
     }

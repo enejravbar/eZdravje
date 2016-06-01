@@ -12,8 +12,11 @@
   <script src="Knjiznice/js/bootstrap.min.js"></script>
   <script src="Knjiznice/js/d3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="Knjiznice/js/jsapi.js"></script>
+  <script src="Podatki/podatkovnaBaza.js"></script>
+  <script src="Knjiznice/js/pripravaObroka.js"></script>
   <script src="Knjiznice/js/koda.js"></script>
+  
 
 </head>
 <body>
@@ -515,7 +518,7 @@
 															            </tr>
 															            <tr>
 															              <td>Skupina:</td>
-															              <td><select name="skupina">
+															              <td><select id="tipZivila" name="skupina">
 															                  					<option value="" selected="">Katerakoli skupina</option>
 															                                    <option value="0100">Mlečni in jajčni izdelki</option>
 															                                    <option value="0200">Začimbe in zelišča</option>
@@ -541,35 +544,58 @@
 															            </tr>
 															            <tr>
 															              <td>Živilo:</td>
-															              <td><input name="zivilo" value="" type="text" style="width:234px;"></td>
+															              <td>
+															            <div class="input-group">  	
+															              <input class="form-control" id="imeZivila" name="zivilo" value="" type="text" style="width:234px;">
+															            </div>
+															            </td>
 															            </tr>
 															            <tr>
 															              <td>Beljakovine:</td>
-															              <td>od
-															                <input class="input-small" style="width:80px;"  name="beljak_min" value="" type="text">
-															                do
-															                <input class="input-small" style="width:80px;" name="beljak_max" value="" type="text">
-															                g/100 g</td>
+															              <td>
+
+															             <div class="input-group"> 
+															                <span style="float:left;padding-right:2px; margin-top:7px;">od</span><input id="beljakovine1" class="form-control" style="float:left;width:80px;" name="beljak_min" value="" type="text">
+															             
+															                <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
+															             
+															                <input id="beljakovine2" class="form-control" style="float:left;width:80px;float:left;" name="beljak_max" value="" type="text"> <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+															                </span>
+															             </div>
+															                </td>
 															            </tr>
 															            <tr>
 															              <td>Maščobe skupaj:</td>
-															              <td>od
-															                <input class="input-small" style="width:80px;" name="masc_min" value="" type="text">
-															                do
-															                <input class="input-small" style="width:80px;" name="masc_max" value="" type="text">
-															                g/100 g</td>
+															              <td>
+															              <div class="input-group"> 
+															                <span style="float:left; padding-right:2px; margin-top:7px; ">od</span>
+
+															                <input id="mascobe1" class="form-control" style="float:left; width:80px;" name="masc_min" value="" type="text">
+															              
+															                <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px; ">do</span>
+															              
+															                <input id="mascobe2" class="form-control" style="float:left; width:80px;" name="masc_max" value="" type="text"> 
+															                <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+															                </span>
+															              </div>
+															               </td>
 															            </tr>
 															            <tr>
 															              <td>OH skupaj:</td>
-															              <td>od
-															                <input class="input-small" style="width:80px;" name="oh_min" value="" type="text">
-															                do
-															                <input class="input-small" style="width:80px;" name="oh_max" value="" type="text">
-															                g/100 g</td>
+															              <td>
+															             <div class="input-group"> 
+															                <span style="float:left;padding-right:2px; margin-top:7px;">od</span> <input id="oglHidrati1" class="form-control" style="width:80px; float:left;" name="oh_min" value="" type="text">
+															             
+															                <span style="float:left; padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
+															             
+															                <input id="oglHidrati2"class="form-control" style="float:left; width:80px;" name="oh_max" value="" type="text"><span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+															                </span>
+															             </div>
+															                </td>
 															            </tr>
 															            <tr>
 															              <th colspan="2" >
-															              <button type="submit" class="btn btn-primary btn-md" style="margin-top:10px; margin:auto; display:block;" align="center"> <span class="glyphicon glyphicon-search"></span><span style="margin-left: 3px;">Poišči živila</span></button> 
+															              <button id="gumb-iskanje" type="submit" class="btn btn-primary btn-md" style="margin-top:10px; margin:auto; display:block;" align="center"> <span class="glyphicon glyphicon-search"></span><span style="margin-left: 3px;">Poišči živila</span></button> 
 															              
 															            </tr>
 															          </tbody>
@@ -614,21 +640,28 @@
 
                                                             <div class="row">
                                                             	<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-                                                            		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-															            <tbody>
-															            <tr style="background-color: rgba(37, 156, 236,0.5);">
+                                                            
+                                                            	<table style="margin-bottom:0px; padding-bottom:0px;" class="table table-bordered table-hover">
+                                                            		<thead  style="background-color: rgba(37, 156, 236,0.5);">
+															            	<tr>
 															              <th>Ime živila</th>
-															              <th style="width:200px;">Izberi živilo</th>
-															            </tr>
-															           	<tr>
-															              <td>Izdelek 1</td>
-															              <td style="width:200px;">
-																              <input class="input-small" style="width:80px;" name="beljak_max" value="" type="text"><span style="margin-left:3px;">g</span> 
-																              <button type="submit" class="btn btn-primary btn-sm" style="margin-left:8px;">Dodaj</button> 
-															              </td>
-															            </tr>
-															          </tbody>
+															              
+															            	</tr>
+															           	
+															         </thead>
+															        
+															         
+                                                            	</table>
+
+                                                            	<div id="container-tabelaIskanihZivil">
+                                                            		<table style="margin-top:0px; padding-top:0px;" class="table-scroll-body table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+															            
+
+															            <tbody id="vrsticeTabeleIskanihZivil"class="scrollContent">
+															           
+															          	</tbody>
 																	</table>
+																</div>
                                                             	</div>
                                                             	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                                                             		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">

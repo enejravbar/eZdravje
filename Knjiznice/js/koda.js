@@ -44,9 +44,10 @@ $(document).ready(function(){
   registracijaUporabnika();
   vnosPodatkovVEHR();
   gumbOsvezi();
-  
-  
+
   ITMKalkulator();
+
+  mainMetodaZaPripravoObroka();
 
 });
 
@@ -1287,3 +1288,7 @@ function drawChart4(podatki) {
   var chart = new google.visualization.AreaChart(document.getElementById('graf4'));
   chart.draw(data, options);
 }
+
+
+
+
