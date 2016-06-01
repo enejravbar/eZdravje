@@ -5,17 +5,15 @@
   <meta charset="utf-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <title>Portal e-Zdravje</title>
-  <link rel="stylesheet" href="css/oblikovanje.css"> 
+  <link rel="stylesheet" href="Knjiznice/css/oblikovanje.css"> 
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-  <script src="js/jquery-2.2.3.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/d3.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/loader.js"></script>
+  <script src="Knjiznice/js/jquery-2.2.3.min.js"></script>
+  <script src="Knjiznice/js/bootstrap.min.js"></script>
+  <script src="Knjiznice/js/d3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script src="js/koda.js"></script>
-  <script src="js/izrisGrafov.js"> </script>
-      
+  <script src="Knjiznice/js/koda.js"></script>
 
 </head>
 <body>
@@ -114,8 +112,13 @@
                                             <label for="ehrID" class="control-label">EhrID:</label>
                                             <!--<div class="col-sm-4"> -->
                                                 
-                                                <input id="prijava-vpisEHR" type="ehrID" class="form-control">
-                                                <button id="gumb-prijava" type="submit" class="btn btn-primary" style="margin-top:10px;">Potrdi</button> 
+                                                <input id="prijava-vpisEHR" type="ehrID" class="form-control col-xs-10 col-sm-10">
+                                                <button id="gumb-prijava" type="submit" class="btn btn-primary" style="margin-top:10px;float:left; position:relative;">Potrdi</button> 
+
+                                                <div class="" id="prijava-obvestilo-okvir" class="bg-danger fade-in" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+	                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+												  <span id="prijava-obvestilo"> <span>
+												</div>
                                             <!--</div> -->                   
                                         </div>
                                 </div>
@@ -131,30 +134,30 @@
                             <div id="registracija-uporabnika" class="panel panel-primary col-xs-12 col-sm-12 col-md-10 col-lg-10" >
 
                                 <div class="panel-heading">
-                                    <span ><b>Registracija novega uporabnika</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-down"> </span>
+                                    <span ><b>Registracija novega uporabnika</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-down"> </span>
                                 </div>
 
                                 <div id="registracija-polja" class="panel-body" style="display:none;">
                          
-                                        <div class="form-group col-sm-10">
+                                        <div class="form-group col-xs-10 col-sm-10">
 
                                         	<label for="ime" class="control-label" >Ime:</label>
-	                                        <div class="input-group col-sm-10">
+	                                        <div class="input-group col-xs-12 col-sm-12">
 	                                            <input id="registracija-ime" type="ime" class="form-control" placeholder="Janez">
 	                                        </div>
 
 	                                        <label for="priimek" class="control-label" >Priimek:</label>
-	                                        <div class="input-group col-sm-10">
+	                                        <div class="input-group col-xs-12 col-sm-12">
 	                                            <input id="registracija-priimek" type="priimek" class="form-control" placeholder="Novak">
 	                                        </div>
 
 	                                        <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
-	                                        <div class="input-group col-sm-10">
+	                                        <div class="input-group col-xs-12 col-sm-12">
 	                                            <input id="registracija-datum" type="Datumrojstva" class="form-control" placeholder="02-09-1996">
 	                                        </div>
 
 	                                        <label for="Urarojstva" class="control-label" >Ura rojstva:</label>
-	                                        <div class="input-group col-sm-10">
+	                                        <div class="input-group col-xs-12 col-sm-12">
 	                                            <input id="registracija-ura" type="Urarojstva" class="form-control" placeholder="09:46">
 	                                        </div>
 	                                            <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px; float:left; position:relative;">Registriraj</button> 
@@ -182,25 +185,25 @@
                                     <div id="vnosEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11 " >
 
                                         <div class="panel-heading">
-                                            <span ><b>Vnos podatkov v EHR</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-up"></span>
+                                            <span ><b>Vnos podatkov v EHR</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
                                         </div>
 
                                         <div id="registracija-polja" class="panel-body">
                                             
-                                                <div class="form-group col-sm-7">
+                                                <div class="form-group col-xs-10 col-sm-10">
 
                                                 		<label for="ehrID" class="control-label">EhrID:</label>
-                                                    <div class="input-group col-sm-12">
+                                                    <div class="input-group col-xs-12 col-sm-12">
                                                         <input id="vnosVEHR-ehrId" type="ehrID" class="form-control">
                                                     </div>
 
                                                     	<label for="datum" class="control-label" >Datum:</label>
-                                                    <div class="input-group col-sm-12">
+                                                    <div class="input-group col-xs-12 col-sm-12">
                                                         <input id="vnosVEHR-datum"type="datum" class="form-control" placeholder="02-09-1996">
                                                     </div>
 
                                                     <label for="ura" class="control-label">Ura:</label>
-                                                    <div class="input-group col-sm-12">
+                                                    <div class="input-group col-xs-12 col-sm-12">
                                                         <input id="vnosVEHR-ura"type="ura" class="form-control" placeholder="09:46">
                                                     </div>
 
@@ -241,10 +244,16 @@
 
 
                                                     <div class="panel-heading">
-                                                        <span ><b>Izpis podatkov EHR</b></span> </span> <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-up"></span>
+                                                        <span ><b>Izpis podatkov EHR</b></span> 
+                                                        <button id="gumb-osvezi" type="submit" class="btn btn-success btn-sm" style="position:absolute; right:45px; top:10%;display:block;"> <span class="glyphicon glyphicon-refresh" style=""></span> <span style="margin-left:5px;">Osveži</span>
+                                                        </button>
+
+                                                        
+                                                        
+                                                        <span style="position:absolute; right:10px; top:25%;display:block;" class=" posebnoOkno glyphicon glyphicon-menu-down"></span>
                                                     </div>
 
-                                                    <div class="panel-body">
+                                                    <div id="izpisEHR-body" class="panel-body" style="display:none;">
                                                     		<div class="row">
                                                     			<div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
 	                                                    			
@@ -283,24 +292,26 @@
                                                     			
 
                                                     		</div>
-                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:0px;">
-                                                                <thead>
-                                                                    <tr style="background-color: rgba(37, 156, 236,0.5);">
-                                                                        <th>Datum in ura</th>
-                                                                        <th>Telesna višina</th>
-                                                                        <th>Telesna masa</th>
-                                                                        <th>Telesna temperatura</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="nosilec-zapisov">
-                                                                    <tr id="niZapisov">
-                                                                        <td colspan="4" style="text-align:center;">V EHR trenutno ni nobenih zapisov.</td>
-                                                                    </tr>
-                                                                    
-                                                                </tbody>                    
-                                                            </table>
+                                                   
+	                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:20px;">
+	                                                                <thead>
+	                                                                    <tr style="background-color: rgba(37, 156, 236,0.5);">
+	                                                                        <th>Datum in ura</th>
+	                                                                        <th>Telesna višina</th>
+	                                                                        <th>Telesna masa</th>
+	                                                                        <th>Telesna temperatura</th>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody id="nosilec-zapisov">
+	                                                                    <tr>
+	                                                                        <td id="niZapisov" colspan="4" style="text-align:center;">V EHR trenutno ni nobenih zapisov.</td>
+	                                                                    </tr>
+	                                                                    
+	                                                                </tbody>                    
+	                                                            </table>
+	                                                     
 
-                                                            <div class="row">
+                                                            <div id="prostorZaGrafe" class="row">
 
                                                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                                                     <div class="grid">
@@ -361,7 +372,7 @@
 
 
                                                     <div class="panel-heading">
-                                                        <span ><b>ITM kalkulator</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-up"></span>
+                                                        <span ><b>ITM kalkulator</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
                                                     </div>
 
                                                     <div class="panel-body">
@@ -471,7 +482,7 @@
 
 
                                                     <div class="panel-heading">
-                                                        <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-menu-up"></span>
+                                                        <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
                                                     </div>
 
                                                     <div class="panel-body">
