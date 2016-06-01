@@ -8,12 +8,11 @@ var password = "ois4fri";
 var trenutniUporabnik="";
 var trenutniEhrUporabnika=-1;
 var prijavljen = false;
-var timer1; 
-var timer2;
-var timer3;
-var timer4;
+var timer1,timer2,timer3,timer4; 
+var timerGenerator;
+
 var tabelaObstojecihUporabnikov=[
-    "c5df5629-94ab-443f-97ad-0fdc8d915aa8",
+    "c5df5629-94ab-443f-97ad-0fdc8d915aa8",   // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
     "38825892-b31c-4045-a4ca-f357240773ef",
     "47605219-2b6e-49bc-a0a3-54f9cb60283e"
   ];
@@ -71,18 +70,49 @@ function getSessionId() {
  */
 
 function gumbGenerirajPodatke(){
+  
 
   $("#gumbGenerirajPodatke").click(function(){
-     //console.log("Kliknjeno!");
+
+    clearTimeout(timerGenerator);
+    odstraniElement("statusGeneriranja");
+
+    $("#vrteciStatus").css({
+     "display" : ""
+    });
+
+
     for(var i=1; i<=3; i++){
-      tabelaObstojecihUporabnikov.push(generirajPodatke(i));
+      tabelaObstojecihUporabnikov[i-1]=generirajPodatke(i);
       console.log("Uporabnik "+i+ " EhrID = " + tabelaObstojecihUporabnikov[i-1]);
     }
+    $("#vrteciStatus").css({
+     "display" : "none"
+    });
+    $("#statusGeneriranja").css({
+     "display" : ""
+    });
+
+    timerGenerator = setTimeout(function(){ $("#statusGeneriranja").hide('slow');}, 3500);
+
+    trenutniUporabnik = $("#preberiPredlogoBolnika option:selected" ).text();
+    
+    if(trenutniUporabnik=="Calvin Harris"){
+      $("#prijava-vpisEHR").val(tabelaObstojecihUporabnikov[0]);
+    }
+    if(trenutniUporabnik=="Ana Klašnja"){
+      $("#prijava-vpisEHR").val(tabelaObstojecihUporabnikov[1]);
+    }
+    if(trenutniUporabnik=="Julija Tavčar"){
+      $("#prijava-vpisEHR").val(tabelaObstojecihUporabnikov[2]);
+    }
+    
+
   });
 }
 
 function generirajPodatke(stPacienta) {
-  var ehrIdUstvarjeni;
+  var ehrIdUstvarjeni="";
 
   var podatkiCalvin = [ // slabi vitalni znaki - povečana telesna masa
     {datumInUra: "2013-05-23T12:23", telesnaVisina: 180, telesnaTeza: 90, telesnaTemperatura: 36.6},
@@ -435,7 +465,6 @@ function izpisPodatkovEHR(ehrId){
   $("#izpis-priimek").text(uporabnik.priimek);
   $("#izpis-datum").text(izpisDatumaVLepiObliki(uporabnik.datumRojstva));
   $("#izpis-starost").text( izracunajStarost(uporabnik.datumRojstva) );
-  
   //console.log("Dolzina tabele je: " +uporabnik.telesnaTeza.length);
   var element = document.getElementById("nosilec-zapisov");
 
