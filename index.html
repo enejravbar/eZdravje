@@ -6,6 +6,7 @@
   <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <title>Portal e-Zdravje</title>
   <link rel="stylesheet" href="Knjiznice/css/oblikovanje.css"> 
+  <link rel="stylesheet" href="Knjiznice/css/bootstrap-3.3.4.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
   <script src="Knjiznice/js/jquery-2.2.3.min.js"></script>
@@ -14,8 +15,9 @@
   <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
   <script type="text/javascript" src="Knjiznice/js/jsapi.js"></script>
   <script src="Podatki/podatkovnaBaza.js"></script>
-  <script src="Knjiznice/js/pripravaObroka.js"></script>
   <script src="Knjiznice/js/koda.js"></script>
+  <script src="Knjiznice/js/pripravaObroka.js"></script>
+  
   
 
 </head>
@@ -519,25 +521,25 @@
 															            <tr>
 															              <td>Skupina:</td>
 															              <td><select id="tipZivila" name="skupina">
-															                  					<option value="" selected="">Katerakoli skupina</option>
-															                                    <option value="0100">Mlečni in jajčni izdelki</option>
-															                                    <option value="0200">Začimbe in zelišča</option>
-															                                    <option value="0400">Maščobe in olja</option>
-															                                    <option value="0500">Perutnina in izdelki iz perutnine</option>
-															                                    <option value="0600">Juhe, omake</option>
-															                                    <option value="0700">Klobase in suhomesni izdelki</option>
-															                                    <option value="0900">Sadje in sadni sokovi</option>
-															                                    <option value="1000">Svinjina in izdelki iz svinjine</option>
-															                                    <option value="1100">Zelenjava in zelenjavni izdelki</option>
-															                                    <option value="1200">Oreščki in semena</option>
-															                                    <option value="1300">Govedina in izdelki iz govedine</option>
-															                                    <option value="1400">Pijače, napitki</option>
-															                                    <option value="1500">Ribe, školjke, raki</option>
-															                                    <option value="1600">Stročnice in izdelki iz stročnic</option>
-															                                    <option value="1700">Jagnjetina, teletina, divjačina</option>
-															                                    <option value="1800">Pecivo, kruh</option>
-															                                    <option value="1900" >Sladkarije</option>
-															                                    <option value="2000">Žita in testenine</option>
+															                  					<option value="Katerakoli skupina" selected="">Katerakoli skupina</option>
+															                                    <option value="Mlečni in jajčni izdelki">Mlečni in jajčni izdelki</option>
+															                                    <option value="Začimbe in zelišča">Začimbe in zelišča</option>
+															                                    <option value="Maščobe in olja">Maščobe in olja</option>
+															                                    <option value="Perutnina in izdelki iz perutnine">Perutnina in izdelki iz perutnine</option>
+															                                    <option value="Juhe, omake">Juhe, omake</option>
+															                                    <option value="Klobase in suhomesni izdelki">Klobase in suhomesni izdelki</option>
+															                                    <option value="Sadje in sadni sokovi">Sadje in sadni sokovi</option>
+															                                    <option value="Svinjina in izdelki iz svinjine">Svinjina in izdelki iz svinjine</option>
+															                                    <option value="Zelenjava in zelenjavni izdelki">Zelenjava in zelenjavni izdelki</option>
+															                                    <option value="Oreščki in semena">Oreščki in semena</option>
+															                                    <option value="Govedina in izdelki iz govedine">Govedina in izdelki iz govedine</option>
+															                                    <option value="Pijače, napitki">Pijače, napitki</option>
+															                                    <option value="Ribe, školjke, raki">Ribe, školjke, raki</option>
+															                                    <option value="Stročnice in izdelki iz stročnic">Stročnice in izdelki iz stročnic</option>
+															                                    <option value="Jagnjetina, teletina, divjačina">Jagnjetina, teletina, divjačina</option>
+															                                    <option value="Pecivo, kruh">Pecivo, kruh</option>
+															                                    <option value="Sladkarije" >Sladkarije</option>
+															                                    <option value="Žita in testenine">Žita in testenine</option>
 															                                    
 															                                </select>
 															              </td>
@@ -654,11 +656,99 @@
                                                             	</table>
 
                                                             	<div id="container-tabelaIskanihZivil">
-                                                            		<table style="margin-top:0px; padding-top:0px;" class="table-scroll-body table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                                            		<table style="margin-top:0px; padding-top:0px;" class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
 															            
 
-															            <tbody id="vrsticeTabeleIskanihZivil"class="scrollContent">
-															           
+															            <tbody id="vrsticeTabeleIskanihZivil">
+
+
+
+															           		<!--<td style="position:relative;">
+															           		<div class="row">
+																           		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																           			<span style="position:absolute; left:10px; top:8px;">Izdelek 1</span>
+								<button type="submit" class="btn btn-primary btn-sm" style="float:right;margin-right:15px;">Dodaj</button> 
+						        <span style="float:right;margin-right:15px;margin-top:5px;">g</span>
+																              <input class="input-small" style="float:right; width:80px;margin-right:5px;" name="beljak_max" value="" type="text">
+																           		</div>
+															           		</div>
+															           		<div class="row podrobnosti" style="margin-top:15px;" >
+																           		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																           			
+																           			<div class="row">
+																           				
+																           				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+																           					<table class="table">
+																							 	<thead>
+																							     	<tr style="background-color: rgba(148, 152, 152,0.5);"><th>Hranilne vrednosti (na 100g)</th></tr>
+																								</thead>
+																								<tbody>
+																							    
+																							    <tr>
+																							    	<td>
+																								    	<span style="float:left;">Energija (kcal)</span>
+																								    	<span style="float:right;">100</span>
+																								    </td>
+																								 </tr>
+																								 <tr>
+																							    	<td>
+																								    	<span style="float:left;">Maščobe skupaj
+																								    	</span>
+																								    	<span style="float:right;">100
+																								    	</span>
+																							    	</td>
+																							    </tr>
+																							    <tr>
+																							    	<td>
+																								    	<span style="float:left;">Holesterol
+																								    	</span>
+																								    	<span style="float:right;">100
+																								    	</span>
+																							    	</td>
+																							    </tr>
+																							    <tr>
+																							    	<td>
+																								    	<span style="float:left;">Ogljikovi hidrati skupaj
+																								    	</span>
+																								    	<span style="float:right;">100
+																								    	</span>
+																							    	</td>
+																							    </tr>
+																							    <tr>
+																							    	<td>
+																								    	<span style="float:left;">Beljakovine
+																								    	</span>
+																								    	<span style="float:right;">100
+																								    	</span>
+																							    	</td>
+																							    </tr>
+																							    
+																							    	
+																							    </tbody>
+																							  </table>
+																						</div>
+																           				
+																           				<div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+																           					<div id="grafHranilnihVrednosti" style="height: 600px;">
+
+																           					</div>
+
+																           				</div>
+
+																           			</div>
+
+																           		</div>
+																           		
+															           		</div>
+			
+															              </td>   -->
+
+
+
+
+
+
+
 															          	</tbody>
 																	</table>
 																</div>

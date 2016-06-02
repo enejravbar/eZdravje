@@ -121,7 +121,8 @@
     #container-tabelaIskanihZivil{
         overflow-x: hidden;
         overflow-y: scroll;
-        height:360px;
+        min-height: 0px;
+        max-height:360px;
     }
     #glavno-desno{
 

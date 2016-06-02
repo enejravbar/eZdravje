@@ -27,6 +27,7 @@ var tabelaObstojecihUporabnikov=[
 google.load("visualization", "1", {
   packages: ["corechart"]
 });
+google.charts.load('current', {'packages':['corechart']});
 
 $(document).ready(function(){
   //console.log("trenutni uporabnik je "+ trenutniUporabnik);
@@ -37,7 +38,7 @@ $(document).ready(function(){
   nadzorujDropdownObstojecihUporabnikovNaZačetku();
   nadzorujDropdownObstojecihUporabnikovObSpremembi();
   razsirjanjeInKrcenjeOken();
-  
+  mainMetodaZaPripravoObroka();
   
   izberiUporabnika();
   gumbGenerirajPodatke();
@@ -47,7 +48,7 @@ $(document).ready(function(){
 
   ITMKalkulator();
 
-  mainMetodaZaPripravoObroka();
+    
 
 });
 
