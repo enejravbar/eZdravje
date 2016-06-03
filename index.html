@@ -1,788 +1,646 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-  <meta charset="utf-8">
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <title>Portal e-Zdravje</title>
-  <link rel="stylesheet" href="Knjiznice/css/oblikovanje.css"> 
-  <link rel="stylesheet" href="Knjiznice/css/bootstrap-3.3.4.css">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-  <script src="Knjiznice/js/jquery-2.2.3.min.js"></script>
-  <script src="Knjiznice/js/bootstrap.min.js"></script>
-  <script src="Knjiznice/js/d3.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
-  <script type="text/javascript" src="Knjiznice/js/jsapi.js"></script>
-  <script src="Podatki/podatkovnaBaza.js"></script>
-  <script src="Knjiznice/js/koda.js"></script>
-  <script src="Knjiznice/js/pripravaObroka.js"></script>
-  
-  
-
-</head>
-<body>
-
-  <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
-  <nav id="zgornji-meni" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
-          <span class="sr-only">Prikaži menu</span>
-          <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-        </button>
-        <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html"><span style="color:white; font-size:24px;"><b>Portal e-Zdravje</b></span></a>
-        <!-- KONEC: Ime vaše aplikacije -->
-      </div>
-      <div class="collapse navbar-collapse" id="menujska-vrstica">
-        <ul  class="nav navbar-nav" >
-            <li><a href="opis.html"><span style="font-size:15px;">Opis ideje</span> </a></li>
-            <li><a href="nacrt.html"><span style="font-size:15px;">Načrt informacijske rešitve </span></a></li>
-            <li ><a href="#"><span id="gumbGenerirajPodatke" style="position:relative; font-size:15px;">Generiranje podatkov <span id="statusGeneriranja" class="glyphicon glyphicon-ok" style="display:none"></span>
-           <div id="vrteciStatus" style="display:none;">
-            <div class="windows8">
-				<div class="wBall" id="wBall_1">
-					<div class="wInnerBall"></div>
-				</div>
-				<div class="wBall" id="wBall_2">
-					<div class="wInnerBall"></div>
-				</div>
-				<div class="wBall" id="wBall_3">
-					<div class="wInnerBall"></div>
-				</div>
-				<div class="wBall" id="wBall_4">
-					<div class="wInnerBall"></div>
-				</div>
-				<div class="wBall" id="wBall_5">
-					<div class="wInnerBall"></div>
-				</div>
-			</div>
-		</div>
-            </span></a> </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
-
-  <!-- ZAČETEK: Vsebina aplikacije -->
-  
- 
-    <div class="container-fluid" style="width=100%"> 
-        
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style=""> 
-                <div  class="row" >
-                    <div id="levi-meni" class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="min-width:150px;">
-                        <div id="mojEHR" data-toggle="dropdown" data-target=".mojEHR">
-                            <p style="color:white;"><b>MOJ EHR</b></p>
-                        </div>
-
-                        <div class="dropdown mojEHR">
-                            <p><span class="halflings halflings-direction-right"> Vnos v EHR</span></p>
-                        </div>
-
-                        <div class="dropdown mojEHR">
-                            <p>Izpis podatkov EHR</p>
-                        </div>
-                      
-                        <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">
-                            <p style="color:white;"><b>PRIPOMOČKI</b></p>
-                        </div>
-
-                        <div class="dropdown pripomocki">
-                            <p>ITM kalkulator</p>
-                        </div>
-                        <div class="dropdown pripomocki">
-                            <p>Priprava obroka</p>
-                        </div>
-                    </div>
-
-                </div>
+   <head>
+      <meta charset="utf-8">
+      <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <title>Portal e-Zdravje</title>
+      <link rel="stylesheet" href="Knjiznice/css/oblikovanje.css">
+      <link rel="stylesheet" href="Knjiznice/css/bootstrap-3.3.4.css">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <script src="Knjiznice/js/jquery-2.2.3.min.js"></script>
+      <script src="Knjiznice/js/bootstrap.min.js"></script>
+      <script src="Knjiznice/js/d3.min.js" charset="utf-8"></script>
+      <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
+      <script type="text/javascript" src="Knjiznice/js/jsapi.js"></script>
+      <script src="Podatki/podatkovnaBaza.js"></script>
+      <script src="Knjiznice/js/koda.js"></script>
+      <script src="Knjiznice/js/pripravaObroka.js"></script>
+      <style>
+      	.progress{
+        	height:30px;
+    	}
+      </style>
+   </head>
+   <body>
+      <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
+      <nav id="zgornji-meni" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
+               <span class="sr-only">Prikaži menu</span>
+               <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+               </button>
+               <!-- ZAČETEK: Ime vaše aplikacije -->
+               <a class="navbar-brand" href="index.html"><span style="color:white; font-size:24px;"><b>Portal e-Zdravje</b></span></a>
+               <!-- KONEC: Ime vaše aplikacije -->
             </div>
-
-
+            <div class="collapse navbar-collapse" id="menujska-vrstica">
+               <ul  class="nav navbar-nav" >
+                  <li><a href="opis.html"><span style="font-size:15px;">Opis ideje</span> </a></li>
+                  <li><a href="nacrt.html"><span style="font-size:15px;">Načrt informacijske rešitve </span></a></li>
+                  <li >
+                     <a href="#">
+                        <span id="gumbGenerirajPodatke" style="position:relative; font-size:15px;">
+                           Generiranje podatkov <span id="statusGeneriranja" class="glyphicon glyphicon-ok" style="display:none"></span>
+                           <div id="vrteciStatus" style="display:none;">
+                              <div class="windows8">
+                                 <div class="wBall" id="wBall_1">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_2">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_3">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_4">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_5">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
+      <!-- ZAČETEK: Vsebina aplikacije -->
+      <div class="container-fluid" style="width=100%">
+         <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="">
+               <div  class="row" >
+                  <div id="levi-meni" class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="min-width:150px;">
+                     <div id="mojEHR" data-toggle="dropdown" data-target=".mojEHR">
+                        <p style="color:white;"><b>MOJ EHR</b></p>
+                     </div>
+                     <div class="dropdown mojEHR">
+                        <p><span class="halflings halflings-direction-right"> Vnos v EHR</span></p>
+                     </div>
+                     <div class="dropdown mojEHR">
+                        <p>Izpis podatkov EHR</p>
+                     </div>
+                     <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">
+                        <p style="color:white;"><b>PRIPOMOČKI</b></p>
+                     </div>
+                     <div class="dropdown pripomocki">
+                        <p>ITM kalkulator</p>
+                     </div>
+                     <div class="dropdown pripomocki">
+                        <p>Priprava obroka</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <!-- PRIJAVA UPORABNIKA -->
-            <div id="glavno-desno" class="col-xs-9 col-sm-9 col-md-10 col-lg-10 "> <!-- desni del spletne strani -->
-                
-                <div id="glavno-desno-zgoraj-levo"class="row"> <!-- Vrhnja vrstica, ki vsebuje PRIJAVO in REGISTRACIJO -->
-                    
+            <div id="glavno-desno" class="col-xs-9 col-sm-9 col-md-10 col-lg-10 ">
+               <!-- desni del spletne strani -->
+               <div id="glavno-desno-zgoraj-levo"class="row">
+                  <!-- Vrhnja vrstica, ki vsebuje PRIJAVO in REGISTRACIJO -->
+                  <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
+                     <!-- PRIJAVA UPORABNIKA -->
+                     <div class="row">
+                        <div id="izbira-uporabnika" class="panel panel-primary col-md-12" >
+                           <div class="panel-heading">
+                              <div class="row">
+                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    <span><b>Izbira uporabnika</b></span> 
+                                 </div>
+                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="position:relative;">
+                                    <select  id="preberiPredlogoBolnika" value="Obstoječi uporabniki" style="position:absolute; right:5px;top:-4px;">
+                                       <option value="Obstoječi uporabniki"></option>
+                                       <option value="Calvin Harris">Calvin Harris</option>
+                                       <option value="Ana Krašnja">Ana Klašnja</option>
+                                       <option value="Julija Tavčar">Julija Tavčar</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="panel-body">
+                              <div class="form-group col-sm-10">
+                                 <label for="ehrID" class="control-label">EhrID:</label>
+                                 <!--<div class="col-sm-4"> -->
+                                 <input id="prijava-vpisEHR" type="ehrID" class="form-control col-xs-10 col-sm-10">
+                                 <button id="gumb-prijava" type="submit" class="btn btn-primary" style="margin-top:10px;float:left; position:relative;">Potrdi</button> 
+                                 <div class="" id="prijava-obvestilo-okvir" class="bg-danger fade-in" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+                                    <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <span id="prijava-obvestilo"> <span>
+                                 </div>
+                                 <!--</div> -->                   
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- KONEC PRIJAVA UPORABNIKA -->    
+                  <!-- REGISTRACIJA UPORABNIKA -->
+                  <div class="col-xs-11 col-sm-11 col-md-7 col-lg-7">
+                     <div class="row">
+                        <div id="registracija-uporabnika" class="panel panel-primary col-xs-12 col-sm-12 col-md-10 col-lg-10" >
+                           <div class="panel-heading">
+                              <span ><b>Registracija novega uporabnika</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-down"> </span>
+                           </div>
+                           <div id="registracija-polja" class="panel-body" style="display:none;">
+                              <div class="form-group col-xs-10 col-sm-10">
+                                 <label for="ime" class="control-label" >Ime:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="registracija-ime" type="ime" class="form-control" placeholder="Janez">
+                                 </div>
+                                 <label for="priimek" class="control-label" >Priimek:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="registracija-priimek" type="priimek" class="form-control" placeholder="Novak">
+                                 </div>
+                                 <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="registracija-datum" type="Datumrojstva" class="form-control" placeholder="02-09-1996">
+                                 </div>
+                                 <label for="Urarojstva" class="control-label" >Ura rojstva:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="registracija-ura" type="Urarojstva" class="form-control" placeholder="09:46">
+                                 </div>
+                                 <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px; float:left; position:relative;">Registriraj</button> 
+                                 <div id="registracija-obvestilo-okvir" class="bg-danger fade-in obvestilo" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+                                    <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <span id="registracija-obvestilo" > <span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- KONEC REGISTRACIJE UPORABNIKA -->
+               </div>
+               <!-- KONEC vrhnje vrstice, ki vsebuje PRIJAVO in REGISTRACIJO -->  
+               <div class="row">
+                  <!-- ##################### OKVIR ZA POSAMAZNE PUNKCIONALNOSTI ##################### -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                     <div class="row">
+                        <!-- FUNKCIONALNOST 1 -> VNOS PODATKOV V EHR --> 
+                        <div id="vnosEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11 " >
+                           <div class="panel-heading">
+                              <span ><b>Vnos podatkov v EHR</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-down"></span>
+                           </div>
+                           <div id="registracija-polja" class="panel-body" style="display:none;">
+                              <div class="form-group col-xs-10 col-sm-10">
+                                 <label for="ehrID" class="control-label">EhrID:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="vnosVEHR-ehrId" type="ehrID" class="form-control">
+                                 </div>
+                                 <label for="datum" class="control-label" >Datum:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="vnosVEHR-datum"type="datum" class="form-control" placeholder="02-09-1996">
+                                 </div>
+                                 <label for="ura" class="control-label">Ura:</label>
+                                 <div class="input-group col-xs-12 col-sm-12">
+                                    <input id="vnosVEHR-ura"type="ura" class="form-control" placeholder="09:46">
+                                 </div>
+                                 <label for="visina" class="control-label">Telesna višina:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-telesnaVisina" type="visina" class="form-control input-mini" placeholder="180">
+                                    <span class="input-group-addon">cm</span>
+                                 </div>
+                                 <label for="masa" class="control-label">Telesna masa:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-masa" type="masa" class="form-control" placeholder="80">
+                                    <span class="input-group-addon">kg</span>
+                                 </div>
 
-                    <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5"> <!-- PRIJAVA UPORABNIKA -->
-                        <div class="row">   
-                            <div id="izbira-uporabnika" class="panel panel-primary col-md-12" >
+                                 <label for="temperatura" class="control-label" >Telesna temperatura:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-temperatura" type="temperatura" class="form-control" placeholder="36.6">
+                                    <span class="input-group-addon">&#8451</span>
+                                 </div>
 
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        
-                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                            <span><b>Izbira uporabnika</b></span> 
-                                        </div>
-                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="position:relative;">
-                                            
-                                            <select  id="preberiPredlogoBolnika" value="Obstoječi uporabniki" style="position:absolute; right:5px;top:-4px;">
-                                                <option value="Obstoječi uporabniki"></option>
-                                                <option value="Calvin Harris">Calvin Harris</option>
-                                                <option value="Ana Krašnja">Ana Klašnja</option>
-                                                <option value="Julija Tavčar">Julija Tavčar</option>
-                                            </select>
-                                              
-                                        </div>
+                                 <label for="sistolicni" class="control-label" >Sistolični krvni tlak:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-sistolicni" type="sistolicni" class="form-control" placeholder="120">
+                                    <span class="input-group-addon">mm[Hg]</span>
+                                 </div>
+
+                                 <label for="diastolicni" class="control-label" >Diastolični krvni tlak:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-diastolicni" type="diastolicni" class="form-control" placeholder="82">
+                                    <span class="input-group-addon">mm[Hg]</span>
+                                 </div>
+
+                                 <label for="kisik" class="control-label" >Nasičenost krvi s kisikom:</label>
+                                 <div class="input-group">
+                                    <input id="vnosVEHR-kisik" type="kisik" class="form-control" placeholder="98">
+                                    <span class="input-group-addon">%</span>
+                                 </div>
+                                 <button id="gumb-vnosVEHR" type="submit" class="btn btn-primary" style="margin-top:10px; float:left;">Dodaj podatke meritve</button>  
+                                 <div class="" id="vnosVEHR-obvestilo-okvir" class="bg-danger fade-in obvestilo" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
+                                    <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <span id="vnosVEHR-obvestilo"> <span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- KONEC FUNKCIONALNOSTI 1 -> VNOS PODATKOV V EHR --> 
+                     <div class="row">
+                        <!-- FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR --> 
+                        <div id="izpisEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
+                           <div class="panel-heading">
+                              <span ><b>Izpis podatkov EHR</b></span> 
+                              <button id="gumb-osvezi" type="submit" class="btn btn-success btn-sm" style="position:absolute; right:45px; top:10%;display:block;"> <span class="glyphicon glyphicon-refresh" style=""></span> <span style="margin-left:5px;">Osveži</span>
+                              </button>
+                              <span style="position:absolute; right:10px; top:25%;display:block;" class=" posebnoOkno glyphicon glyphicon-menu-down"></span>
+                           </div>
+                           <div id="izpisEHR-body" class="panel-body" style="display:none;">
+                              <div class="row">
+                                 <div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
+                                    <img id="osebna-slika" src="Slike/No-Image.jpg" style="width:90%;" class="img-rounded"> 
+                                 </div>
+                                 <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9" style="border-left:2px;">
+                                    <div class="panel">
+                                       <div class="panel-heading" style="background-color: rgba(37, 156, 236,0.5);">
+                                          <b>Osebna izkaznica</b>
+                                       </div>
+                                       <div class="panel-body" style="background-color: rgba(157, 157, 157,0.05);">
+                                          <table class="table table-hover" border="0" style="width:40%; border-top:0px;">
+                                             <tbody>
+                                                <tr>
+                                                   <th>Ime:</td>
+                                                   <td id="izpis-ime">-</td>
+                                                </tr>
+                                                <tr>
+                                                   <th>Priimek:</td>
+                                                   <td id="izpis-priimek">-</td>
+                                                </tr>
+                                                <tr>
+                                                   <th>Datum rojstva:</td>
+                                                   <td id="izpis-datum">-</td>
+                                                </tr>
+                                                <tr>
+                                                   <th>Starost:</td>
+                                                   <td id="izpis-starost">-</td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
                                     </div>
-                                </div>
+                                 </div>
+                              </div>
+                              <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:20px;">
+                                 <thead>
+                                    <tr style="background-color: rgba(37, 156, 236,0.5);">
+                                       <th>Datum in ura</th>
+                                       <th>Telesna višina</th>
+                                       <th>Telesna masa</th>
+                                       <th>Telesna temperatura</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody id="nosilec-zapisov">
+                                    <tr>
+                                       <td id="niZapisov" colspan="4" style="text-align:center;">V EHR trenutno ni nobenih zapisov.</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
 
-                                <div class="panel-body">
-                                        <div class="form-group col-sm-10">
-                                            <label for="ehrID" class="control-label">EhrID:</label>
-                                            <!--<div class="col-sm-4"> -->
-                                                
-                                                <input id="prijava-vpisEHR" type="ehrID" class="form-control col-xs-10 col-sm-10">
-                                                <button id="gumb-prijava" type="submit" class="btn btn-primary" style="margin-top:10px;float:left; position:relative;">Potrdi</button> 
+                              <div class="row">
+                              	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+	                              	<div style=" padding:15px; background-color: rgba(37, 156, 236,0.5);-webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
+	                              		<p><b>Sistolični krvni tlak<b></p> 
+	                              		 <div class="progress">
+											  <div id="sistolicniKrvniTlak" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+											  aria-valuemin="0" aria-valuemax="200" style="width:40%">
+											    
+											  </div>
+										 </div>
+									</div>
+										
+                              	</div>
+                              	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+	                              	<div style=" padding:15px;background-color: rgba(37, 156, 236,0.5); -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
+	                              		<p><b>Diastolični krvni tlak</b></p> 
+	                              		<div class="progress">
+											  <div id="diastolicniKrvniTlak" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+											  aria-valuemin="0" aria-valuemax="150" style="width:60%">
+											   
+											  </div>
+										</div>
+									</div>
+                              	</div>
+                              	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              		<div style=" padding:15px;background-color: rgba(37, 156, 236,0.5);-webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
+	                              		<p><b>Nasičenost krvi s kisikom</b></p>
+	                              		<div id="kisikVKrvi"class="progress">
+											  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+											  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+											    
+											  </div>
+										</div>
+									</div>
+                              	</div>
+                              </div>
 
-                                                <div class="" id="prijava-obvestilo-okvir" class="bg-danger fade-in" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
-	                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-												  <span id="prijava-obvestilo"> <span>
-												</div>
-                                            <!--</div> -->                   
-                                        </div>
-                                </div>
-
-                            </div>
+                              <div id="prostorZaGrafe" class="row">
+                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="grid">
+                                       <div class="col-1-1">
+                                          <div id="graf1" class="chart">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="grid">
+                                       <div class="col-1-1">
+                                          <div id="graf2" class="chart">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="grid">
+                                       <div class="col-1-1">
+                                          <div id="graf3" class="chart">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="grid">
+                                       <div class="col-1-1">
+                                          <div id="graf4" class="chart">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>
-                    <!-- KONEC PRIJAVA UPORABNIKA -->    
-
-                    <!-- REGISTRACIJA UPORABNIKA -->
-                    <div class="col-xs-11 col-sm-11 col-md-7 col-lg-7">    
-                        <div class="row">   
-                            <div id="registracija-uporabnika" class="panel panel-primary col-xs-12 col-sm-12 col-md-10 col-lg-10" >
-
-                                <div class="panel-heading">
-                                    <span ><b>Registracija novega uporabnika</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-down"> </span>
-                                </div>
-
-                                <div id="registracija-polja" class="panel-body" style="display:none;">
-                         
-                                        <div class="form-group col-xs-10 col-sm-10">
-
-                                        	<label for="ime" class="control-label" >Ime:</label>
-	                                        <div class="input-group col-xs-12 col-sm-12">
-	                                            <input id="registracija-ime" type="ime" class="form-control" placeholder="Janez">
-	                                        </div>
-
-	                                        <label for="priimek" class="control-label" >Priimek:</label>
-	                                        <div class="input-group col-xs-12 col-sm-12">
-	                                            <input id="registracija-priimek" type="priimek" class="form-control" placeholder="Novak">
-	                                        </div>
-
-	                                        <label for="Datumrojstva" class="control-label">Datum rojstva:</label>
-	                                        <div class="input-group col-xs-12 col-sm-12">
-	                                            <input id="registracija-datum" type="Datumrojstva" class="form-control" placeholder="02-09-1996">
-	                                        </div>
-
-	                                        <label for="Urarojstva" class="control-label" >Ura rojstva:</label>
-	                                        <div class="input-group col-xs-12 col-sm-12">
-	                                            <input id="registracija-ura" type="Urarojstva" class="form-control" placeholder="09:46">
-	                                        </div>
-	                                            <button id="gumb-registriraj" type="submit" class="btn btn-primary" style="margin-top:10px; float:left; position:relative;">Registriraj</button> 
-	                                            
-
-	                                            <div id="registracija-obvestilo-okvir" class="bg-danger fade-in obvestilo" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
-	                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-												  <span id="registracija-obvestilo" > <span>
-												</div>
-
-                                        </div>
-                                   
-                                </div>
-
-                            </div>
+                     </div>
+                     <!-- ##################### KONEC FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR ##################### -->   
+                     <div class="row">
+                        <!-- ##################### FUNKCIONALNOST 3 -> RAČUNANJE ITM #####################--> 
+                        <div id="ITM-kalkulator" class="panel panel-primary col-xs-11 col-sm-11 col-md-11" >
+                           <div class="panel-heading">
+                              <span ><b>ITM kalkulator</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
+                           </div>
+                           <div class="panel-body">
+                              <div class=row>
+                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group col-xs-10 col-sm-10">
+                                       <label for="spol" class="control-label">Spol:</label>
+                                       <div id="spol" sytle="">  
+                                          <label class="radio-inline "><input type="radio" name="optradio"  checked>Moški</label>
+                                          <label class="radio-inline "><input type="radio" name="optradio">Ženski</label>   
+                                       </div>
+                                       <label for="teza" class="control-label" style="margin-top:10px;">Telesna teža:</label>
+                                       <div class="input-group">
+                                          <input id="teza" type="teza" class="form-control">
+                                          <span class="input-group-addon">kg</span>
+                                       </div>
+                                       <label for="visina" class="control-label">Telesna višina:</label>
+                                       <div class="input-group">
+                                          <input id="visina" type="visina" class="form-control input-mini">
+                                          <span class="input-group-addon">cm</span>
+                                       </div>
+                                       <button id="gumbITM"  class="btn btn-primary" style="margin-top:10px;">Izračunaj ITM</button>
+                                    </div>
+                                    <div class="row obvestilo">
+                                       <div class="col-md-12" style="margin-top:20px; margin-left:13px;">
+                                          <div id="ITM-okvir" class="alert alert-success" style="display:none;">
+                                             <p >Vaš indeks telesne mase (ITM) je <span id="ITM-podatek" style="font-size:17px;"><b></b></span>.<br>
+                                                Uvrščate se v kategorijo: <b><span id="ITM-kategorija"></span></b>. 
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6" border="1">
+                                    <table id="tabelaITM" class="table" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                       <thead>
+                                          <tr>
+                                             <th></th>
+                                             <th>Kategorija</th>
+                                             <th>ITM (kg/m²)</th>
+                                             <th>Telesna masa</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <tr style="border-top: 3px solid #aaa; ">
+                                             <td  bgcolor="#2A50FF"></td>
+                                             <td class="huda-podhranjenost">Huda podhranjenost</td>
+                                             <td class="huda-podhranjenost">≤ 16,0</td>
+                                             <td rowspan="3">suhost(zmanjšana telesna masa)</td>
+                                          </tr>
+                                          <tr >
+                                             <td bgcolor="#3A60BB"></td>
+                                             <td class="zmerna-podhranjenost">Zmerna podhranjenost</td>
+                                             <td class="zmerna-podhranjenost">16,0–17,0</td>
+                                          </tr>
+                                          <tr style="">
+                                             <td  bgcolor="#4A708B"></td>
+                                             <td class="blaga-podhranjenost">Blaga podhranjenost</td>
+                                             <td class="blaga-podhranjenost">17,0–18,5</td>
+                                          </tr>
+                                          <tr  style="border-top: 3px solid #aaa; ">
+                                             <td  bgcolor="#006400"></td>
+                                             <td class="normalna-masa">Normalna telesna masa</td>
+                                             <td class="normalna-masa">18,5–25,0</td>
+                                             <td>normalna telesna masa</a></td>
+                                          </tr>
+                                          <tr  style="border-top: 3px solid #aaa;">
+                                             <td bgcolor="#FFFF00"></td>
+                                             <td class="zvecana-masa">Zvečana telesna masa (preadipoznost)</td>
+                                             <td class="zvecana-masa">25,0–30,0</td>
+                                             <td>zvečana telesna masa</td>
+                                          </tr>
+                                          <tr style="border-top: 3px solid #aaa;">
+                                             <td  bgcolor="#FFA500"></td>
+                                             <td class="debelostI">Debelost stopnje I</td>
+                                             <td class="debelostI">30,0–35,0</td>
+                                             <td rowspan="3" ></td>
+                                          </tr>
+                                          <tr>
+                                             <td bgcolor="#FF0000"></td>
+                                             <td  class="debelostII">Debelost stopnje II</td>
+                                             <td  class="debelostII">35,0–40,0</td>
+                                          </tr>
+                                          <tr >
+                                             <td bgcolor="#8B0000"></td>
+                                             <td class="debelostIII">Debelost stopnje III</td>
+                                             <td class="debelostIII">≥ 40,0</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>  <!-- KONEC REGISTRACIJE UPORABNIKA -->
-                </div>     <!-- KONEC vrhnje vrstice, ki vsebuje PRIJAVO in REGISTRACIJO -->  
-                    
-                       
-                        <div class="row">   <!-- ##################### OKVIR ZA POSAMAZNE PUNKCIONALNOSTI ##################### -->
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                                <div class="row">   <!-- FUNKCIONALNOST 1 -> VNOS PODATKOV V EHR --> 
-                                    <div id="vnosEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11 " >
-
-                                        <div class="panel-heading">
-                                            <span ><b>Vnos podatkov v EHR</b></span>  <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
-                                        </div>
-
-                                        <div id="registracija-polja" class="panel-body">
-                                            
-                                                <div class="form-group col-xs-10 col-sm-10">
-
-                                                		<label for="ehrID" class="control-label">EhrID:</label>
-                                                    <div class="input-group col-xs-12 col-sm-12">
-                                                        <input id="vnosVEHR-ehrId" type="ehrID" class="form-control">
-                                                    </div>
-
-                                                    	<label for="datum" class="control-label" >Datum:</label>
-                                                    <div class="input-group col-xs-12 col-sm-12">
-                                                        <input id="vnosVEHR-datum"type="datum" class="form-control" placeholder="02-09-1996">
-                                                    </div>
-
-                                                    <label for="ura" class="control-label">Ura:</label>
-                                                    <div class="input-group col-xs-12 col-sm-12">
-                                                        <input id="vnosVEHR-ura"type="ura" class="form-control" placeholder="09:46">
-                                                    </div>
-
-                                                        <label for="visina" class="control-label">Telesna višina:</label>
-                                                    <div class="input-group">
-                                                        <input id="vnosVEHR-telesnaVisina" type="visina" class="form-control input-mini" placeholder="180">
-                                                        <span class="input-group-addon">cm</span>
-                                                    </div>
-
-                                                        <label for="masa" class="control-label">Telesna masa:</label>
-                                                    <div class="input-group">
-                                                        <input id="vnosVEHR-masa" type="masa" class="form-control" placeholder="80">
-                                                        <span class="input-group-addon">kg</span>
-                                                    </div>
-
-                                                    <label for="temperatura" class="control-label" >Telesna temperatura:</label>
-                                                    <div class="input-group">
-                                                        <input id="vnosVEHR-temperatura" type="temperatura" class="form-control" placeholder="36.6">
-                                                        <span class="input-group-addon">&#8451</span>
-                                                    </div>
-
-                                                        <button id="gumb-vnosVEHR" type="submit" class="btn btn-primary" style="margin-top:10px; float:left;">Dodaj podatke meritve</button>  
-
-                                                        <div class="" id="vnosVEHR-obvestilo-okvir" class="bg-danger fade-in obvestilo" style=" display:none; margin-left:15px; margin-top:10px; padding:6px; float:left;">
-			                                            	<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-														  	<span id="vnosVEHR-obvestilo"> <span>
-														</div>
-  
-
+                     </div>
+                     <!-- ##################### KONEC FUNKCIONALNOST 3 -> RAČUNANJE ITM ##################### -->   
+                     <div class="row">
+                        <!-- FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK --> 
+                        <div id="pripravaObroka" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
+                           <div class="panel-heading">
+                              <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
+                           </div>
+                           <div class="panel-body">
+                              <div class="row" >
+                                 <div id="iskalnik" class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                       <tbody>
+                                          <tr style="background-color: rgba(37, 156, 236,0.5);">
+                                             <th colspan="2" style="text-align:center; ">Iskalnik živil</th>
+                                          </tr>
+                                          <tr>
+                                             <td>Skupina:</td>
+                                             <td>
+                                                <select id="tipZivila" name="skupina">
+                                                   <option value="Katerakoli skupina" selected="">Katerakoli skupina</option>
+                                                   <option value="Mlečni in jajčni izdelki">Mlečni in jajčni izdelki</option>
+                                                   <option value="Začimbe in zelišča">Začimbe in zelišča</option>
+                                                   <option value="Maščobe in olja">Maščobe in olja</option>
+                                                   <option value="Perutnina in izdelki iz perutnine">Perutnina in izdelki iz perutnine</option>
+                                                   <option value="Juhe, omake">Juhe, omake</option>
+                                                   <option value="Klobase in suhomesni izdelki">Klobase in suhomesni izdelki</option>
+                                                   <option value="Sadje in sadni sokovi">Sadje in sadni sokovi</option>
+                                                   <option value="Svinjina in izdelki iz svinjine">Svinjina in izdelki iz svinjine</option>
+                                                   <option value="Zelenjava in zelenjavni izdelki">Zelenjava in zelenjavni izdelki</option>
+                                                   <option value="Oreščki in semena">Oreščki in semena</option>
+                                                   <option value="Govedina in izdelki iz govedine">Govedina in izdelki iz govedine</option>
+                                                   <option value="Pijače, napitki">Pijače, napitki</option>
+                                                   <option value="Ribe, školjke, raki">Ribe, školjke, raki</option>
+                                                   <option value="Stročnice in izdelki iz stročnic">Stročnice in izdelki iz stročnic</option>
+                                                   <option value="Jagnjetina, teletina, divjačina">Jagnjetina, teletina, divjačina</option>
+                                                   <option value="Pecivo, kruh">Pecivo, kruh</option>
+                                                   <option value="Sladkarije" >Sladkarije</option>
+                                                   <option value="Žita in testenine">Žita in testenine</option>
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Živilo:</td>
+                                             <td>
+                                                <div class="input-group">  	
+                                                   <input class="form-control" id="imeZivila" name="zivilo" value="" type="text" style="width:234px;">
                                                 </div>
-                                        
-                                        </div>
-                                    </div>        
-                                </div>  <!-- KONEC FUNKCIONALNOSTI 1 -> VNOS PODATKOV V EHR --> 
-
-                                <div class="row">   <!-- FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR --> 
-                                        <div id="izpisEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
-
-
-                                                    <div class="panel-heading">
-                                                        <span ><b>Izpis podatkov EHR</b></span> 
-                                                        <button id="gumb-osvezi" type="submit" class="btn btn-success btn-sm" style="position:absolute; right:45px; top:10%;display:block;"> <span class="glyphicon glyphicon-refresh" style=""></span> <span style="margin-left:5px;">Osveži</span>
-                                                        </button>
-
-                                                        
-                                                        
-                                                        <span style="position:absolute; right:10px; top:25%;display:block;" class=" posebnoOkno glyphicon glyphicon-menu-down"></span>
-                                                    </div>
-
-                                                    <div id="izpisEHR-body" class="panel-body" style="display:none;">
-                                                    		<div class="row">
-                                                    			<div id="slika" class="col-xs-5 col-sm-5 col-md-3 col-lg-3">
-	                                                    			
-	                                                    			<img id="osebna-slika" src="Slike/No-Image.jpg" style="width:90%;" class="img-rounded"> 
-                                                    			</div>
-                                                    			<div class="col-xs-7 col-sm-7 col-md-9 col-lg-9" style="border-left:2px;">
-                                                    				<div class="panel">
-                                                    					<div class="panel-heading" style="background-color: rgba(37, 156, 236,0.5);">
-		                                                    				<b>Osebna izkaznica</b>
-	                                                    				</div>
-	                                                    				<div class="panel-body" style="background-color: rgba(157, 157, 157,0.05);">
-	                                                    					<table class="table table-hover" border="0" style="width:40%; border-top:0px;">
-																			    <tbody>
-																				    <tr>
-																				       	<th>Ime:</td>
-																				        <td id="izpis-ime">-</td>
-																				    </tr>
-																				    <tr>
-																				        <th>Priimek:</td>
-																				        <td id="izpis-priimek">-</td>
-																			      	</tr>
-																			      	<tr>
-																				        <th>Datum rojstva:</td>
-																				        <td id="izpis-datum">-</td>
-																			      	</tr>
-																			      	<tr>
-																				        <th>Starost:</td>
-																				        <td id="izpis-starost">-</td>
-																			      	</tr>
-																			    </tbody>
-																			  </table>
-	                                                    				</div>
-
-                                                    				</div>
-                                                    			</div>
-                                                    			
-
-                                                    		</div>
-                                                   
-	                                                            <table id="tabelaEHRpodatkov" class="table table-hover table-bordered" style="background-color: rgba(157, 157, 157,0.05); margin-top:20px;">
-	                                                                <thead>
-	                                                                    <tr style="background-color: rgba(37, 156, 236,0.5);">
-	                                                                        <th>Datum in ura</th>
-	                                                                        <th>Telesna višina</th>
-	                                                                        <th>Telesna masa</th>
-	                                                                        <th>Telesna temperatura</th>
-	                                                                    </tr>
-	                                                                </thead>
-	                                                                <tbody id="nosilec-zapisov">
-	                                                                    <tr>
-	                                                                        <td id="niZapisov" colspan="4" style="text-align:center;">V EHR trenutno ni nobenih zapisov.</td>
-	                                                                    </tr>
-	                                                                    
-	                                                                </tbody>                    
-	                                                            </table>
-	                                                     
-
-                                                            <div id="prostorZaGrafe" class="row">
-
-                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                                    <div class="grid">
-                                                                        <div class="col-1-1">
-                                                                            
-                                                                            <div id="graf1" class="chart">
-                                                                                    
-                                                                            </div>
-                                                                                
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                                    <div class="grid">
-                                                                        <div class="col-1-1">
-                                                                            
-                                                                            <div id="graf2" class="chart">
-                                                                                    
-                                                                            </div>
-                                                                                
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                                    <div class="grid">
-                                                                        <div class="col-1-1">
-                                                                            
-                                                                            <div id="graf3" class="chart">
-                                                                                    
-                                                                            </div>
-                                                                                
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                                    <div class="grid">
-                                                                        <div class="col-1-1">
-                                                                            
-                                                                            <div id="graf4" class="chart">
-                                                                                    
-                                                                            </div>
-                                                                                
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                    </div>
-                                        </div>        
-                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR ##################### -->   
-
-                                    <div class="row">   <!-- ##################### FUNKCIONALNOST 3 -> RAČUNANJE ITM #####################--> 
-                                        <div id="ITM-kalkulator" class="panel panel-primary col-xs-11 col-sm-11 col-md-11" >
-
-
-                                                    <div class="panel-heading">
-                                                        <span ><b>ITM kalkulator</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
-                                                    </div>
-
-                                                    <div class="panel-body">
-                                                        <div class=row>
-                                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                                                                    <div class="form-group col-xs-10 col-sm-10">
-                                                                        
-                                                                        <label for="spol" class="control-label">Spol:</label>
-                                                                            <div id="spol" sytle="">  
-                                                                                <label class="radio-inline "><input type="radio" name="optradio"  checked>Moški</label>
-                                                                                <label class="radio-inline "><input type="radio" name="optradio">Ženski</label>   
-                                                                            </div>
-                                                                        <label for="teza" class="control-label" style="margin-top:10px;">Telesna teža:</label>
-                                                                        <div class="input-group">
-                                                                            <input id="teza" type="teza" class="form-control">
-                                                                            <span class="input-group-addon">kg</span>
-                                                                        </div>
-                                                                        
-                                                                        <label for="visina" class="control-label">Telesna višina:</label>
-                                                                        <div class="input-group">
-                                                                            <input id="visina" type="visina" class="form-control input-mini">
-                                                                            <span class="input-group-addon">cm</span>
-                                                                        </div>
-                                                                         <button id="gumbITM"  class="btn btn-primary" style="margin-top:10px;">Izračunaj ITM</button>
-                                                                    </div>
-
-                                                               
-                                                            <div class="row obvestilo">
-                                                                <div class="col-md-12" style="margin-top:20px; margin-left:13px;">
-                                                                    <div id="ITM-okvir" class="alert alert-success" style="display:none;">
-                                                                        <p >Vaš indeks telesne mase (ITM) je <span id="ITM-podatek" style="font-size:17px;"><b></b></span>.<br>
-                                                                        Uvrščate se v kategorijo: <b><span id="ITM-kategorija"></span></b>. </p>   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            </div>
-
-                                                            <div class="col-md-6" border="1">
-
-                                                                <table id="tabelaITM" class="table" style="background-color: rgba(157, 157, 157,0.05); padding:5px;"> 
-                                                                    <thead>
-                                                                      <tr>
-                                                                        <th></th>
-                                                                        <th>Kategorija</th>
-                                                                        <th>ITM (kg/m²)</th>
-                                                                        <th>Telesna masa</th>
-                                                                      </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr style="border-top: 3px solid #aaa;">
-                                                                            <td bgcolor="#2A50FF"></td>
-                                                                            <td>Huda podhranjenost</td>
-                                                                            <td>≤ 16,0</td>
-                                                                            <td rowspan="3">suhost(zmanjšana telesna masa)</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td bgcolor="#3A60BB"></td>
-                                                                            <td>Zmerna podhranjenost</td>
-                                                                            <td>16,0–17,0</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td bgcolor="#4A708B"></td>
-                                                                            <td>Blaga podhranjenost</td>
-                                                                            <td >17,0–18,5</td>
-                                                                        </tr>
-                                                                        <tr style="border-top: 3px solid #aaa;">
-                                                                            <td bgcolor="#006400"></td>
-                                                                            <td>Normalna telesna masa</td>
-                                                                            <td>18,5–25,0</td>
-                                                                            <td>normalna telesna masa</a></td>
-                                                                        </tr>
-                                                                        <tr style="border-top: 3px solid #aaa;">
-                                                                            <td bgcolor="#FFFF00"></td>
-                                                                            <td>Zvečana telesna masa (preadipoznost)</td>
-                                                                            <td>25,0–30,0</td>
-                                                                            <td>zvečana telesna masa</td>
-                                                                        </tr>
-                                                                        <tr style="border-top: 3px solid #aaa;">
-                                                                            <td bgcolor="#FFA500"></td>
-                                                                            <td>Debelost stopnje I</td>
-                                                                            <td>30,0–35,0</td>
-                                                                            <td rowspan="3" ></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td bgcolor="#FF0000"></td>
-                                                                            <td>Debelost stopnje II</td>
-                                                                            <td>35,0–40,0</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td bgcolor="#8B0000"></td>
-                                                                            <td>Debelost stopnje III</td>
-                                                                            <td>≥ 40,0</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                        </div>        
-                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 3 -> RAČUNANJE ITM ##################### -->   
-
-                                    <div class="row">   <!-- FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK --> 
-                                        <div id="pripravaObroka" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
-
-
-                                                    <div class="panel-heading">
-                                                        <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
-                                                    </div>
-
-                                                    <div class="panel-body">
-                                                            <div class="row" >
-                                                            	<div id="iskalnik" class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-                                                            		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-															            <tbody>
-															            <tr style="background-color: rgba(37, 156, 236,0.5);">
-															              <th colspan="2" style="text-align:center; ">Iskalnik živil</th>
-															            </tr>
-															            <tr>
-															              <td>Skupina:</td>
-															              <td><select id="tipZivila" name="skupina">
-															                  					<option value="Katerakoli skupina" selected="">Katerakoli skupina</option>
-															                                    <option value="Mlečni in jajčni izdelki">Mlečni in jajčni izdelki</option>
-															                                    <option value="Začimbe in zelišča">Začimbe in zelišča</option>
-															                                    <option value="Maščobe in olja">Maščobe in olja</option>
-															                                    <option value="Perutnina in izdelki iz perutnine">Perutnina in izdelki iz perutnine</option>
-															                                    <option value="Juhe, omake">Juhe, omake</option>
-															                                    <option value="Klobase in suhomesni izdelki">Klobase in suhomesni izdelki</option>
-															                                    <option value="Sadje in sadni sokovi">Sadje in sadni sokovi</option>
-															                                    <option value="Svinjina in izdelki iz svinjine">Svinjina in izdelki iz svinjine</option>
-															                                    <option value="Zelenjava in zelenjavni izdelki">Zelenjava in zelenjavni izdelki</option>
-															                                    <option value="Oreščki in semena">Oreščki in semena</option>
-															                                    <option value="Govedina in izdelki iz govedine">Govedina in izdelki iz govedine</option>
-															                                    <option value="Pijače, napitki">Pijače, napitki</option>
-															                                    <option value="Ribe, školjke, raki">Ribe, školjke, raki</option>
-															                                    <option value="Stročnice in izdelki iz stročnic">Stročnice in izdelki iz stročnic</option>
-															                                    <option value="Jagnjetina, teletina, divjačina">Jagnjetina, teletina, divjačina</option>
-															                                    <option value="Pecivo, kruh">Pecivo, kruh</option>
-															                                    <option value="Sladkarije" >Sladkarije</option>
-															                                    <option value="Žita in testenine">Žita in testenine</option>
-															                                    
-															                                </select>
-															              </td>
-															            </tr>
-															            <tr>
-															              <td>Živilo:</td>
-															              <td>
-															            <div class="input-group">  	
-															              <input class="form-control" id="imeZivila" name="zivilo" value="" type="text" style="width:234px;">
-															            </div>
-															            </td>
-															            </tr>
-															            <tr>
-															              <td>Beljakovine:</td>
-															              <td>
-
-															             <div class="input-group"> 
-															                <span style="float:left;padding-right:2px; margin-top:7px;">od</span><input id="beljakovine1" class="form-control" style="float:left;width:80px;" name="beljak_min" value="" type="text">
-															             
-															                <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
-															             
-															                <input id="beljakovine2" class="form-control" style="float:left;width:80px;float:left;" name="beljak_max" value="" type="text"> <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
-															                </span>
-															             </div>
-															                </td>
-															            </tr>
-															            <tr>
-															              <td>Maščobe skupaj:</td>
-															              <td>
-															              <div class="input-group"> 
-															                <span style="float:left; padding-right:2px; margin-top:7px; ">od</span>
-
-															                <input id="mascobe1" class="form-control" style="float:left; width:80px;" name="masc_min" value="" type="text">
-															              
-															                <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px; ">do</span>
-															              
-															                <input id="mascobe2" class="form-control" style="float:left; width:80px;" name="masc_max" value="" type="text"> 
-															                <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
-															                </span>
-															              </div>
-															               </td>
-															            </tr>
-															            <tr>
-															              <td>OH skupaj:</td>
-															              <td>
-															             <div class="input-group"> 
-															                <span style="float:left;padding-right:2px; margin-top:7px;">od</span> <input id="oglHidrati1" class="form-control" style="width:80px; float:left;" name="oh_min" value="" type="text">
-															             
-															                <span style="float:left; padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
-															             
-															                <input id="oglHidrati2"class="form-control" style="float:left; width:80px;" name="oh_max" value="" type="text"><span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
-															                </span>
-															             </div>
-															                </td>
-															            </tr>
-															            <tr>
-															              <th colspan="2" >
-															              <button id="gumb-iskanje" type="submit" class="btn btn-primary btn-md" style="margin-top:10px; margin:auto; display:block;" align="center"> <span class="glyphicon glyphicon-search"></span><span style="margin-left: 3px;">Poišči živila</span></button> 
-															              
-															            </tr>
-															          </tbody>
-																	</table>
-                                                            	</div>
-
-                                                            	<div id="hranilneVrednostiObroka" class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-                                                            		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-															            <tbody>
-															            <tr style="background-color: rgba(37, 156, 236,0.5);">
-															              <th colspan="2" style="text-align:center; ">Hranilne vrednosti obroka</th>
-															            </tr>
-															            <tr>
-															              <td style="border-bottom: 3px solid #aaa;">Priporočen dnevni vnos kalorij</td>
-															              <td style="border-bottom: 3px solid #aaa;">2000 kcal </td>
-															            </tr>
-															           	<tr>
-															              <td>Energija:</td>
-															              <td>0 kcal </td>
-															            </tr>
-															            <tr>
-															              <td>Maščobe skupaj:</td>
-															              <td>0 g </td>
-															            </tr>
-															            <tr>
-															              <td>Horesterol:</td>
-															              <td>0 g </td>
-															            </tr>
-															            <tr>
-															              <td>Oglikovi hidrati:</td>
-															              <td>0 g </td>
-															            </tr>
-															            <tr>
-															              <td>Beljakovine:</td>
-															              <td>0 g </td>
-															            </tr>
-															          </tbody>
-																	</table>
-                                                            	</div>
-
-                                                            </div>
-
-                                                            <div class="row">
-                                                            	<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-                                                            
-                                                            	<table style="margin-bottom:0px; padding-bottom:0px;" class="table table-bordered table-hover">
-                                                            		<thead  style="background-color: rgba(37, 156, 236,0.5);">
-															            	<tr>
-															              <th>Ime živila</th>
-															              
-															            	</tr>
-															           	
-															         </thead>
-															        
-															         
-                                                            	</table>
-
-                                                            	<div id="container-tabelaIskanihZivil">
-                                                            		<table style="margin-top:0px; padding-top:0px;" class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-															            
-
-															            <tbody id="vrsticeTabeleIskanihZivil">
-
-
-
-															           		<!--<td style="position:relative;">
-															           		<div class="row">
-																           		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-																           			<span style="position:absolute; left:10px; top:8px;">Izdelek 1</span>
-								<button type="submit" class="btn btn-primary btn-sm" style="float:right;margin-right:15px;">Dodaj</button> 
-						        <span style="float:right;margin-right:15px;margin-top:5px;">g</span>
-																              <input class="input-small" style="float:right; width:80px;margin-right:5px;" name="beljak_max" value="" type="text">
-																           		</div>
-															           		</div>
-															           		<div class="row podrobnosti" style="margin-top:15px;" >
-																           		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-																           			
-																           			<div class="row">
-																           				
-																           				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-																           					<table class="table">
-																							 	<thead>
-																							     	<tr style="background-color: rgba(148, 152, 152,0.5);"><th>Hranilne vrednosti (na 100g)</th></tr>
-																								</thead>
-																								<tbody>
-																							    
-																							    <tr>
-																							    	<td>
-																								    	<span style="float:left;">Energija (kcal)</span>
-																								    	<span style="float:right;">100</span>
-																								    </td>
-																								 </tr>
-																								 <tr>
-																							    	<td>
-																								    	<span style="float:left;">Maščobe skupaj
-																								    	</span>
-																								    	<span style="float:right;">100
-																								    	</span>
-																							    	</td>
-																							    </tr>
-																							    <tr>
-																							    	<td>
-																								    	<span style="float:left;">Holesterol
-																								    	</span>
-																								    	<span style="float:right;">100
-																								    	</span>
-																							    	</td>
-																							    </tr>
-																							    <tr>
-																							    	<td>
-																								    	<span style="float:left;">Ogljikovi hidrati skupaj
-																								    	</span>
-																								    	<span style="float:right;">100
-																								    	</span>
-																							    	</td>
-																							    </tr>
-																							    <tr>
-																							    	<td>
-																								    	<span style="float:left;">Beljakovine
-																								    	</span>
-																								    	<span style="float:right;">100
-																								    	</span>
-																							    	</td>
-																							    </tr>
-																							    
-																							    	
-																							    </tbody>
-																							  </table>
-																						</div>
-																           				
-																           				<div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-																           					<div id="grafHranilnihVrednosti" style="height: 600px;">
-
-																           					</div>
-
-																           				</div>
-
-																           			</div>
-
-																           		</div>
-																           		
-															           		</div>
-			
-															              </td>   -->
-
-
-
-
-
-
-
-															          	</tbody>
-																	</table>
-																</div>
-                                                            	</div>
-                                                            	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-                                                            		<table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-															            <tbody>
-															            <tr style="background-color: rgba(37, 156, 236,0.5);">
-															              <th colspan="2">Seznam izbranih živil</th>
-															            </tr>
-															           	<tr>
-															              <td style="position:relative;">Izdelek 1 <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-minus"></span></td>
-															            </tr>
-															          </tbody>
-																	</table>
-                                                            	</div>
-                                                            </div>
-
-                                                    </div>
-                                        </div>        
-                                    </div>  <!-- ##################### KONEC FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK ##################### -->   
-
-                            </div>
-                        </div> <!-- KONEC OKVIRJA ZA POSAMAZNE PUNKCIONALNOSTI -->
-        
-                </div>
-            </div> <!-- konec desnega dela spletne strani -->
-
-        </div>
-    </div>
-
-</body>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Beljakovine:</td>
+                                             <td>
+                                                <div class="input-group"> 
+                                                   <span style="float:left;padding-right:2px; margin-top:7px;">od</span><input id="beljakovine1" class="form-control" style="float:left;width:80px;" name="beljak_min" value="" type="text">
+                                                   <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
+                                                   <input id="beljakovine2" class="form-control" style="float:left;width:80px;float:left;" name="beljak_max" value="" type="text"> <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+                                                   </span>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Maščobe skupaj:</td>
+                                             <td>
+                                                <div class="input-group"> 
+                                                   <span style="float:left; padding-right:2px; margin-top:7px; ">od</span>
+                                                   <input id="mascobe1" class="form-control" style="float:left; width:80px;" name="masc_min" value="" type="text">
+                                                   <span style="float:left;padding-left:2px;padding-right:2px; margin-top:7px; ">do</span>
+                                                   <input id="mascobe2" class="form-control" style="float:left; width:80px;" name="masc_max" value="" type="text"> 
+                                                   <span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+                                                   </span>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>OH skupaj:</td>
+                                             <td>
+                                                <div class="input-group"> 
+                                                   <span style="float:left;padding-right:2px; margin-top:7px;">od</span> <input id="oglHidrati1" class="form-control" style="width:80px; float:left;" name="oh_min" value="" type="text">
+                                                   <span style="float:left; padding-left:2px;padding-right:2px; margin-top:7px;">do</span>
+                                                   <input id="oglHidrati2"class="form-control" style="float:left; width:80px;" name="oh_max" value="" type="text"><span style="float:left;padding-left:2px; margin-top:7px;">g/100 g
+                                                   </span>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th colspan="2" >
+                                                <button id="gumb-iskanje" type="submit" class="btn btn-primary btn-md" style="margin-top:10px; margin:auto; display:block;" align="center"> <span class="glyphicon glyphicon-search"></span><span style="margin-left: 3px;">Poišči živila</span></button> 
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div id="hranilneVrednostiObroka" class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                       <tbody>
+                                          <tr style="background-color: rgba(37, 156, 236,0.5);">
+                                             <th colspan="2" style="text-align:center; ">Hranilne vrednosti obroka</th>
+                                          </tr>
+                                          <tr>
+                                             <td style="border-bottom: 3px solid #aaa;">Priporočen dnevni vnos kalorij</td>
+                                             <td style="border-bottom: 3px solid #aaa;">2000 kcal </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Energija:</td>
+                                             <td>0 kcal </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Maščobe skupaj:</td>
+                                             <td>0 g </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Horesterol:</td>
+                                             <td>0 g </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Oglikovi hidrati:</td>
+                                             <td>0 g </td>
+                                          </tr>
+                                          <tr>
+                                             <td>Beljakovine:</td>
+                                             <td>0 g </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <table style="margin-bottom:0px; padding-bottom:0px;" class="table table-bordered table-hover">
+                                       <thead  style="background-color: rgba(37, 156, 236,0.5);">
+                                          <tr>
+                                             <th>Ime živila</th>
+                                          </tr>
+                                       </thead>
+                                    </table>
+                                    <div id="container-tabelaIskanihZivil">
+                                       <table style="margin-top:0px; padding-top:0px;" class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                          <tbody id="vrsticeTabeleIskanihZivil">
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
+                                       <tbody>
+                                          <tr style="background-color: rgba(37, 156, 236,0.5);">
+                                             <th colspan="2">Seznam izbranih živil</th>
+                                          </tr>
+                                          <tr>
+                                             <td style="position:relative;">Izdelek 1 <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-minus"></span></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- ##################### KONEC FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK ##################### -->   
+                  </div>
+               </div>
+               <!-- KONEC OKVIRJA ZA POSAMAZNE PUNKCIONALNOSTI -->
+            </div>
+         </div>
+         <!-- konec desnega dela spletne strani -->
+      </div>
+      </div>
+   </body>
 </html>
-
-
-
-

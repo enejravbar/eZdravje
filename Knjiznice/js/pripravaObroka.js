@@ -195,7 +195,11 @@ function gumbIskanje(){
 															              </td>
 		*/
 		var htmlTabela="";
-		for(var i=0; i<najdenaZivila.length; i++){
+
+		if(najdenaZivila.length==0){
+			htmlTabela+="<tr><td style=\"position:relative; text-align:center;\">" + "Ni zadetkov!" + "</td></tr>";
+		}else{
+			for(var i=0; i<najdenaZivila.length; i++){
 			htmlTabela+=
 
 				"<tr><td style=\"position:relative;\">" +
@@ -211,7 +215,9 @@ function gumbIskanje(){
 													           		
 					"</div>"+
 				"</td></tr>"
+			}
 		}
+		
 		$("#vrsticeTabeleIskanihZivil").html(htmlTabela);
 	});
 		

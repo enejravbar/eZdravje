@@ -12,9 +12,9 @@ var timer1,timer2,timer3,timer4;
 var timerGenerator;
 
 var tabelaObstojecihUporabnikov=[
-    "c5df5629-94ab-443f-97ad-0fdc8d915aa8",   // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
-    "38825892-b31c-4045-a4ca-f357240773ef",
-    "47605219-2b6e-49bc-a0a3-54f9cb60283e"
+    "f6695773-7105-4101-bb06-ad3675ddf497",   // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
+    "0260a980-62e7-4023-aac3-ef8f7c9ae2e3",
+    "97b35e6d-a1f6-4504-bef8-bc39ad67eaa5"
   ];
 /**
  * Prijava v sistem z privzetim uporabnikom za predmet OIS in pridobitev
@@ -39,14 +39,14 @@ $(document).ready(function(){
   nadzorujDropdownObstojecihUporabnikovObSpremembi();
   razsirjanjeInKrcenjeOken();
   mainMetodaZaPripravoObroka();
-  
+  ITMKalkulator();
   izberiUporabnika();
   gumbGenerirajPodatke();
   registracijaUporabnika();
   vnosPodatkovVEHR();
   gumbOsvezi();
 
-  ITMKalkulator();
+  
 
     
 
@@ -117,28 +117,28 @@ function generirajPodatke(stPacienta) {
   var ehrIdUstvarjeni="";
 
   var podatkiCalvin = [ // slabi vitalni znaki - povečana telesna masa
-    {datumInUra: "2013-05-23T12:23", telesnaVisina: 180, telesnaTeza: 90, telesnaTemperatura: 36.6},
-    {datumInUra: "2013-07-23T12:23", telesnaVisina: 181, telesnaTeza: 95, telesnaTemperatura: 37.3},
-    {datumInUra: "2014-06-23T12:23", telesnaVisina: 184, telesnaTeza: 87, telesnaTemperatura: 36.6},
-    {datumInUra: "2014-11-23T12:23", telesnaVisina: 186, telesnaTeza: 90, telesnaTemperatura: 36.5},
-    {datumInUra: "2015-05-21T12:23", telesnaVisina: 188, telesnaTeza: 95, telesnaTemperatura: 38.6},
-    {datumInUra: "2016-05-23T12:23", telesnaVisina: 190, telesnaTeza: 98, telesnaTemperatura: 36.6}
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 180, telesnaTeza: 90, telesnaTemperatura: 36.6, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 181, telesnaTeza: 95, telesnaTemperatura: 37.3, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 184, telesnaTeza: 87, telesnaTemperatura: 36.6, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 186, telesnaTeza: 90, telesnaTemperatura: 36.5, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 188, telesnaTeza: 95, telesnaTemperatura: 38.6, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 190, telesnaTeza: 98, telesnaTemperatura: 36.6, sistolicniKrvniTlak:150, diastolicniKrvniTlak: 95,kisikVKrvi:89}
   ];
   var podatkiAna = [ // srednje dobri vitalni znaki
-    {datumInUra: "2013-05-23T12:23", telesnaVisina: 160, telesnaTeza: 72, telesnaTemperatura: 36.6},
-    {datumInUra: "2013-07-23T12:23", telesnaVisina: 162, telesnaTeza: 71, telesnaTemperatura: 37.3},
-    {datumInUra: "2014-06-23T12:23", telesnaVisina: 165, telesnaTeza: 70, telesnaTemperatura: 36.6},
-    {datumInUra: "2014-11-23T12:23", telesnaVisina: 166, telesnaTeza: 77, telesnaTemperatura: 36.5},
-    {datumInUra: "2015-05-21T12:23", telesnaVisina: 169, telesnaTeza: 80, telesnaTemperatura: 38.6},
-    {datumInUra: "2016-05-23T12:23", telesnaVisina: 172, telesnaTeza: 73, telesnaTemperatura: 36.6}
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 160, telesnaTeza: 72, telesnaTemperatura: 36.6, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 162, telesnaTeza: 71, telesnaTemperatura: 37.3, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 165, telesnaTeza: 70, telesnaTemperatura: 36.6, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 166, telesnaTeza: 77, telesnaTemperatura: 36.5, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 169, telesnaTeza: 80, telesnaTemperatura: 38.6, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 172, telesnaTeza: 73, telesnaTemperatura: 36.6, sistolicniKrvniTlak:110, diastolicniKrvniTlak: 78,kisikVKrvi:94}
   ];
   var podatkiJulija = [ // dobri vitalni znaki
-    {datumInUra: "2013-05-23T12:23", telesnaVisina: 170, telesnaTeza: 62, telesnaTemperatura: 36.6},
-    {datumInUra: "2013-07-23T12:23", telesnaVisina: 172, telesnaTeza: 61, telesnaTemperatura: 37.3},
-    {datumInUra: "2014-06-23T12:23", telesnaVisina: 175, telesnaTeza: 60, telesnaTemperatura: 36.6},
-    {datumInUra: "2014-11-23T12:23", telesnaVisina: 176, telesnaTeza: 67, telesnaTemperatura: 36.5},
-    {datumInUra: "2015-05-21T12:23", telesnaVisina: 180, telesnaTeza: 70, telesnaTemperatura: 38.6},
-    {datumInUra: "2016-05-23T12:23", telesnaVisina: 182, telesnaTeza: 63, telesnaTemperatura: 36.6}
+    {datumInUra: "2013-05-23T12:23", telesnaVisina: 170, telesnaTeza: 62, telesnaTemperatura: 36.6, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98},
+    {datumInUra: "2013-07-23T12:23", telesnaVisina: 172, telesnaTeza: 61, telesnaTemperatura: 37.3, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98},
+    {datumInUra: "2014-06-23T12:23", telesnaVisina: 175, telesnaTeza: 60, telesnaTemperatura: 36.6, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98},
+    {datumInUra: "2014-11-23T12:23", telesnaVisina: 176, telesnaTeza: 67, telesnaTemperatura: 36.5, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98},
+    {datumInUra: "2015-05-21T12:23", telesnaVisina: 180, telesnaTeza: 70, telesnaTemperatura: 38.6, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98},
+    {datumInUra: "2016-05-23T12:23", telesnaVisina: 182, telesnaTeza: 63, telesnaTemperatura: 36.6, sistolicniKrvniTlak:125, diastolicniKrvniTlak: 82,kisikVKrvi:98}
   ];
 
   switch(stPacienta){
@@ -147,7 +147,7 @@ function generirajPodatke(stPacienta) {
       var ehrIdCalvin = kreirajEhrId("Calvin", "Harris", "1984-01-17T16:34");
       ehrIdUstvarjeni = ehrIdCalvin;
           for(var i=0; i<6; i++){
-            dodajMeritve(ehrIdCalvin,podatkiCalvin[i].datumInUra,podatkiCalvin[i].telesnaVisina,podatkiCalvin[i].telesnaTeza,podatkiCalvin[i].telesnaTemperatura );
+            console.log(dodajMeritve(ehrIdCalvin,podatkiCalvin[i].datumInUra,podatkiCalvin[i].telesnaVisina,podatkiCalvin[i].telesnaTeza,podatkiCalvin[i].telesnaTemperatura, podatkiCalvin[i].sistolicniKrvniTlak ,podatkiCalvin[i].diastolicniKrvniTlak ));
           }
       break;
       
@@ -155,7 +155,7 @@ function generirajPodatke(stPacienta) {
       var ehrIdAna = kreirajEhrId("Ana", "Klašnja", "1978-12-18T16:00");
       ehrIdUstvarjeni = ehrIdAna;
           for(var i=0; i<6; i++){
-            dodajMeritve(ehrIdAna,podatkiAna[i].datumInUra,podatkiAna[i].telesnaVisina,podatkiAna[i].telesnaTeza,podatkiAna[i].telesnaTemperatura );
+            dodajMeritve(ehrIdAna,podatkiAna[i].datumInUra,podatkiAna[i].telesnaVisina,podatkiAna[i].telesnaTeza,podatkiAna[i].telesnaTemperatura, podatkiAna[i].sistolicniKrvniTlak ,podatkiAna[i].diastolicniKrvniTlak  );
           }
       break;
 
@@ -163,7 +163,7 @@ function generirajPodatke(stPacienta) {
       var ehrIdJulija = kreirajEhrId("Julija", "Tavčar", "1996-09-12T12:00");
       ehrIdUstvarjeni = ehrIdJulija;
           for(var i=0; i<6; i++){
-            dodajMeritve(ehrIdJulija,podatkiJulija[i].datumInUra,podatkiJulija[i].telesnaVisina,podatkiJulija[i].telesnaTeza,podatkiJulija[i].telesnaTemperatura );
+            dodajMeritve(ehrIdJulija,podatkiJulija[i].datumInUra,podatkiJulija[i].telesnaVisina,podatkiJulija[i].telesnaTeza,podatkiJulija[i].telesnaTemperatura, podatkiJulija[i].sistolicniKrvniTlak ,podatkiJulija[i].diastolicniKrvniTlak );
           }
       break;
   }
@@ -195,7 +195,7 @@ function gumbOsvezi(){
     if(trenutniEhrUporabnika!=-1){
       izpisPodatkovEHR(trenutniEhrUporabnika);
     }else{
-      console.log("Osveževanje je onemogočeno!");
+      //console.log("Osveževanje je onemogočeno!");
     }
     
   });
@@ -206,7 +206,7 @@ function nadzorujDropdownObstojecihUporabnikovNaZačetku(){
     var kontrola=0;
     $("#prijava-vpisEHR").val("");
     trenutniUporabnik = $("#preberiPredlogoBolnika option:selected" ).text();
-    console.log("Prijavljen je uporabnik "+ trenutniUporabnik);
+    //console.log("Prijavljen je uporabnik "+ trenutniUporabnik);
 
     if(trenutniUporabnik=="Calvin Harris"){
       kontrola=1;
@@ -225,7 +225,7 @@ function nadzorujDropdownObstojecihUporabnikovNaZačetku(){
     }
     if(kontrola==0){
       $("#prijava-vpisEHR").val("");
-      console.log("izvajam dovoljenje za pisanje");
+      //console.log("izvajam dovoljenje za pisanje");
       omogociPrijavoZEhr();
     }
 }
@@ -281,6 +281,7 @@ function izberiUporabnika(){
           timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
 
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[0] );
+          izracunajITMPriPrijavi(tabelaObstojecihUporabnikov[0]);
         }else{
 
           trenutniEhrUporabnika=-1;
@@ -314,6 +315,7 @@ function izberiUporabnika(){
           timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
 
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[1] );
+          izracunajITMPriPrijavi(tabelaObstojecihUporabnikov[1]);
         }else{
 
           trenutniEhrUporabnika=-1;
@@ -347,6 +349,7 @@ function izberiUporabnika(){
           timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
 
           izpisPodatkovEHR( tabelaObstojecihUporabnikov[2] );
+          izracunajITMPriPrijavi(tabelaObstojecihUporabnikov[2]);
         }else{
           
           trenutniEhrUporabnika=-1;
@@ -381,6 +384,7 @@ function izberiUporabnika(){
           timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
 
           izpisPodatkovEHR( prebraniEhr );
+          izracunajITMPriPrijavi(prebraniEhr);
         }else{
           
           trenutniEhrUporabnika=-1;
@@ -431,12 +435,17 @@ function izpisPodatkovEHR(ehrId){
             ime: "",
             priimek: "",
             datumRojstva: "",
+            cas: "",
             telesnaTeza: [],
             telesnaTemperatura: [],
-            telesnaVisina:[]
+            telesnaVisina:[],
+            pritisk:[],
+            kisikVKrvi:[]
           }*/
 
   var uporabnik = preberiMeritve(ehrId);
+  console.log(uporabnik);
+
   if(jeObstojeciUporabnik(ehrId)){
     if(ehrId==tabelaObstojecihUporabnikov[0]){  // Calvin Harris
       $("#prostorZaGrafe").css({"display" : ""});
@@ -488,10 +497,73 @@ function izpisPodatkovEHR(ehrId){
       vrsticeHTML+= "<td>"+ uporabnik.telesnaTeza[i].weight+"</td>";
       vrsticeHTML+= "<td>"+ uporabnik.telesnaTemperatura[i].temperature+"</td>" + kon;
     }
-    element.innerHTML=vrsticeHTML;
+    element.innerHTML=vrsticeHTML;  //
+    var barva="";
+    if((uporabnik.pritisk).length!=0){
+      var tlak1=(uporabnik.pritisk)[0].systolic;
+      console.log("Systolic je: "+tlak1);
+      $("#sistolicniKrvniTlak").text(tlak1+" mm[Hg]");
+      
+      switch(true){
+        case (tlak1<120):
+          barva="progress-bar progress-bar-warning";
+          break;
+        
+        case (tlak1>=120 && tlak1<140):
+          barva="progress-bar progress-bar-success";
+          break;
 
-    console.log("sem pred izrisom grafov");
-    console.log(posredujPodatkeZaGraf1(ehrId));
+        case (tlak1>=140):
+          barva="progress-bar progress-bar-danger";
+          break;
+      }
+
+      $("#sistolicniKrvniTlak").attr({"aria-valuenow" : tlak1+"", "class" : barva});
+
+    }
+
+    if((uporabnik.pritisk).length!=0){
+      var tlak2=(uporabnik.pritisk)[0].diastolic;
+      console.log("diatolic je: "+tlak2);
+      $("#diastolicniKrvniTlak").text(tlak2+" mm[Hg]");
+
+      switch(true){
+        case (tlak2<80):
+          barva="progress-bar progress-bar-warning";
+          break;
+        
+        case (tlak2>=80 && tlak2<90):
+          barva="progress-bar progress-bar-success";
+          break;
+
+        case (tlak2>=90):
+          barva="progress-bar progress-bar-danger";
+          break;
+      }
+
+      $("#diastolicniKrvniTlak").attr({"aria-valuenow" : tlak2+"","class" : barva});
+    }
+
+    if((uporabnik.kisikVKrvi).length!=0){
+      var kisik=(uporabnik.kisikVKrvi)[0].spO2;
+      console.log("kisik je: "+kisik);
+      $("#kisikVKrvi").text(kisik+" %");
+
+      switch(true){
+        case (kisik<90):
+          barva="progress-bar progress-bar-danger";
+          break;
+        
+        case (kisik>=90 && kisik<95):
+          barva="progress-bar progress-bar-warning";
+          break;
+
+        case (kisik>=95):
+          barva="progress-bar progress-bar-success";
+          break;
+      }
+      $("#kisikVKrvi").attr({"aria-valuenow" : kisik +"" ,"class" : barva});
+    }
 
     // poskrbimo, da se poizvedovanje po podatkih izvede samo enkrat
     var tabela1=posredujPodatkeZaGraf1(ehrId);
@@ -520,7 +592,7 @@ function posredujPodatkeZaGraf1(ehrId){  // graf telesne višine
   var tabela=[];
   tabela.push(["Datum","Telesna višina"]);
   for(var i=0; i<(uporabnik.telesnaVisina.length); i++){
-    tabela.push([izpisDatumaVLepiObliki(uporabnik.telesnaVisina[i].time),uporabnik.telesnaVisina[i].height]);
+    tabela.push([ izpisDatumaVLepiObliki(uporabnik.telesnaVisina[i].time),uporabnik.telesnaVisina[i].height]);
 
   }
   //console.log(tabela);
@@ -674,11 +746,19 @@ function vnosPodatkovVEHR(){
       var telesnaMasa = $("#vnosVEHR-masa").val();
       var telesnaTemperatura = $("#vnosVEHR-temperatura").val();
 
+      var sistolicniKrvniTlak=$("#vnosVEHR-sistolicni").val();
+      var diastolicniKrvniTlak =$("#vnosVEHR-diastolicni").val();
+      var kisik= $("#vnosVEHR-kisik").val();
 
+      console.log("sistolicniKrvniTlak: "+sistolicniKrvniTlak +" diastolicniKrvniTlak " + diastolicniKrvniTlak+ " kisik "+kisik);
       var napaka=false;
       var napaka1=false;
       var napaka2=false;
       var napaka3=false;
+      var napaka4=false;
+      var napaka5=false;
+      var napaka6=false;
+      var napaka7=false;
 
       if(!preveriVeljavnostDatuma(datum)){ 
         $("#vnosVEHR-datum").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
@@ -709,7 +789,29 @@ function vnosPodatkovVEHR(){
         $("#vnosVEHR-masa").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
       }
 
+      if(!(sistolicniKrvniTlak >=0)){ 
+        $("#vnosVEHR-sistolicni").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
+        napaka4=true;
+      }else{
+        $("#vnosVEHR-sistolicni").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
+      }
+
+      if(!(diastolicniKrvniTlak >=0)){ 
+        $("#vnosVEHR-diastolicni").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
+        napaka5=true;
+      }else{
+        $("#vnosVEHR-diastolicni").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
+      }
+
+      if(!(kisik >=0)){ 
+        $("#vnosVEHR-kisik").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
+        napaka6=true;
+      }else{
+        $("#vnosVEHR-kisik").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
+      }
+
       if(!(telesnaVisina >0)){
+        napaka7=true;
         $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-xs-12 col-sm-12 has-error"});
         $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
         $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
@@ -718,7 +820,7 @@ function vnosPodatkovVEHR(){
         return;
       }else{
         $("#vnosVEHR-telesnaVisina").parent().attr({"class" : "input-group col-xs-12 col-sm-12"});
-        if(napaka||napaka1 || napaka2){
+        if(napaka||napaka1 || napaka2 || napaka3 ||napaka4 || napaka5 || napaka6|| napaka7){
           $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
           $("#vnosVEHR-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
           $("#vnosVEHR-obvestilo").html("<b>NAPAKA</b> Prosim izpolnite polja pravilno.");
@@ -727,7 +829,7 @@ function vnosPodatkovVEHR(){
         }
       }
             var datumInUra = zapisiDatumRojstvaVFormatu(datum, ura)
-            var statusProcesaDodajMeritve = dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaMasa,telesnaTemperatura);
+            var statusProcesaDodajMeritve = dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaMasa,telesnaTemperatura,sistolicniKrvniTlak,diastolicniKrvniTlak);
             //console.log("statusProcesaDodajMeritve "+statusProcesaDodajMeritve);
             if(statusProcesaDodajMeritve==1){
               $("#vnosVEHR-obvestilo-okvir").css({"display" : "inline-block"});
@@ -840,7 +942,7 @@ function registracijaUporabnika(){
 }
 
 
-function dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaTeza,telesnaTemperatura ) {
+function dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaTeza,telesnaTemperatura,sistolicniKrvniTlak,diastolicniKrvniTlak ) {
   var sessionId = getSessionId();
   var kontrola = 1;
 
@@ -857,6 +959,8 @@ function dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaTeza,telesnaTemperat
         "vital_signs/body_weight/any_event/body_weight": telesnaTeza,
         "vital_signs/body_temperature/any_event/temperature|magnitude": telesnaTemperatura,
         "vital_signs/body_temperature/any_event/temperature|unit": "°C",
+        "vital_signs/blood_pressure/any_event/systolic": sistolicniKrvniTlak,
+        "vital_signs/blood_pressure/any_event/diastolic": diastolicniKrvniTlak
     };
     var parametriZahteve = {
         ehrId: ehrId,
@@ -1002,12 +1106,22 @@ function razsirjanjeInKrcenjeOken(){
   });
 }
 
+function resetirajBarveITMKalkulator(){
+  $(".huda-podhranjenost").css({"background-color" : ""});
+  $(".zmerna-podhranjenost").css({"background-color" : ""});
+  $(".blaga-podhranjenost").css({"background-color" : ""});
+  $(".normalna-masa").css({"background-color" : ""});
+  $(".zvecana-masa").css({"background-color" : ""});
+  $(".debelostI").css({"background-color" : ""});
+  $(".debelostII").css({"background-color" : ""});
+  $(".debelostIII").css({"background-color" : ""});
+}
+
 function ITMKalkulator(){
 
   $("#gumbITM").click(function(){
 
-    clearTimeout(timer4);
-    odstraniElement("ITM-okvir");
+    resetirajBarveITMKalkulator();
 
     var teza = $("#teza").val();
     var visina = ($("#visina").val())/100;
@@ -1037,34 +1151,42 @@ function ITMKalkulator(){
         case (ITM<=16): 
           kategorija="HUDA PODHRANJENOST"; 
           barva="alert alert-info";
+          $(".huda-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});  // background-color: rgba(37, 156, 236,0.5);
           break;
         case (ITM>=16 && ITM<17): 
           kategorija="ZMERNA PODHRANJENOST"; 
           barva="alert alert-info";
+          $(".zmerna-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=17 && ITM<18.5):
           kategorija="BLAGA PODHRANJENOST"; 
           barva="alert alert-info";
+          $(".blaga-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=18.5 && ITM<25):
           kategorija="NORMALNA TELESNA MASA";
           barva="alert alert-success"; 
+          $(".normalna-masa").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=25 && ITM<30):
           kategorija="ZVEČANA TELESNA MASA";
           barva="alert alert-warning";
+          $(".zvecana-masa").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=30 && ITM<35):
           kategorija="DEBELOST STOPNJE I"; 
           barva="alert alert-danger";
+          $(".debelostI").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=35 && ITM<40):
           kategorija="DEBELOST STOPNJE II";
           barva="alert alert-danger"; 
+          $(".debelostII").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
         case (ITM>=40):
           kategorija="DEBELOST STOPNJE III";
           barva="alert alert-danger"; 
+          $(".debelostIII").css({"background-color" : "rgba(157, 157, 157,0.5)"});
           break;
       }
       //console.log(kategorija + "  "+ barva);
@@ -1072,9 +1194,83 @@ function ITMKalkulator(){
       $("#ITM-okvir").attr({"class" : barva});
       $("#ITM-podatek").text(ITM.toFixed(1));
       $("#ITM-kategorija").text(kategorija);
-      timer4 = setTimeout(function(){ $("#ITM-okvir").hide('slow');}, 3500);
+
     }
   });
+
+}
+
+function izracunajITMPriPrijavi(ehrId){
+
+    
+    var uporabnik = preberiMeritve(ehrId);
+    //console.log("Zacel sem metodo");
+    if((uporabnik.telesnaTeza).length==0 || (uporabnik.telesnaVisina).length==0){
+      return;
+    }
+    //console.log("Prišel sem mimo returna!");
+    resetirajBarveITMKalkulator();
+    var teza = uporabnik.telesnaTeza[0].weight;
+    var visina = uporabnik.telesnaVisina[0].height/100;
+
+    $("#teza").val(teza);
+    $("#visina").val(visina*100);
+
+    //console.log("teza "+ teza + " visina " +visina);
+    var ITM;
+    var kategorija="";
+    var barva="";
+    
+
+      ITM=teza/(visina*visina);
+      switch(true){
+        case (ITM<=16): 
+          kategorija="HUDA PODHRANJENOST"; 
+          barva="alert alert-info";
+          $(".huda-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});  // background-color: rgba(37, 156, 236,0.5);
+          break;
+        case (ITM>=16 && ITM<17): 
+          kategorija="ZMERNA PODHRANJENOST"; 
+          barva="alert alert-info";
+          $(".zmerna-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=17 && ITM<18.5):
+          kategorija="BLAGA PODHRANJENOST"; 
+          barva="alert alert-info";
+          $(".blaga-podhranjenost").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=18.5 && ITM<25):
+          kategorija="NORMALNA TELESNA MASA";
+          barva="alert alert-success"; 
+          $(".normalna-masa").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=25 && ITM<30):
+          kategorija="ZVEČANA TELESNA MASA";
+          barva="alert alert-warning";
+          $(".zvecana-masa").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=30 && ITM<35):
+          kategorija="DEBELOST STOPNJE I"; 
+          barva="alert alert-danger";
+          $(".debelostI").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=35 && ITM<40):
+          kategorija="DEBELOST STOPNJE II";
+          barva="alert alert-danger"; 
+          $(".debelostII").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+        case (ITM>=40):
+          kategorija="DEBELOST STOPNJE III";
+          barva="alert alert-danger"; 
+          $(".debelostIII").css({"background-color" : "rgba(157, 157, 157,0.5)"});
+          break;
+    }
+
+    //console.log(kategorija + "  "+ barva);
+    $("#ITM-okvir").css({"display" : "block"});
+    $("#ITM-okvir").attr({"class" : barva});
+    $("#ITM-podatek").text(ITM.toFixed(1));
+    $("#ITM-kategorija").text(kategorija);
 
 }
 
@@ -1090,7 +1286,9 @@ function preberiMeritve(ehrId) {
             cas: "",
             telesnaTeza: [],
             telesnaTemperatura: [],
-            telesnaVisina:[]
+            telesnaVisina:[],
+            pritisk:[],
+            kisikVKrvi:[]
           }
 
     $.ajax({
@@ -1175,6 +1373,47 @@ function preberiMeritve(ehrId) {
               }
           });
 
+// KRVNI PRITISK ----------------------------------------
+          $.ajax({
+              url: baseUrl + "/view/" + ehrId + "/" + "blood_pressure",
+              type: 'GET',
+              async: false,
+              headers: {"Ehr-Session": sessionId},
+              success: function (res) {
+                if (res.length > 0) {
+                    // res[i].time  res[i].weight res[i].unit
+                    uporabnik.pritisk=res;
+                    //console.log(res);
+                    //console.log(res[0].time + " " + res[0].temperature +" "+res[0].unit +"\n" +res[1].time + " " + res[1].temperature +" "+res[1].unit); 
+                }else{ 
+                  uporabnik.pritisk=[];
+                }
+              },
+              error: function() {
+                
+              }
+          });
+
+// NASIČENOST KRVI S KISIKOM ----------------------------------------
+          $.ajax({
+              url: baseUrl + "/view/" + ehrId + "/" + "spO2",
+              type: 'GET',
+              async: false,
+              headers: {"Ehr-Session": sessionId},
+              success: function (res) {
+                if (res.length > 0) {
+                    // res[i].time  res[i].weight res[i].unit
+                    uporabnik.kisikVKrvi=res;
+                    console.log(res);
+                    //console.log(res[0].time + " " + res[0].temperature +" "+res[0].unit +"\n" +res[1].time + " " + res[1].temperature +" "+res[1].unit); 
+                }else{ 
+                  uporabnik.kisikVKrvi=[];
+                }
+              },
+              error: function() {
+                
+              }
+          });
           return uporabnik;
 }
 
@@ -1185,7 +1424,7 @@ function preberiMeritve(ehrId) {
 //----------------------------- GRAF TELESNE VIŠINE -----------------------------//
 
 function drawChart1(podatki) {
-  console.log(podatki);
+  //console.log(podatki);
   var data = google.visualization.arrayToDataTable(podatki);
 
   var options = {
@@ -1213,7 +1452,7 @@ function drawChart1(podatki) {
 //----------------------------- GRAF TELESNE MASE -----------------------------//
 
 function drawChart2(podatki) {
-  console.log(podatki);
+  //console.log(podatki);
   var data = google.visualization.arrayToDataTable(podatki);
 
   var options = {
@@ -1238,7 +1477,7 @@ function drawChart2(podatki) {
 }
 
 function drawChart3(podatki) {
-  console.log(podatki);
+  //console.log(podatki);
   var data = google.visualization.arrayToDataTable(podatki);
 
   var options = {
@@ -1265,7 +1504,7 @@ function drawChart3(podatki) {
 //----------------------------- GRAF ITM -----------------------------//
 
 function drawChart4(podatki) {
-  console.log(podatki);
+  //console.log(podatki);
   
   var data = google.visualization.arrayToDataTable(podatki);
 
