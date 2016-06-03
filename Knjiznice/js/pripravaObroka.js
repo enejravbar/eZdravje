@@ -1,12 +1,15 @@
 
 var tabelaZivil= new Array();
 var buffer;
+var stevecZivilNaListi=0;
 
 
 function mainMetodaZaPripravoObroka(){
 	pripravaTabele();
 	gumbIskanje();
 	prikaziPodrobnostiZivila();
+	dodajZiviloNaSeznam();
+	odstraniZiviloIzSeznama();
 	
 	//var iskanje=iskanjeZivil("","sir",["",""],["",""],["",""]);
 }
@@ -129,102 +132,6 @@ function pridobiObjektZivila(imeZivila){
 	return objekt;
 }
 
-function gumbIskanje(){
-	$("#gumb-iskanje").click(function() {
-
-		var tip = $("#tipZivila").val();
-		var ime = $("#imeZivila").val();
-
-		console.log("tip je: "+tip);
-
-		var beljakovine1 = $("#beljakovine1").val();
-		var beljakovine2 = $("#beljakovine2").val();
-		var mascobe1 = $("#mascobe1").val();
-		var mascobe2 = $("#mascobe2").val();
-		var oglHidrati1 = $("#oglHidrati1").val();
-		var oglHidrati2 = $("#oglHidrati2").val();
-
-		var napaka1=true;
-		var napaka2=true;
-		var napaka3=true;
-
-		if( ($.isNumeric(beljakovine1)) && ($.isNumeric(beljakovine2) && beljakovine1<=beljakovine2) || (beljakovine1=="" && beljakovine2=="")){
-			napaka1=false;
-			$("#beljakovine1").parent().attr({
-				"class" : "input-group"
-			});
-		}else{
-			napaka1=true;
-			$("#beljakovine1").parent().attr({
-				"class" : "input-group has-error"
-			});
-		}
-		if(($.isNumeric(mascobe1)) && ($.isNumeric(mascobe2) && mascobe1<=mascobe2) || (mascobe1=="" && mascobe2=="")){
-			napaka2=false;
-			$("#mascobe1").parent().attr({
-				"class" : "input-group"
-			});
-		}else{
-			napaka2=true;
-			$("#mascobe1").parent().attr({
-				"class" : "input-group has-error"
-			});
-		}
-		if(($.isNumeric(oglHidrati1)) && ($.isNumeric(oglHidrati2) && oglHidrati1<=oglHidrati2) || (oglHidrati1=="" && oglHidrati2=="")){
-			napaka3=false;
-			$("#oglHidrati1").parent().attr({
-				"class" : "input-group"
-			});
-		}else{
-			napaka3=true;
-			$("#oglHidrati1").parent().attr({
-				"class" : "input-group has-error"
-			});
-		}
-		if(napaka1 || napaka2 || napaka3){
-			return;
-		}
-		var najdenaZivila = iskanjeZivil(tip,ime,[beljakovine1,beljakovine2],[mascobe1,mascobe2],[oglHidrati1,oglHidrati2]);
-
-		/* 
-<td style="position:relative;">
-			<span style="position:absolute; left:5px; top:15px;">Izdelek 1</span>
-								<button type="submit" class="btn btn-primary btn-sm" style="float:right;margin-right:15px;">Dodaj</button> 
-						        <span style="float:right;margin-right:15px;margin-top:5px;">g</span>
-																              <input class="input-small" style="float:right; width:80px;margin-right:5px;" name="beljak_max" value="" type="text">
-															              </td>
-		*/
-		var htmlTabela="";
-
-		if(najdenaZivila.length==0){
-			htmlTabela+="<tr><td style=\"position:relative; text-align:center;\">" + "Ni zadetkov!" + "</td></tr>";
-		}else{
-			for(var i=0; i<najdenaZivila.length; i++){
-			htmlTabela+=
-
-				"<tr><td style=\"position:relative;\">" +
-					"<div class=\"row\">" +
-						"<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">" +
-							"<span style=\"position:absolute; left:15px; top:8px;\">"+najdenaZivila[i].ime+"<span style=\"position:absolute; margin-left:5px; \" class=\"info glyphicon glyphicon-info-sign\"> </span></span>"+
-							"<button type=\"submit\" class=\"btn btn-primary btn-sm\" style=\"float:right;margin-right:15px;\">Dodaj</button>"+
-							"<span style=\"float:right;margin-right:15px;margin-top:5px;\">g</span>"+
-							"<input class=\"input-small\" style=\"float:right; width:80px;margin-right:5px;\" name=\"beljak_max\" type=\"text\">"+
-						"</div>"+
-					"</div>"	+												           		
-					"<div class=\"row podrobnosti\" style=\"margin-top:15px;display:none;\">"+
-													           		
-					"</div>"+
-				"</td></tr>"
-			}
-		}
-		
-		$("#vrsticeTabeleIskanihZivil").html(htmlTabela);
-	});
-		
-}
-
-
-
 //  {TIP ŽIVILA  IME ŽIVILA  ENERGIJA (kcal)  MAŠČOBE SKUPAJ  HORESTEROL  OGL. HIDRATI  BELJAKOVINE}
 
 function pripravaTabele(){
@@ -327,3 +234,203 @@ function posredujPodatkeZaGraf5(imeZivila){
     return podatki;
 }
 
+function gumbIskanje(){
+	$("#gumb-iskanje").click(function() {
+
+		var tip = $("#tipZivila").val();
+		var ime = $("#imeZivila").val();
+
+		console.log("tip je: "+tip);
+
+		var beljakovine1 = $("#beljakovine1").val();
+		var beljakovine2 = $("#beljakovine2").val();
+		var mascobe1 = $("#mascobe1").val();
+		var mascobe2 = $("#mascobe2").val();
+		var oglHidrati1 = $("#oglHidrati1").val();
+		var oglHidrati2 = $("#oglHidrati2").val();
+
+		var napaka1=true;
+		var napaka2=true;
+		var napaka3=true;
+
+		if( ($.isNumeric(beljakovine1)) && ($.isNumeric(beljakovine2) && beljakovine1<=beljakovine2) || (beljakovine1=="" && beljakovine2=="")){
+			napaka1=false;
+			$("#beljakovine1").parent().attr({
+				"class" : "input-group"
+			});
+		}else{
+			napaka1=true;
+			$("#beljakovine1").parent().attr({
+				"class" : "input-group has-error"
+			});
+		}
+		if(($.isNumeric(mascobe1)) && ($.isNumeric(mascobe2) && mascobe1<=mascobe2) || (mascobe1=="" && mascobe2=="")){
+			napaka2=false;
+			$("#mascobe1").parent().attr({
+				"class" : "input-group"
+			});
+		}else{
+			napaka2=true;
+			$("#mascobe1").parent().attr({
+				"class" : "input-group has-error"
+			});
+		}
+		if(($.isNumeric(oglHidrati1)) && ($.isNumeric(oglHidrati2) && oglHidrati1<=oglHidrati2) || (oglHidrati1=="" && oglHidrati2=="")){
+			napaka3=false;
+			$("#oglHidrati1").parent().attr({
+				"class" : "input-group"
+			});
+		}else{
+			napaka3=true;
+			$("#oglHidrati1").parent().attr({
+				"class" : "input-group has-error"
+			});
+		}
+		if(napaka1 || napaka2 || napaka3){
+			return;
+		}
+		var najdenaZivila = iskanjeZivil(tip,ime,[beljakovine1,beljakovine2],[mascobe1,mascobe2],[oglHidrati1,oglHidrati2]);
+
+		/* 
+<td style="position:relative;">
+			<span style="position:absolute; left:5px; top:15px;">Izdelek 1</span>
+								<button type="submit" class="btn btn-primary btn-sm" style="float:right;margin-right:15px;">Dodaj</button> 
+						        <span style="float:right;margin-right:15px;margin-top:5px;">g</span>
+																              <input class="input-small" style="float:right; width:80px;margin-right:5px;" name="beljak_max" value="" type="text">
+															              </td>
+		*/
+		var htmlTabela="";
+
+		if(najdenaZivila.length==0){
+			htmlTabela+="<tr><td style=\"position:relative; text-align:center;\">" + "Ni zadetkov!" + "</td></tr>";
+		}else{
+			for(var i=0; i<najdenaZivila.length; i++){
+			htmlTabela+=
+
+				"<tr><td style=\"position:relative;\">" +
+					"<div class=\"row\">" +
+						"<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">" +
+							"<span class=\"imeZivila\"style=\"position:absolute; left:15px; top:8px;\">"+najdenaZivila[i].ime+"<span style=\"position:absolute; margin-left:5px; \" class=\"info glyphicon glyphicon-info-sign\"> </span></span>"+
+							"<button type=\"submit\" class=\"gumb-dodaj-zivilo btn btn-primary btn-sm\" style=\"float:right;margin-right:15px;\">Dodaj</button>"+
+							"<span style=\"float:right;margin-right:15px;margin-top:5px;\">g</span>"+
+							"<input class=\"input-small\" style=\"float:right; width:80px;margin-right:5px;\" name=\"beljak_max\" type=\"text\">"+
+						"</div>"+
+					"</div>"	+												           		
+					"<div class=\"row podrobnosti\" style=\"margin-top:15px;display:none;\">"+
+													           		
+					"</div>"+
+				"</td></tr>"
+			}
+		}
+		
+		$("#vrsticeTabeleIskanihZivil").html(htmlTabela);
+	});
+		
+}
+
+function dodajZiviloNaSeznam(){
+	$(document).on('click','.gumb-dodaj-zivilo',function(){
+		var imeZivila=$(this).parent().find(".imeZivila").text();
+		//imeZivila=imeZivila.substring(0,imeZivila.length-1);
+		var kolicina = $(this).parent().find("input").val();
+		/*console.log("Dodaj Zivilo na Seznam - ime zivila: '"+imeZivila+"'");
+		var zivilo = pridobiObjektZivila(imeZivila.substring(0,imeZivila.length-1));*/
+		if(kolicina>0){
+			var vrstica = 
+				"<tr><td style=\"position:relative;\">" +
+				"<span class='ziviloIme'>"+imeZivila +"</span>"+
+				" ("+ 
+				"<span class='ziviloKolicina'>"+kolicina+"</span>"+
+				"g)"+
+				"<span style=\"position:absolute; right:10px; top:25%;display:block;\" class=\"minus-odstrani-zivilo glyphicon glyphicon-minus\"></span>" +
+				"</td></tr>";
+
+			$("#seznamIzbranihZivil").append(vrstica);
+			izracunajNovoStanje(pridobiObjektZivila(imeZivila),kolicina,"dodaj");
+			
+			var energija = parseFloat($("#kolicinaEnergije-vrednost").text());
+			var dnevniVnos = $("#priporocenVnos").text();
+			var barva="";
+			switch(true){
+				case (energija<=dnevniVnos):
+					barva="success";
+					break;
+				case (energija >dnevniVnos):
+					barva="danger";
+					break;
+			}
+			$("#dnevni-vnos-status").attr({"class" : barva});
+
+		}
+		
+	});
+}
+
+function odstraniZiviloIzSeznama(){
+	$(document).on('click','.minus-odstrani-zivilo',function(){
+
+		$(this).parent().parent().css({"display" : "none"});
+		var imeZivila = $(this).parent().find(".ziviloIme").text();
+		
+		var kolicina= $(this).parent().find(".ziviloKolicina").text();
+
+		console.log("imeZivila: '"+imeZivila+"'"+" kolicina '"+kolicina+"'");
+		izracunajNovoStanje(pridobiObjektZivila(imeZivila), kolicina, "odstrani");
+
+		var energija = parseFloat($("#kolicinaEnergije-vrednost").text());
+		var dnevniVnos = $("#priporocenVnos").text();
+		var barva="";
+		switch(true){
+				case (energija<=dnevniVnos):
+					barva="success";
+					break;
+				case (energija >dnevniVnos):
+					barva="danger";
+					break;
+		}
+		$("#dnevni-vnos-status").attr({"class" : barva});
+	});
+}
+
+function izracunajNovoStanje(zivilo,kolicina,akcija){
+  var stevilo=23.439;
+
+  console.log("Stevilo je: "+izpisNaDolocenoSteviloDecimalnihMest(stevilo,2) +"    " + izpisNaDolocenoSteviloDecimalnihMest(stevilo,3) );
+  var energija = parseFloat($("#kolicinaEnergije-vrednost").text());
+  var mascobe =  parseFloat($("#kolicinaMascob-vrednost").text());
+  var holesterol = parseFloat($("#kolicinaHolesterola-vrednost").text());
+  var oglHidrati =  parseFloat($("#kolicinaOglHidratov-vrednost").text());
+  var beljakovine =  parseFloat($("#kolicinaBeljakovin-vrednost").text());
+  var stEnot= kolicina/100;
+
+  if(akcija=="odstrani"){
+    $("#kolicinaEnergije-vrednost").text( Math.abs((energija - zivilo.energija*stEnot).toFixed(0))   );
+    $("#kolicinaMascob-vrednost").text( Math.abs((mascobe - zivilo.mascobe*stEnot).toFixed(2)) );
+    $("#kolicinaHolesterola-vrednost").text( Math.abs((holesterol - zivilo.horesterol*stEnot).toFixed(2)) );
+    $("#kolicinaOglHidratov-vrednost").text( Math.abs((oglHidrati - zivilo.oglHidrati*stEnot).toFixed(2)) );
+    $("#kolicinaBeljakovin-vrednost").text( Math.abs((beljakovine - zivilo.beljakovine*stEnot).toFixed(2)) );
+  }
+  if(akcija=="dodaj"){
+    $("#kolicinaEnergije-vrednost").text( Math.abs((energija + zivilo.energija*stEnot).toFixed(0)) );
+    $("#kolicinaMascob-vrednost").text( Math.abs((mascobe +zivilo.mascobe*stEnot).toFixed(2)) );
+    $("#kolicinaHolesterola-vrednost").text( Math.abs((holesterol + zivilo.horesterol*stEnot).toFixed(2)) );
+    $("#kolicinaOglHidratov-vrednost").text( Math.abs((oglHidrati + zivilo.oglHidrati*stEnot).toFixed(2)) );
+    $("#kolicinaBeljakovin-vrednost").text( Math.abs((beljakovine + zivilo.beljakovine*stEnot).toFixed(2)) );
+  }
+  
+}
+
+function izpisNaDolocenoSteviloDecimalnihMest(num,stMest){
+
+num = num.toString();
+num = num.slice(0, (num.indexOf("."))+(stMest+1));
+Number(num); 
+return num;
+}
+
+// Mifflinova enačba
+
+function izracunDnevnegaVnosa(teza, visina, starost) { 			
+	var dnevniVnos = teza*10 + visina*6.25 - starost*5 + 5;
+	return dnevniVnos;			
+}

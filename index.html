@@ -471,9 +471,9 @@
                         <!-- FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK --> 
                         <div id="pripravaObroka" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
                            <div class="panel-heading">
-                              <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-up"></span>
+                              <span ><b>Priprava obroka</b></span> <span style="position:absolute; right:10px; top:25%;display:block;" class="okno glyphicon glyphicon-menu-down"></span>
                            </div>
-                           <div class="panel-body">
+                           <div id="funkcionalnost4" class="panel-body" style="display:none;">
                               <div class="row" >
                                  <div id="iskalnik" class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                                     <table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
@@ -563,29 +563,29 @@
                                           <tr style="background-color: rgba(37, 156, 236,0.5);">
                                              <th colspan="2" style="text-align:center; ">Hranilne vrednosti obroka</th>
                                           </tr>
-                                          <tr>
+                                          <tr >
                                              <td style="border-bottom: 3px solid #aaa;">Priporočen dnevni vnos kalorij</td>
-                                             <td style="border-bottom: 3px solid #aaa;">2000 kcal </td>
+                                             <td  style="border-bottom: 3px solid #aaa;"><span id="priporocenVnos"></span> <span> kcal</span></td>
                                           </tr>
-                                          <tr>
+                                          <tr id="dnevni-vnos-status">
                                              <td>Energija:</td>
-                                             <td>0 kcal </td>
+                                             <td><span id="kolicinaEnergije-vrednost">0</span> kcal </td>
                                           </tr>
                                           <tr>
                                              <td>Maščobe skupaj:</td>
-                                             <td>0 g </td>
+                                             <td><span id="kolicinaMascob-vrednost">0</span> g </td>
                                           </tr>
                                           <tr>
-                                             <td>Horesterol:</td>
-                                             <td>0 g </td>
+                                             <td>Holesterol:</td>
+                                             <td><span id="kolicinaHolesterola-vrednost">0</span> mg </td>
                                           </tr>
                                           <tr>
                                              <td>Oglikovi hidrati:</td>
-                                             <td>0 g </td>
+                                             <td><span id="kolicinaOglHidratov-vrednost">0</span> g </td>
                                           </tr>
                                           <tr>
                                              <td>Beljakovine:</td>
-                                             <td>0 g </td>
+                                             <td><span id="kolicinaBeljakovin-vrednost">0</span> g </td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -609,12 +609,9 @@
                                  </div>
                                  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                                     <table class="table table-bordered table-hover" align="center" style="background-color: rgba(157, 157, 157,0.05); padding:5px;">
-                                       <tbody>
+                                       <tbody id="seznamIzbranihZivil">
                                           <tr style="background-color: rgba(37, 156, 236,0.5);">
                                              <th colspan="2">Seznam izbranih živil</th>
-                                          </tr>
-                                          <tr>
-                                             <td style="position:relative;">Izdelek 1 <span style="position:absolute; right:10px; top:25%;display:block;" class="glyphicon glyphicon-minus"></span></td>
                                           </tr>
                                        </tbody>
                                     </table>

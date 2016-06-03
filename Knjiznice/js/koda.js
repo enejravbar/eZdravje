@@ -195,7 +195,7 @@ function gumbOsvezi(){
     if(trenutniEhrUporabnika!=-1){
       izpisPodatkovEHR(trenutniEhrUporabnika);
     }else{
-      //console.log("Osveževanje je onemogočeno!");
+
     }
     
   });
@@ -505,9 +505,10 @@ function izpisPodatkovEHR(ehrId){
       vrsticeHTML+= "<td>"+ uporabnik.telesnaTemperatura[i].temperature+"</td>" + kon;
     }
     element.innerHTML=vrsticeHTML;  //
+    
+
     var barva="";
 
-    if(kontrola==1){
       console.log("Kontrola je: '"+kontrola+"'");
       $("#vrsticaSKrvnimiTlaki").css({"display" : ""});
 
@@ -555,10 +556,7 @@ function izpisPodatkovEHR(ehrId){
 
         $("#diastolicniKrvniTlak").attr({"aria-valuenow" : tlak2+"","class" : barva});
       }
-  }else{
-    console.log("Kontrola je: '"+kontrola+"'");
-    
-  }
+  
 
     // poskrbimo, da se poizvedovanje po podatkih izvede samo enkrat
     var tabela1=posredujPodatkeZaGraf1(ehrId);
@@ -577,6 +575,14 @@ function izpisPodatkovEHR(ehrId){
       drawChart3(tabela3);
       drawChart4(tabela4);
     });
+
+
+    // izracun priporocenega dnevnega vnosa
+    if((uporabnik.telesnaTeza).length!=0 && (uporabnik.telesnaVisina).length!=0 ){
+      var priporocenDnevniVnos= izracunDnevnegaVnosa(uporabnik.telesnaTeza[0].weight, uporabnik.telesnaVisina[0].height, izracunajStarost(uporabnik.datumRojstva));
+      $("#priporocenVnos").text(priporocenDnevniVnos);
+    }
+    $("#funkcionalnost4").css({"display" : ""});
 
   }
 
