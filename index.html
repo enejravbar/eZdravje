@@ -16,9 +16,9 @@
       <script src="Knjiznice/js/koda.js"></script>
       <script src="Knjiznice/js/pripravaObroka.js"></script>
       <style>
-      	.progress{
-        	height:30px;
-    	}
+         .progress{
+         height:30px;
+         }
       </style>
    </head>
    <body>
@@ -82,16 +82,16 @@
                         <p><span class="halflings halflings-direction-right"> <a class="link" href="#row-vnosPodatkov">Vnos v EHR</a></span></p>
                      </div>
                      <div class="dropdown mojEHR">
-                        <p><a class="link"  href="#row-izpisPodatkov">Izpis podatkov EHR </a></p>   
+                        <p><a class="link"  href="#row-izpisPodatkov">Izpis podatkov EHR </a></p>
                      </div>
-                     <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">   
+                     <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">
                         <p style="color:white;"><b>PRIPOMOČKI</b></p>
                      </div>
-                     <div class="dropdown pripomocki">  
+                     <div class="dropdown pripomocki">
                         <p><a class="link"  href="#row-ITMKalkulator">ITM kalkulator</a></p>
                      </div>
                      <div class="dropdown pripomocki">
-                        <p><a class="link" href="#row-pripravaObroka">Priprava obroka</a></p> 
+                        <p><a class="link" href="#row-pripravaObroka">Priprava obroka</a></p>
                      </div>
                   </div>
                </div>
@@ -208,25 +208,21 @@
                                     <input id="vnosVEHR-masa" type="masa" class="form-control" placeholder="80">
                                     <span class="input-group-addon">kg</span>
                                  </div>
-
                                  <label for="temperatura" class="control-label" >Telesna temperatura:</label>
                                  <div class="input-group">
                                     <input id="vnosVEHR-temperatura" type="temperatura" class="form-control" placeholder="36.6">
                                     <span class="input-group-addon">&#8451</span>
                                  </div>
-
                                  <label for="sistolicni" class="control-label" >Sistolični krvni tlak:</label>
                                  <div class="input-group">
                                     <input id="vnosVEHR-sistolicni" type="sistolicni" class="form-control" placeholder="120">
                                     <span class="input-group-addon">mm[Hg]</span>
                                  </div>
-
                                  <label for="diastolicni" class="control-label" >Diastolični krvni tlak:</label>
                                  <div class="input-group">
                                     <input id="vnosVEHR-diastolicni" type="diastolicni" class="form-control" placeholder="82">
                                     <span class="input-group-addon">mm[Hg]</span>
                                  </div>
-
                                  <label for="kisik" class="control-label" >Nasičenost krvi s kisikom:</label>
                                  <div class="input-group">
                                     <input id="vnosVEHR-kisik" type="kisik" class="form-control" placeholder="98">
@@ -301,34 +297,28 @@
                                     </tr>
                                  </tbody>
                               </table>
-
                               <div id="vrsticaSKrvnimiTlaki" class="row" style="">
-                              	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-	                              	<div style=" padding:15px; background-color: rgba(37, 156, 236,0.5);-webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
-	                              		<p><b>Sistolični krvni tlak<b></p> 
-	                              		 <div class="progress">
-											  <div id="sistolicniKrvniTlak" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-											  aria-valuemin="0" aria-valuemax="200" style="width:40%">
-											    
-											  </div>
-										 </div>
-									</div>
-										
-                              	</div>
-                              	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
-	                              	<div style=" padding:15px;background-color: rgba(37, 156, 236,0.5); -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
-	                              		<p><b>Diastolični krvni tlak</b></p> 
-	                              		<div class="progress">
-											  <div id="diastolicniKrvniTlak" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-											  aria-valuemin="0" aria-valuemax="150" style="width:60%">
-											   
-											  </div>
-										</div>
-									</div>
-                              	</div>
-                              	
+                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div style=" padding:15px; background-color: rgba(37, 156, 236,0.5);-webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
+                                       <p><b>Sistolični krvni tlak<b></p>
+                                       <div class="progress">
+                                          <div id="sistolicniKrvniTlak" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                             aria-valuemin="0" aria-valuemax="200" style="width:40%">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+                                    <div style=" padding:15px;background-color: rgba(37, 156, 236,0.5); -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;">
+                                       <p><b>Diastolični krvni tlak</b></p>
+                                       <div class="progress">
+                                          <div id="diastolicniKrvniTlak" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                             aria-valuemin="0" aria-valuemax="150" style="width:60%">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
                               </div>
-
                               <div id="prostorZaGrafe" class="row">
                                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                     <div class="grid">
