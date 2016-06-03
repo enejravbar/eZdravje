@@ -1,83 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {padding-top: 70px;}
-  </style>
-  <script src="js/jquery-2.2.3.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/koda.js"></script>
-  <script type="text/javascript" src="js/loader.js"></script>
-
-</head>
-<body>
-
-  <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
-          <span class="sr-only">Prikaži menu</span>
-          <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-        </button>
-        <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html">{ime vaše aplikacije}</a>
-        <!-- KONEC: Ime vaše aplikacije -->
-      </div>
-      <div class="collapse navbar-collapse" id="menujska-vrstica">
-        <ul class="nav navbar-nav">
-          <li><a href="opis.html">Opis ideje</a></li>
-          <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+   <head>
+      <meta charset="utf-8">
+      <!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <title>Portal e-Zdravje</title>
+      <link rel="stylesheet" href="Knjiznice/css/oblikovanje.css">
+      <link rel="stylesheet" href="Knjiznice/css/bootstrap-3.3.4.css">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <script src="Knjiznice/js/jquery-2.2.3.min.js"></script>
+      <script src="Knjiznice/js/bootstrap.min.js"></script>
+      <script src="Knjiznice/js/d3.min.js" charset="utf-8"></script>
+      <script type="text/javascript" src="Knjiznice/js/loader.js"></script>
+      <script type="text/javascript" src="Knjiznice/js/jsapi.js"></script>
+      <script src="Podatki/podatkovnaBaza.js"></script>
+      <script src="Knjiznice/js/koda.js"></script>
+      <script src="Knjiznice/js/pripravaObroka.js"></script>
+      <style>
+         .progress{
+         height:30px;
+         }
+      </style>
+   </head>
+   <body>
+      <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
+      <nav id="zgornji-meni" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
+               <span class="sr-only">Prikaži menu</span>
+               <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+               </button>
+               <!-- ZAČETEK: Ime vaše aplikacije -->
+               <a class="navbar-brand" href="index.html"><span style="color:white; font-size:24px;"><b>Portal e-Zdravje</b></span></a>
+               <!-- KONEC: Ime vaše aplikacije -->
+            </div>
+            <div class="collapse navbar-collapse" id="menujska-vrstica">
+               <ul  class="nav navbar-nav" >
+                  <li><a href="opis.html"><span style="font-size:15px;">Opis ideje</span> </a></li>
+                  <li><a href="nacrt.html"><span style="font-size:15px;">Načrt informacijske rešitve </span></a></li>
+                  <li >
+                     <a href="#">
+                        <span id="gumbGenerirajPodatke" style="position:relative; font-size:15px;">
+                           Generiranje podatkov <span id="statusGeneriranja" class="glyphicon glyphicon-ok" style="display:none"></span>
+                           <div id="vrteciStatus" style="display:none;">
+                              <div class="windows8">
+                                 <div class="wBall" id="wBall_1">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_2">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_3">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_4">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                                 <div class="wBall" id="wBall_5">
+                                    <div class="wInnerBall"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
   <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
 
   <!-- ZAČETEK: Opis delovanja aplikacije -->
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Opis ideje, ki jo aplikacija podpira</h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="text-align:left;">
             <!-- ZAČETEK: Opis ideje, ki jo aplikacija podpira -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno dodati <strong>osnovni opis ideje rešitve</strong> (kakšen je osnovni SCENARIJ UPORABE, KDO je ciljna publika, za kakšen NAMEN se aplikacija uporablja).</p><p class="text-muted">Opis naj ne bo daljši od 200 besed.</p>
+	            <p><strong>Portal e-Zdravje</strong> je spletna aplikacija zasnovana za vse vrste naprav. Sestavljena je iz več komponent.</p>
+				<p>Te so:</p>
+				<ul style="list-style-type: circle;">
+				<li>registracija novega uporabnika</li>
+				<li>vnos vitalnih znakov v EHR</li>
+				<li>izpis EHR-ja</li>
+				<li>računanje indeksa telesne mase</li>
+				<li>priprava seznama živil, iz katerih bodo sestavljeni posamezni obroki</li>
+				</ul>
+				<p><strong>CILJNA PUBLIKA</strong></p>
+				<p>Aplikacija je namenjena pacientom, kot tudi navadnim uporabnikom, ki želijo biti bolje osve&scaron;čeni o svojem zdravju, in poleg tega uporabljati tudi nekatere pripomočke, ki bi lahko potencialno pomagali pri izbolj&scaron;anju njihovega zdravstvenega stanja.</p>
+				<p><strong>UPORABA</strong></p>
+				<p>Aplikacija je tesno povezana z podatki iz EHR-ja, zato je priporočeno, da se pred uporabo najprej prijavite. Večina zgoraj na&scaron;tetih funkcionalnosti je namreč od njih tesno odvisna.&nbsp;Po prijavi se bodo iz EhrScapove podatkovne baze prenesli vsi potrebni podatki. </p>
+				<p>Funkcionalnost za izpis EHR-ja bo poskrbela za vizualizacijo uporabnikovih zdravstvenih podatkov.</p>
+				<p>Na podlagi zadnjih podatkov bo avtomatsko izračunan indeks telesne mase in uvr&scaron;čen v ustrezno kategorijo.</p>
+				<p>Podobno velja tudi za zadnjo funkcionalnost, ki&nbsp;na podlagi zadnjih podatkov o telesni masi in vi&scaron;ini izračuna priporočen dnevni vnos kalorij (Mifflinova enačba).</p>
             <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
           </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Uporabljeni zunanji viri podatkov</h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="text-align:left;">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je navesti zunanji vir podatkov (URL naslov), na kakšen način ste ga uporabili (neposredni API klic, uvožena statična datoteka ipd.) in kaj je bil namen uporabe (kako se vključuje v osnovno idejo aplikacije).</p>
+            <p>Kot zunanji vir mi je služila sledeča spletna stran&nbsp;<a href="http://www.cenim.se/zivila.php" target="_blank">http://www.cenim.se/zivila.php</a>. Nanji sem pridobil okoli 650 živil + pripadajočih podatkov o deležu posamezne hranilne snovi. Ta zunanji vir je bil ključen za uspe&scaron;no implementacijo&nbsp;funkcionalnosti, katera omogoča sestavo&nbsp;seznama živil, iz katerih bodo narejeni posamezni&nbsp;obroki.&nbsp;</p>
+			<p>Spletna stran ne ponuja nobenih API-jev, zato sem moral za pridobitev podatkov sprogramirati&nbsp;svoj HTMLParser. Napisal sem ga v jeziku Java. Kodo si lahko ogledate&nbsp;<a href="https://github.com/enejravbar/eZdravje/blob/gh-pages/HTML%20Parser/HTMLParser.java" target="_blank">tukaj</a>.</p>
+			<p>Deluje pa na sledeči način. V tabelo sem zapisal url-je za vsako kategorijo živil (npr. Mleko in mlečni izdelki,...). Vzpostavljal sem povezave preko GET&nbsp;zahtevka&nbsp;(na port 80) in tako pridobival HTML&nbsp;String-e. Te sem z dodatnimi funkcijami razbil in iz njih izvlekel uporabne podatke. Za vsak izdelek je bil potreben &scaron;e en GET zahtevek, saj so se podatki o hranilnih vrednosti nahajali na ločenih url naslovih. Naposled sem podatke, ki sem jih zbiral v 2D tabeli&nbsp;zapisal &scaron;e na disk.&nbsp;</p>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Master/detail načrtovalski vzorec</h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="position:relative; text-align:left;">
             <!-- ZAČETEK: Master/detail načrtovalski vzorec -->
-            <p><strong>TO-DO</strong>: Na tem mestu morate navesti uporabljen master/detail načrtovalski vzorec in na kakšen način ga nameravate uporabiti.</p>
+            <p>Na spodnji zaslonski sliki je prikazan master/detail načrtovalski vzorec, ki sem ga uporabil pri implementaciji&nbsp;zadnje funkcionalnosti, in je namenjen podrobnej&scaron;emu&nbsp;prikazu podatkov o hranilnih vrednostih posameznega živila.</p>
+            <img src="Slike/master-detail.jpg" class="img-responsive" >
+            
             <!-- KONEC: Master/detail načrtovalski vzorec -->
           </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Uporabljena tehnika za vizualizacijo podatkov</h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="text-align:left;">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno navesti uporabljeno tehniko vizualizacije podatkov (za pomoč lahko uporabite primer iz <a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3.js galerije</a>) in zakaj je bila ta tehnika izbrana.</p>
+
+			<p>Pri vizualizaciji podatkov sem uporabljal "Google Charts". Bolj natančno uporabil sem dva tipa grafov "Pie Chart" in "Area Chart". Prvega sem uporabil pri master-detail načrtovalskem vzorcu drugega pa pri vizualizaciji podatkov iz EHR-ja. Za "Google Charts" sem se odločil zaradi samega izgleda. Poleg tega z njimi ni nobenega problema ohranjati prilagodljivost spletne strani glede na velikost ekrana.&nbsp;</p>
+			<div>	
+				<img src="Slike/Vizualizacija1.png" class="img-responsive" style="display:inline-block;margin-right:5px;">
+				<img src="Slike/Vizualizacija2.png" class="img-responsive" style="display:inline-block;">
+			</div>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>

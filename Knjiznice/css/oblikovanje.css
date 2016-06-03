@@ -116,7 +116,7 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     min-height: 0px;
-    max-height: 360px;
+    max-height: 450px;
 }
 #glavno-desno {} #pripravaObroka {
     padding: 0px;

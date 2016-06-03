@@ -2,8 +2,8 @@
 var baza = 
 "Mlečni in jajčni izdelki	Maslo, soljeno	717 kcal	81.11 g	215 mg	0.06 g	0.85 g	"+
 "Mlečni in jajčni izdelki	Sir, blue	353 kcal	28.74 g	75 mg	2.34 g	21.4 g	"+
-"Mlečni in jajčni izdelki	Sir, v kocki (brick)	371 kcal	29.68 g	94 mg	2.79 g	23.24 g	"+
-"Mlečni in jajčni izdelki	Sir, camembert	300 kcal	24.26 g	72 mg	0.46 g	19.8 g	"+
+"Mlečni in jajčni izdelki	Sir, v kocki (brick)	371 kcal	29.68 g	94 mg	2.79 g	23.24 g	"
++"Mlečni in jajčni izdelki	Sir, camembert	300 kcal	24.26 g	72 mg	0.46 g	19.8 g	"+
 "Mlečni in jajčni izdelki	Sir, caraway	376 kcal	29.2 g	93 mg	3.06 g	25.18 g	"+
 "Mlečni in jajčni izdelki	Sir, cheddar	403 kcal	33.14 g	105 mg	1.28 g	24.9 g	"+
 "Mlečni in jajčni izdelki	Sir, cheshire	387 kcal	30.6 g	103 mg	4.78 g	23.37 g	"+

@@ -94,6 +94,14 @@ function gumbGenerirajPodatke() {
         $("#statusGeneriranja").css({
             "display": ""
         });
+        var obvestilo=
+                    "<br><br>EhrID - Calvin Harris \"" + tabelaObstojecihUporabnikov[0]+"\"<br>"+
+                    "EhrID - Ana Klašnja \"" + tabelaObstojecihUporabnikov[1]+"\"<br>"+
+                    "EhrID - Julija Tavčar \"" + tabelaObstojecihUporabnikov[2]+"\"";
+
+        $("#obvestiloGenerator-tekst").parent().css({"display" : ""});
+        $("#obvestiloGenerator-tekst").html(obvestilo);
+        
 
         timerGenerator = setTimeout(function() {
             $("#statusGeneriranja").hide('slow');
