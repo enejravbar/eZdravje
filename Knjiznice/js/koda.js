@@ -12,9 +12,9 @@ var timer1,timer2,timer3,timer4;
 var timerGenerator;
 
 var tabelaObstojecihUporabnikov=[
-    "f6695773-7105-4101-bb06-ad3675ddf497",   // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
-    "0260a980-62e7-4023-aac3-ef8f7c9ae2e3",
-    "97b35e6d-a1f6-4504-bef8-bc39ad67eaa5"
+    "ea84616d-df8b-436f-94f6-17290c7aa0af",   // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
+    "77f1055e-c53e-4bf2-b1f1-767ff8c93576",
+    "ae361b03-a64f-433c-b0fc-edddc56d29f8"
   ];
 /**
  * Prijava v sistem z privzetim uporabnikom za predmet OIS in pridobitev
@@ -382,7 +382,7 @@ function izberiUporabnika(){
           $("#prijava-obvestilo").html("Uporabnik je bil uspešno prijavljen.");
 
           timer1 = setTimeout(function(){ $("#prijava-obvestilo-okvir").hide('slow');}, 3500);
-
+          $("#vrsticaSKrvnimiTlaki").css({"display" : "none"});
           izpisPodatkovEHR( prebraniEhr );
           izracunajITMPriPrijavi(prebraniEhr);
         }else{
@@ -446,7 +446,10 @@ function izpisPodatkovEHR(ehrId){
   var uporabnik = preberiMeritve(ehrId);
   console.log(uporabnik);
 
+  var kontrola=0;
+
   if(jeObstojeciUporabnik(ehrId)){
+    kontrola=1;
     if(ehrId==tabelaObstojecihUporabnikov[0]){  // Calvin Harris
       $("#prostorZaGrafe").css({"display" : ""});
       $("#osebna-slika").attr({
@@ -467,6 +470,7 @@ function izpisPodatkovEHR(ehrId){
     }
 
   }else{
+      kontrola=0;
       $("#osebna-slika").attr({
         "src" : "Slike/No-Image.jpg"
       });
@@ -482,7 +486,10 @@ function izpisPodatkovEHR(ehrId){
   if(uporabnik.telesnaTeza.length==0){
     $("#niZapisov").css({"display" : ""});
     $("#prostorZaGrafe").css({"display" : "none"});  // skrij prostor za grafe, če ni podatkov
-    element.innerHTML="";
+    element.innerHTML="<tr>"+
+                          "<td id=\"niZapisov\" colspan=\"4\" style=\"text-align:center;\">V EHR trenutno ni nobenih zapisov.</td>"+
+                      "</tr>";
+                                    
   }else{
     $("#niZapisov").css({"display" : "none"});
     $("#prostorZaGrafe").css({"display" : ""});
@@ -499,71 +506,59 @@ function izpisPodatkovEHR(ehrId){
     }
     element.innerHTML=vrsticeHTML;  //
     var barva="";
-    if((uporabnik.pritisk).length!=0){
-      var tlak1=(uporabnik.pritisk)[0].systolic;
-      console.log("Systolic je: "+tlak1);
-      $("#sistolicniKrvniTlak").text(tlak1+" mm[Hg]");
-      
-      switch(true){
-        case (tlak1<120):
-          barva="progress-bar progress-bar-warning";
-          break;
-        
-        case (tlak1>=120 && tlak1<140):
-          barva="progress-bar progress-bar-success";
-          break;
 
-        case (tlak1>=140):
-          barva="progress-bar progress-bar-danger";
-          break;
+    if(kontrola==1){
+      console.log("Kontrola je: '"+kontrola+"'");
+      $("#vrsticaSKrvnimiTlaki").css({"display" : ""});
+
+      if((uporabnik.pritisk).length!=0){
+        var tlak1=(uporabnik.pritisk)[0].systolic;
+        console.log("Systolic je: "+tlak1);
+        $("#sistolicniKrvniTlak").text(tlak1+" mm[Hg]");
+        
+        switch(true){
+          case (tlak1<120):
+            barva="progress-bar progress-bar-warning";
+            break;
+          
+          case (tlak1>=120 && tlak1<140):
+            barva="progress-bar progress-bar-success";
+            break;
+
+          case (tlak1>=140):
+            barva="progress-bar progress-bar-danger";
+            break;
+        }
+
+        $("#sistolicniKrvniTlak").attr({"aria-valuenow" : tlak1+"", "class" : barva});
+
       }
 
-      $("#sistolicniKrvniTlak").attr({"aria-valuenow" : tlak1+"", "class" : barva});
+      if((uporabnik.pritisk).length!=0){
+        var tlak2=(uporabnik.pritisk)[0].diastolic;
+        console.log("diatolic je: "+tlak2);
+        $("#diastolicniKrvniTlak").text(tlak2+" mm[Hg]");
 
-    }
+        switch(true){
+          case (tlak2<80):
+            barva="progress-bar progress-bar-warning";
+            break;
+          
+          case (tlak2>=80 && tlak2<90):
+            barva="progress-bar progress-bar-success";
+            break;
 
-    if((uporabnik.pritisk).length!=0){
-      var tlak2=(uporabnik.pritisk)[0].diastolic;
-      console.log("diatolic je: "+tlak2);
-      $("#diastolicniKrvniTlak").text(tlak2+" mm[Hg]");
+          case (tlak2>=90):
+            barva="progress-bar progress-bar-danger";
+            break;
+        }
 
-      switch(true){
-        case (tlak2<80):
-          barva="progress-bar progress-bar-warning";
-          break;
-        
-        case (tlak2>=80 && tlak2<90):
-          barva="progress-bar progress-bar-success";
-          break;
-
-        case (tlak2>=90):
-          barva="progress-bar progress-bar-danger";
-          break;
+        $("#diastolicniKrvniTlak").attr({"aria-valuenow" : tlak2+"","class" : barva});
       }
-
-      $("#diastolicniKrvniTlak").attr({"aria-valuenow" : tlak2+"","class" : barva});
-    }
-
-    if((uporabnik.kisikVKrvi).length!=0){
-      var kisik=(uporabnik.kisikVKrvi)[0].spO2;
-      console.log("kisik je: "+kisik);
-      $("#kisikVKrvi").text(kisik+" %");
-
-      switch(true){
-        case (kisik<90):
-          barva="progress-bar progress-bar-danger";
-          break;
-        
-        case (kisik>=90 && kisik<95):
-          barva="progress-bar progress-bar-warning";
-          break;
-
-        case (kisik>=95):
-          barva="progress-bar progress-bar-success";
-          break;
-      }
-      $("#kisikVKrvi").attr({"aria-valuenow" : kisik +"" ,"class" : barva});
-    }
+  }else{
+    console.log("Kontrola je: '"+kontrola+"'");
+    
+  }
 
     // poskrbimo, da se poizvedovanje po podatkih izvede samo enkrat
     var tabela1=posredujPodatkeZaGraf1(ehrId);
@@ -849,8 +844,7 @@ function vnosPodatkovVEHR(){
 
 function registracijaUporabnika(){
 
-   $("#gumb-registriraj").click(function(){
-
+    $("#gumb-registriraj").click(function(){
       clearTimeout(timer3);
       odstraniElement("registracija-obvestilo-okvir");
 
@@ -886,10 +880,8 @@ function registracijaUporabnika(){
       }
 
       var datumRojstva= zapisiDatumRojstvaVFormatu(datum, ura);
-      //console.log("datum rojstva: " + datumRojstva);
       
-
-     $.ajaxSetup({
+      $.ajaxSetup({
             headers: {"Ehr-Session": sessionId}
         });
         $.ajax({
@@ -911,35 +903,85 @@ function registracijaUporabnika(){
                     data: JSON.stringify(partyData),
                     success: function (party) {
                         if (party.action == 'CREATE') {
-                            //console.log("Uspešno kreiran zapis " +ehrId);
+                          
+                          $("#vnosVEHR-ehrId").val(ehrId);
+                          $("#preberiPredlogoBolnika").val("");
+                          nadzorujDropdownObstojecihUporabnikovNaZačetku();
+                          $("#prijava-vpisEHR").val(ehrId);
 
-                            
-                            $("#vnosVEHR-ehrId").val(ehrId);
-                            $("#preberiPredlogoBolnika").val("");
-                            nadzorujDropdownObstojecihUporabnikovNaZačetku();
-                            $("#prijava-vpisEHR").val(ehrId);
+                          $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                          $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
+                          $("#registracija-obvestilo").html("Uporabnik je bil uspešno registriran!" + " <br><strong>EhrID = "+ehrId+"</strong>");
+                          timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
+                          return ehrId;
 
-                            $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
-                            $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
-                            $("#registracija-obvestilo").html("Uporabnik je bil uspešno registriran!" + " <br><strong>EhrID = "+ehrId+"</strong>");
-                            timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
-                            return ehrId;
                         }
                     },
                     error: function(err) {
-                        $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
-                        $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
-                        $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Uporabnik ni bil uspešno registriran.");
-                        timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
+                      $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                      $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+                      $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Uporabnik ni bil uspešno registriran.");
+                      timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
 
-                        return -1;
+                      return -1;
                     }
                 });
             }
         });
 
-    });  
+    });
 }
+      /*$.ajaxSetup({
+            headers: {"Ehr-Session": sessionId}
+      });
+      $.ajax({
+          url: baseUrl + "/ehr",
+          type: 'POST',
+          async: false,
+          success: function (data) {
+              var ehrId = data.ehrId;
+              var partyData = {
+                  firstNames: ime,
+                  lastNames: priimek,
+                  dateOfBirth: datumRojstva,
+                  partyAdditionalInfo: [{key: "ehrId", value: ehrId}]
+              };
+              
+              $.ajax({
+                  url: baseUrl + "/demographics/party",
+                  type: 'POST',
+                  contentType: 'application/json',
+                  data: JSON.stringify(partyData),
+                  success: function (party) {
+                      if (party.action == 'CREATE') {
+                          //console.log("Uspešno kreiran zapis " +ehrId);
+
+                          
+                          $("#vnosVEHR-ehrId").val(ehrId);
+                          $("#preberiPredlogoBolnika").val("");
+                          nadzorujDropdownObstojecihUporabnikovNaZačetku();
+                          $("#prijava-vpisEHR").val(ehrId);
+
+                          $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                          $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-success fade-in"});
+                          $("#registracija-obvestilo").html("Uporabnik je bil uspešno registriran!" + " <br><strong>EhrID = "+ehrId+"</strong>");
+                          timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
+                          return ehrId;
+                      }
+                  },
+                  error: function(err) {
+                      $("#registracija-obvestilo-okvir").css({"display" : "inline-block"});
+                      $("#registracija-obvestilo-okvir").attr({"class" : "alert alert-danger fade-in"});
+                      $("#registracija-obvestilo").html("<strong>NAPAKA!</strong> Uporabnik ni bil uspešno registriran.");
+                      timer3 = setTimeout(function(){ $("#registracija-obvestilo-okvir").hide('slow');}, 3500);
+
+                      return -1;
+                  }
+              });
+            }*/
+      
+    
+    
 
 
 function dodajMeritve(ehrId,datumInUra,telesnaVisina,telesnaTeza,telesnaTemperatura,sistolicniKrvniTlak,diastolicniKrvniTlak ) {

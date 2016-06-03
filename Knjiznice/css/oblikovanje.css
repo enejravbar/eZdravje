@@ -9,9 +9,7 @@
         /*width: auto !important;*/  /* Firefox will set width as auto */
 
     }
-    .progress{
-        height:30px;
-    }
+    
     .vertical_line{
     	height:150px; 
     	width:1px;
