@@ -70,28 +70,28 @@
       </nav>
       <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
       <!-- ZAČETEK: Vsebina aplikacije -->
-      <div class="container-fluid" style="width=100%">
-         <div class="row">
+      <div id="glavniKontainer" class="container-fluid" style="width:100%;" >
+         <div class="row" data-spy="scroll" data-target="#levi-meni" data-offset="0">
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="">
                <div  class="row" >
                   <div id="levi-meni" class="col-xs-3 col-sm-3 col-md-2 col-lg-2"  style="min-width:150px;">
-                     <div id="mojEHR" data-toggle="dropdown" data-target=".mojEHR">
+                     <div id="mojEHR" >
                         <p style="color:white;"><b>MOJ EHR</b></p>
                      </div>
                      <div class="dropdown mojEHR">
-                        <p><span class="halflings halflings-direction-right"> Vnos v EHR</span></p>
+                        <p><span class="halflings halflings-direction-right"> <a class="link" href="#row-vnosPodatkov">Vnos v EHR</a></span></p>
                      </div>
                      <div class="dropdown mojEHR">
-                        <p>Izpis podatkov EHR</p>
+                        <p><a class="link"  href="#row-izpisPodatkov">Izpis podatkov EHR </a></p>   
                      </div>
-                     <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">
+                     <div id="pripomocki" data-toggle="dropdown" data-target=".pripomocki">   
                         <p style="color:white;"><b>PRIPOMOČKI</b></p>
                      </div>
-                     <div class="dropdown pripomocki">
-                        <p>ITM kalkulator</p>
+                     <div class="dropdown pripomocki">  
+                        <p><a class="link"  href="#row-ITMKalkulator">ITM kalkulator</a></p>
                      </div>
                      <div class="dropdown pripomocki">
-                        <p>Priprava obroka</p>
+                        <p><a class="link" href="#row-pripravaObroka">Priprava obroka</a></p> 
                      </div>
                   </div>
                </div>
@@ -103,7 +103,7 @@
                   <!-- Vrhnja vrstica, ki vsebuje PRIJAVO in REGISTRACIJO -->
                   <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
                      <!-- PRIJAVA UPORABNIKA -->
-                     <div class="row">
+                     <div class="row" id="row-prijavaUporabnika">
                         <div id="izbira-uporabnika" class="panel panel-primary col-md-12" >
                            <div class="panel-heading">
                               <div class="row">
@@ -178,7 +178,7 @@
                <div class="row">
                   <!-- ##################### OKVIR ZA POSAMAZNE PUNKCIONALNOSTI ##################### -->
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                     <div class="row">
+                     <div id="row-vnosPodatkov" class="row">
                         <!-- FUNKCIONALNOST 1 -> VNOS PODATKOV V EHR --> 
                         <div id="vnosEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11 " >
                            <div class="panel-heading">
@@ -242,7 +242,7 @@
                         </div>
                      </div>
                      <!-- KONEC FUNKCIONALNOSTI 1 -> VNOS PODATKOV V EHR --> 
-                     <div class="row">
+                     <div id="row-izpisPodatkov" class="row" >
                         <!-- FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR --> 
                         <div id="izpisEHR" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
                            <div class="panel-heading">
@@ -367,7 +367,7 @@
                         </div>
                      </div>
                      <!-- ##################### KONEC FUNKCIONALNOST 2 -> IZPIS PODATKOV IZ EHR ##################### -->   
-                     <div class="row">
+                     <div id="row-ITMKalkulator" class="row">
                         <!-- ##################### FUNKCIONALNOST 3 -> RAČUNANJE ITM #####################--> 
                         <div id="ITM-kalkulator" class="panel panel-primary col-xs-11 col-sm-11 col-md-11" >
                            <div class="panel-heading">
@@ -467,7 +467,7 @@
                         </div>
                      </div>
                      <!-- ##################### KONEC FUNKCIONALNOST 3 -> RAČUNANJE ITM ##################### -->   
-                     <div class="row">
+                     <div id="row-pripravaObroka" class="row">
                         <!-- FUNKCIONALNOST 4 -> PRIPRAVI SI SVOJ OBROK --> 
                         <div id="pripravaObroka" class="panel panel-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" >
                            <div class="panel-heading">
