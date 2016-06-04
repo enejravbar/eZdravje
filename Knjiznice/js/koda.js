@@ -78,6 +78,7 @@ function gumbGenerirajPodatke() {
 
         clearTimeout(timerGenerator);
         odstraniElement("statusGeneriranja");
+        $("#obvestiloGenerator-tekst").parent().css({"display" : "none"});
 
         $("#vrteciStatus").css({
             "display": ""
