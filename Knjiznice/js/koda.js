@@ -12,7 +12,7 @@ var timerGenerator;
 
 var tabelaObstojecihUporabnikov = [
     "ea84616d-df8b-436f-94f6-17290c7aa0af", // c5df5629-94ab-443f-97ad-0fdc8d915aa8 pravilno
-    "77f1055e-c53e-4bf2-b1f1-767ff8c93576",
+    "dcaf9a22-b050-4751-a4e2-d164742b8d06",
     "ae361b03-a64f-433c-b0fc-edddc56d29f8"
 ];
 /**
@@ -190,7 +190,7 @@ function generirajPodatke(stPacienta) {
         }, {
             datumInUra: "2013-07-23T12:23",
             telesnaVisina: 162,
-            telesnaTeza: 71,
+            telesnaTeza: 65,
             telesnaTemperatura: 37.3,
             sistolicniKrvniTlak: 110,
             diastolicniKrvniTlak: 78,
@@ -198,7 +198,7 @@ function generirajPodatke(stPacienta) {
         }, {
             datumInUra: "2014-06-23T12:23",
             telesnaVisina: 165,
-            telesnaTeza: 70,
+            telesnaTeza: 66,
             telesnaTemperatura: 36.6,
             sistolicniKrvniTlak: 110,
             diastolicniKrvniTlak: 78,
@@ -206,7 +206,7 @@ function generirajPodatke(stPacienta) {
         }, {
             datumInUra: "2014-11-23T12:23",
             telesnaVisina: 166,
-            telesnaTeza: 77,
+            telesnaTeza: 65.3,
             telesnaTemperatura: 36.5,
             sistolicniKrvniTlak: 110,
             diastolicniKrvniTlak: 78,
@@ -214,7 +214,7 @@ function generirajPodatke(stPacienta) {
         }, {
             datumInUra: "2015-05-21T12:23",
             telesnaVisina: 169,
-            telesnaTeza: 80,
+            telesnaTeza: 67,
             telesnaTemperatura: 38.6,
             sistolicniKrvniTlak: 110,
             diastolicniKrvniTlak: 78,
@@ -222,7 +222,7 @@ function generirajPodatke(stPacienta) {
         }, {
             datumInUra: "2016-05-23T12:23",
             telesnaVisina: 172,
-            telesnaTeza: 73,
+            telesnaTeza: 64.9,
             telesnaTemperatura: 36.6,
             sistolicniKrvniTlak: 110,
             diastolicniKrvniTlak: 78,
@@ -292,7 +292,7 @@ function generirajPodatke(stPacienta) {
             break;
 
         case 2: // Ana Klašnja
-            var ehrIdAna = kreirajEhrId("Ana", "Klašnja", "1978-12-18T16:00");
+            var ehrIdAna = kreirajEhrId("Ana", "Klašnja", "1996-12-18T16:00");
             ehrIdUstvarjeni = ehrIdAna;
             for (var i = 0; i < 6; i++) {
                 dodajMeritve(ehrIdAna, podatkiAna[i].datumInUra, podatkiAna[i].telesnaVisina, podatkiAna[i].telesnaTeza, podatkiAna[i].telesnaTemperatura, podatkiAna[i].sistolicniKrvniTlak, podatkiAna[i].diastolicniKrvniTlak);
